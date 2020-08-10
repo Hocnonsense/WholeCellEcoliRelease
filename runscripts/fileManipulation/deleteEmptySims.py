@@ -22,12 +22,12 @@ def findFiles(directory,typeFile):
     return onlyFiles
 
 def main(out_dir):
-    print 'ONLY WORKS ON OLD FORMAT SIMULATIONS!'
+    print('ONLY WORKS ON OLD FORMAT SIMULATIONS!')
     allSimulations = findDirectories(out_dir)
     to_delete = []
     for sim_idx, sim_dir in enumerate(allSimulations):
         markDelete = False
-        print 'Working on {}'.format(sim_dir)
+        print('Working on {}'.format(sim_dir))
 
         all_seeds = findDirectories(sim_dir)
         if len(all_seeds) == 0:
@@ -49,7 +49,7 @@ def main(out_dir):
 
         if markDelete:
             to_delete.append(sim_idx)
-    print 'ONLY WORKS ON OLD FORMAT SIMULATIONS!'
+    print('ONLY WORKS ON OLD FORMAT SIMULATIONS!')
 
     for idx in to_delete:
         subprocess.call([

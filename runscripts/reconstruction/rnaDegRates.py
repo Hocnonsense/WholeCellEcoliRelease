@@ -4,8 +4,6 @@
 # Requires 2 files in validation/ecoli/flat: geneIDs.tsv and moffitt2016_mrna_deg_rates.tsv
 # Outputs rnaDegRates.pdf plot to directory that script is run from
 
-from __future__ import division
-
 import os
 
 import numpy as np

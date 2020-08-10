@@ -12,7 +12,7 @@ class InitValidationDataTask(FireTaskBase):
 
     def run_task(self, fw_spec):
 
-        print "%s: Initializing Validation Data" % (time.ctime())
+        print("%s: Initializing Validation Data" % (time.ctime()))
 
         raw_validation_data = pickle.load(open(self["validation_data_input"], "rb"))
         knowledge_base_raw = pickle.load(open(self["knowledge_base_raw"], "rb"))

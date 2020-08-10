@@ -11,11 +11,11 @@ class InitRawValidationDataTask(FireTaskBase):
     required_params = ["output"]
 
     def run_task(self, fw_spec):
-        print "%s: Instantiating validation_data_raw" % (time.ctime())
+        print("%s: Instantiating validation_data_raw" % (time.ctime()))
 
         validation_data_raw = ValidationDataRawEcoli()
 
-        print "%s: Saving validation_data_raw" % (time.ctime())
+        print("%s: Saving validation_data_raw" % (time.ctime()))
 
         pickle.dump(
             validation_data_raw,

@@ -13,9 +13,6 @@ In any case, you should see GC messages like:
 # The test case is adapted from https://pymotw.com/2/gc/
 """
 
-from __future__ import absolute_import
-from __future__ import division
-
 import gc
 import nose.plugins.attrib as noseAttrib
 import unittest
@@ -34,7 +31,7 @@ class Node(object):
             type(self).__name__, self.name, id(self), id(self.__dict__))
 
     def __del__(self):
-        print "    {} __del__()".format(self)
+        print("    {} __del__()".format(self))
 
 
 class Test_memory_debug(unittest.TestCase):
@@ -55,12 +52,12 @@ class Test_memory_debug(unittest.TestCase):
             nodes[4].link = nodes[3]
             nodes[4].link2 = nodes[5]
 
-            print "Dropping: Should __del__ {}.".format(nodes[:3])
+            print("Dropping: Should __del__ {}.".format(nodes[:3]))
             uncollectable = str(nodes[3:])  # don't retain the Nodes
             nodes = []
 
-            print ("Collecting: {} and some of their dicts should be"
-                   " uncollectable.").format(uncollectable)
+            print(("Collecting: {} and some of their dicts should be"
+                   " uncollectable.").format(uncollectable))
             # Why is Node5's dict collectable?
 
         # gc.garbage holds Node3 .. Node5.

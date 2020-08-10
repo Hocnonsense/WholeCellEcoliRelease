@@ -26,7 +26,7 @@ class SimulationDaughterTask(FireTaskBase):
 
     def run_task(self, fw_spec):
 
-        print "%s: Running simulation" % time.ctime()
+        print("%s: Running simulation" % time.ctime())
 
         options = {}
 

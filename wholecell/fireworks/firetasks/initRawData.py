@@ -11,11 +11,11 @@ class InitRawDataTask(FireTaskBase):
     required_params = ["output"]
 
     def run_task(self, fw_spec):
-        print "%s: Instantiating raw_data" % (time.ctime(),)
+        print("%s: Instantiating raw_data" % (time.ctime(),))
 
         raw_data = KnowledgeBaseEcoli()
 
-        print "%s: Saving raw_data" % (time.ctime(),)
+        print("%s: Saving raw_data" % (time.ctime(),))
 
         with open(self["output"], "wb") as f:
             pickle.dump(raw_data, f, protocol = pickle.HIGHEST_PROTOCOL)

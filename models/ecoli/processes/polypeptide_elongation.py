@@ -13,19 +13,14 @@ TODO:
 @date: Created 4/30/14
 """
 
-from __future__ import division
-
-
-
 import numpy as np
 import copy
 import re
 
 import wholecell.processes.process
 from wholecell.utils.polymerize import buildSequences, polymerize, computeMassIncrease
-from wholecell.utils.biorandom import stochasticRound
+from wholecell.utils.random import stochasticRound
 from wholecell.utils import units
-
 
 
 class PolypeptideElongation(wholecell.processes.process.Process):

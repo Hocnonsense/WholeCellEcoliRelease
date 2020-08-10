@@ -203,7 +203,7 @@ def save_genes(raw_data, sim_data, output):
                 writer.writerow([gene, monomerToRna[monomer], monomer, ', '.join(processes)])
                 monomers_added.add(monomer)
 
-    print 'Number of genes: {}'.format(len(monomers_added))
+    print('Number of genes: {}'.format(len(monomers_added)))
 
 def save_metabolites(raw_data, sim_data, output):
     """
@@ -232,7 +232,7 @@ def save_metabolites(raw_data, sim_data, output):
                 source = 'Biomass (EcoCyc GEM, Bremer and Dennis. 1996., and Neidhardt. 2006.)'
             writer.writerow([m, source])
 
-    print 'Number of metabolites: {}'.format(len(metabolites))
+    print('Number of metabolites: {}'.format(len(metabolites)))
 
 def save_kinetics(sim_data, output):
     """
@@ -264,7 +264,7 @@ def save_kinetics(sim_data, output):
                 c['enzymeIDs'], c['substrateIDs'], c['Concentration Substrates'],
                 c['Temp'], excluded])
 
-    print 'Number of kinetic constraints: {}'.format(len(kinetic_constraints))
+    print('Number of kinetic constraints: {}'.format(len(kinetic_constraints)))
 
 def parse_args():
     """

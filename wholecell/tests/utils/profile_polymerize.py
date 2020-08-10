@@ -21,13 +21,13 @@ kernprof doesn't support that.
 @date: Created 10/10/2016
 """
 
-import __builtin__
+import builtins
 import sys
 import os
 import time
 import cProfile
 import pstats
-import StringIO
+import io
 
 import numpy as np
 
@@ -43,7 +43,7 @@ PAD_VALUE = polymerize.PAD_VALUE
 
 # Wrap with kernprof profiling decorator - will throw an error if we call this
 # script using the vanilla python interpreter.
-if not __builtin__.__dict__.has_key('profile'):
+if not builtins.__dict__.has_key('profile'):
     raise Exception(
         'kernprof @profile decorator not available.  This script should be '
         + 'invoked via kernprof -lv.  If invoked correctly and this error '
@@ -145,7 +145,7 @@ def _simpleProfile():
     assert nReactions <= reactionLimit
     assert nReactions == monomerUsages.sum()
 
-    print """
+    print("""
 Polymerize function report:
 
 For {} sequences of {} different monomers elongating by at most {}:
@@ -168,7 +168,7 @@ For {} sequences of {} different monomers elongating by at most {}:
         nReactions/reactionLimit,
         (sequenceElongation == sequenceLengths).sum()/nSequences,
         sequenceElongation.sum()/sequenceLengths.sum()
-        )
+        ))
 
 
 def _fullProfile():
@@ -184,11 +184,11 @@ def _fullProfile():
         sequences, monomerLimits, reactionLimit, randomState)
 
     pr.disable()
-    s = StringIO.StringIO()
+    s = io.StringIO()
     sortby = 'cumulative'
     ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
     ps.print_stats()
-    print s.getvalue()
+    print(s.getvalue())
 
 
 if __name__ == "__main__":

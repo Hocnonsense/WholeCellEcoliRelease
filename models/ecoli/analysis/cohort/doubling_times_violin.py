@@ -12,8 +12,6 @@ standardize the output across sets of simulations.
 
 """
 
-from __future__ import absolute_import
-
 import os
 import pickle
 
@@ -39,7 +37,7 @@ FIGSIZE = (2.5, 5)
 class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
     def do_plot(self, variantDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(variantDir):
-            raise Exception("variantDir does not currently exist as a directory")
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -106,7 +104,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
 
             if THROW_ON_BAD_SIMULATION_OUTPUT:
                 # Throw late so we get a full picture of what files are missing
-                raise Exception(message)
+                raise InterruptedError(message)
 
             else:
                 print(message)

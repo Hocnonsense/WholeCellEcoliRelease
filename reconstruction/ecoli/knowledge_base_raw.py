@@ -7,13 +7,11 @@ directly from CSV flat files.
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 @date: Created 02/11/2015
 """
-from __future__ import division
 
 import os
 import csv
 from reconstruction.spreadsheets import JsonReader
 import json
-from itertools import ifilter
 
 from wholecell.utils import units
 
@@ -136,11 +134,11 @@ LIST_OF_PARAMETER_FILENAMES = (
     "parameters.tsv", "mass_parameters.tsv", "mass_parameters_alternate.tsv")
 CONSTANTS_FILENAME = "constants.tsv"
 
-class DataStore(object):
+class DataStore:
     def __init__(self):
         pass
 
-class KnowledgeBaseEcoli(object):
+class KnowledgeBaseEcoli:
     """ KnowledgeBaseEcoli """
 
     def __init__(self):
@@ -155,17 +153,32 @@ class KnowledgeBaseEcoli(object):
         self.genome_sequence = self._load_sequence(os.path.join(FLAT_DIR, SEQUENCE_FILE))
 
     def _load_tsv(self, file_name):
+        """
+            @description:
+            @example:
+                file_name = 'd:\\Code\\python\\WholeCellEcoliRelease\\reconstruction\\ecoli\\flat\\biomass.tsv'
+                FLAT_DIR = 'd:\\Code\\python\\WholeCellEcoliRelease\\reconstruction\\ecoli\\flat'
+                NO for
+                attrName = 'biomass'
+
+                reader 可能要运行了才能看出来是啥玩意, 可能类似:
+                    "group id"	"molecule id"	"coefficient"
+                    "charged-tRNAs"	"Charged-VAL-tRNAs[c]"	0.411184
+        """
+        # 因为这个对象可能是对象的对象 e.g. os.path.join("massFractions", "glycogenFractions.tsv"),
         path = self
-        for subPath in file_name[len(FLAT_DIR) + 1 : ].split(os.path.sep)[:-1]:
+        # for those like `os.path.join("massFractions", "glycogenFractions.tsv"),`, it will put it in correct place
+        for subPath in file_name[len(FLAT_DIR) + 1 :].split(os.path.sep)[:-1]:
             if not hasattr(path, subPath):
                 setattr(path, subPath, DataStore())
             path = getattr(path, subPath)
+
         attrName = file_name.split(os.path.sep)[-1].split(".")[0]
         setattr(path, attrName, [])
 
         with open(file_name, 'rU') as csvfile:
             reader = JsonReader(
-                ifilter(lambda x: x.lstrip()[0] != "#", csvfile), # Strip comments
+                filter(lambda x: x.lstrip()[0] != "#", csvfile), # Strip comments
                 dialect = CSV_DIALECT)
             setattr(path, attrName, [row for row in reader])
 
@@ -176,6 +189,16 @@ class KnowledgeBaseEcoli(object):
                 return record.seq
 
     def _load_parameters(self, file_path):
+        """
+            @example:
+                file_path = 'd:\\Code\\python\\WholeCellEcoliRelease\\reconstruction\\ecoli\\flat\\parameters.tsv'
+                attrName = 'parameters'
+                paramdict = {}
+                with ...:
+                    reader.fieldnames:['name', 'value', 'units', 'source', 'comments']
+                    row: {'comments': None, 'name': 'gtpPerTranslation', 'source': None, 'units': '', 'value': '4.2'}
+                    row: {'comments': None, 'name': 'oriCCenter', 'source': 'Ecocyc', 'units': 'units.nt', 'value': '3923882'}
+        """
         attrName = file_path.split(os.path.sep)[-1].split(".")[0]
         paramDict = {}
         with open(file_path, "rU") as csvfile:

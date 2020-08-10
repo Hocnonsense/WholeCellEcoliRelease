@@ -1,3 +1,4 @@
+# cython: language_level=3
 """
 _fastsums.pyx
 
@@ -7,8 +8,6 @@ Fast group sums to speed up polymerize.
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 @date: Created 10/12/2016
 """
-
-from __future__ import division
 
 import numpy as np
 cimport numpy as np

@@ -1,27 +1,25 @@
-#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+    @author: John Mason
+    @organization: Covert Lab, Department of Bioengineering, Stanford University
+    @date: Created 4/26/14
+    @LastEditors: Hwrn
+    @LastEditTime: 2020-08-09 18:11:51
+    @FilePath: /WholeCellEcoliRelease/models/ecoli/processes/transcript_elongation.py
+    @Description:
+        Transcription elongation sub-model.
+    @TODO:
+        - use transcription units instead of single genes
+        - account for energy
 
 """
-TranscriptElongation
-
-Transcription elongation sub-model.
-
-TODO:
-- use transcription units instead of single genes
-- account for energy
-
-@author: John Mason
-@organization: Covert Lab, Department of Bioengineering, Stanford University
-@date: Created 4/26/14
-"""
-
-from __future__ import division
 
 import numpy as np
 
 import wholecell.processes.process
 from wholecell.utils.polymerize import buildSequences, polymerize, computeMassIncrease
 from wholecell.utils import units
-from wholecell.utils.biorandom import stochasticRound
+from wholecell.utils.random import stochasticRound
 
 class TranscriptElongation(wholecell.processes.process.Process):
     """ TranscriptElongation """

@@ -32,7 +32,7 @@ def main(out_directory):
 
         for seed_idx, seed in enumerate(all_seeds):
             plotDir = os.path.join(seed, 'plotOut')
-            print 'Working on {}/{}: {}'.format(seed_idx,len(all_seeds),seed)
+            print('Working on {}/{}: {}'.format(seed_idx,len(all_seeds),seed))
             if os.path.exists(plotDir):
                 allPdfPlots = findFiles(plotDir, '.pdf')
                 if allPdfPlots:
@@ -43,7 +43,7 @@ def main(out_directory):
 
                     for idx,pdfPlot in enumerate(allPdfPlots):
                         plotName = pdfPlot[:-4]
-                        print '{}/{} Converting {} to {}'.format(idx, len(allPdfPlots), plotName + ".pdf", plotName + ".svg")
+                        print('{}/{} Converting {} to {}'.format(idx, len(allPdfPlots), plotName + ".pdf", plotName + ".svg"))
                         subprocess.call(
                                 [
                                     "inkscape",
@@ -53,7 +53,7 @@ def main(out_directory):
                                 ]
                             )
 
-                        print 'Creating low resolution {}'.format(plotName + ".png")
+                        print('Creating low resolution {}'.format(plotName + ".png"))
                         subprocess.call(
                                 [
                                     "inkscape",
@@ -64,7 +64,7 @@ def main(out_directory):
                                 ]
                             )
 
-                        print 'Moving {} to {}'.format(plotName + ".pdf", "pdf_plots")
+                        print('Moving {} to {}'.format(plotName + ".pdf", "pdf_plots"))
                         subprocess.call(
                                 [
                                     "mv",

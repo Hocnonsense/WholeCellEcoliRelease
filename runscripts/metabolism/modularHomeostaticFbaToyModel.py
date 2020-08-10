@@ -33,16 +33,16 @@ metaboliteConcentrations = [objective[x] for x in sorted(objective.keys())]
 
 step = 1
 while step <= 12:
-    print "\nStep %i" % (step)
+    print("\nStep %i" % (step))
     fba = FluxBalanceAnalysis(reactions, externalMolecules, objective, objectiveType = "homeostatic", solver = "glpk")
 
     fba.setInternalMoleculeLevels(metaboliteConcentrations)
     fba.setExternalMoleculeLevels([externalMolecules[x] for x in externalMolecules])
     metaboliteConcentrations += fba.getOutputMoleculeLevelsChange()
 
-    print "Metabolite changes:\n%s" % (fba.getOutputMoleculeLevelsChange())
-    print "Metabolite conc:\n%s" % (metaboliteConcentrations)
-    # print "Objective value: %f" % (fba.objectiveValue())
+    print("Metabolite changes:\n%s" % (fba.getOutputMoleculeLevelsChange()))
+    print("Metabolite conc:\n%s" % (metaboliteConcentrations))
+    # print("Objective value: %f" % (fba.objectiveValue()))
 
     # consume some metabolites
     metaboliteConcentrations *= 0.5

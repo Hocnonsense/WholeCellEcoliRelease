@@ -3,11 +3,11 @@
 
 ## Source code locations
 
-* The knowledge base input information: `wcEcoli/reconstruction/ecoli/flat`.
-* The code that uses it to calculate parameters: `wcEcoli/reconstruction/ecoli/`.
-* The code that loads it into an object: `knowledge_base_raw.py`.
-* Simulation processes: `wcEcoli/models/ecoli/processes/`.
-* The cell's initial conditions: `wcEcoli/models/ecoli/sim/initial\_conditions.py`.
+- [The knowledge base input information](/reconstruction/ecoli/flat).
+- [The code that uses it to calculate parameters](/reconstruction/ecoli/).
+- [The code that loads it into an object](/reconstruction/ecoli/knowledge_base_raw.py).
+- [Simulation processes](/models/ecoli/processes/).
+- [The cell's initial conditions](/models/ecoli/sim/initial_conditions.py).
 
 
 ## Processes

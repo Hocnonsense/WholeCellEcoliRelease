@@ -5,9 +5,6 @@ Run with '-h' for command line help.
 Set PYTHONPATH when running this.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-
 import pickle
 import os
 import sys
@@ -99,7 +96,7 @@ class TestAnalysis(AnalysisBase):
         super(TestAnalysis, self).__init__(analysis_plotter=self)
 
     def run(self, analysis_args):
-        print "[TEST] Analysis args:", analysis_args
+        print("[TEST] Analysis args:", analysis_args)
 
 
 if __name__ == '__main__':

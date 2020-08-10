@@ -3,9 +3,6 @@ AnalysisPaths: object for easily accessing file paths to simulations based on
 variants, seeds, and generation.
 '''
 
-from __future__ import absolute_import
-from __future__ import division
-
 from os import listdir
 from os.path import isdir, join
 from re import match, findall
@@ -53,7 +50,7 @@ class AnalysisPaths(object):
                         variant_out_dirs.append(join(out_dir, directory))
 
             if len(variant_out_dirs) == 0:
-                raise Exception("Variant directory specified has no variant files in it!")
+                raise FileNotFoundError("Variant directory specified has no variant files in it!")
 
             # Get all seed directories in each variant directory
             seed_out_dirs = []
@@ -101,7 +98,7 @@ class AnalysisPaths(object):
             # Find generation
             matches = findall(r'generation_\d{6}', filePath)
             if len(matches) > 1:
-                raise Exception("Expected only one match for generation!")
+                raise FileExistsError("Expected only one match for generation!")
             generations.append(int(matches[0][-6:]))
 
             # Find seed

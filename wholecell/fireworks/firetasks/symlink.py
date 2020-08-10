@@ -12,7 +12,7 @@ class SymlinkTask(FireTaskBase):
     optional_params = ["overwrite_if_exists"]
 
     def run_task(self, fw_spec):
-        print "%s: Creating symlink" % (time.ctime())
+        print("%s: Creating symlink" % (time.ctime()))
 
         if self["overwrite_if_exists"]:
             if os.path.exists(self["link"]):

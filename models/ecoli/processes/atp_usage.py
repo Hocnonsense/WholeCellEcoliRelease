@@ -15,15 +15,13 @@ TODO: let (N)GAM roll over to the next time step, just in case there is some sto
 TODO: Flag listner that tracks cell death when maintenance is not met
 """
 
-from __future__ import division
-
 import warnings
 
 import numpy as np
 
 import wholecell.processes.process
 from wholecell.utils.constants import REQUEST_PRIORITY_ATP_USAGE
-from wholecell.utils.biorandom import stochasticRound
+from wholecell.utils.random import stochasticRound
 from wholecell.utils import units
 
 VERBOSE = False
@@ -93,7 +91,7 @@ class AtpUsage(wholecell.processes.process.Process):
             )
 
         # Logs data
-        if VERBOSE: print "ATP hydrolyzed = %f" % atpsHydrolyzed
+        if VERBOSE: print("ATP hydrolyzed = %f" % atpsHydrolyzed)
         self.writeToListener("ATPhydrolyzedUsageListener", "atpsHydrolyzed", atpsHydrolyzed)
 
         # Decrements reactant counts and increments product counts
@@ -103,7 +101,7 @@ class AtpUsage(wholecell.processes.process.Process):
         # If for some reason maintence is not met throw a warning
         if atpsHydrolyzed < np.floor(expectedReactions):
             warnings.warn("Maintenance not satisfied; the cell may be growing too fast")
-            print "did not meet maintenance ({})".format(expectedReactions - atpsHydrolyzed)
+            print("did not meet maintenance ({})".format(expectedReactions - atpsHydrolyzed))
 
     def _nongrowthAssociated_reactionsPerTimestep(self):
         return self.nonGrowthMaintenance * self.timeStepSec()

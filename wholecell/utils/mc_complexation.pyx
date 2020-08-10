@@ -1,3 +1,4 @@
+# cython: language_level=3
 """
 _complexation.pyx
 
@@ -10,9 +11,6 @@ TODO:
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 @date: Created 6/17/14
 """
-
-from __future__ import absolute_import
-from __future__ import division
 
 import numpy as np
 cimport numpy as np
