@@ -6,9 +6,6 @@ Simulation
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 """
 
-from __future__ import absolute_import
-from __future__ import division
-
 import collections
 import pickle
 import time
@@ -302,7 +299,8 @@ class Simulation(object):
         # Check that timestep length was short enough
         for process in self.processes.itervalues():
             if not process.wasTimeStepShortEnough():
-                raise Exception("The timestep (%.3f) was too long at step %i, failed on process %s" % (self._timeStepSec, self.simulationStep(), str(process.name())))
+                raise AttributeError("The timestep (%.3f) was too long at step %i, failed on process %s" % (
+                    self._timeStepSec, self.simulationStep(), str(process.name())))
 
         # Merge state
         for i, state in enumerate(self.internal_states.itervalues()):
@@ -391,7 +389,7 @@ class Simulation(object):
 
     def _findTimeStep(self, minTimeStep, maxTimeStep, checkerFunction):
         N = 10000
-        for i in xrange(N):
+        for i in range(N):
             candidateTimeStep = minTimeStep + (maxTimeStep - minTimeStep) / 2.
             if checkerFunction(candidateTimeStep, self._timeStepSafetyFraction):
                 minTimeStep = candidateTimeStep
@@ -399,7 +397,7 @@ class Simulation(object):
                     break
             else:
                 maxTimeStep = candidateTimeStep
-        if i == N - 1:
-            raise Exception, "Timestep adjustment did not converge, last attempt was %f" % (candidateTimeStep)
+        else:
+            raise RuntimeError("Timestep adjustment did not converge, last attempt was %f" % (candidateTimeStep))
 
         return candidateTimeStep

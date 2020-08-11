@@ -11,7 +11,7 @@ UniqueMoleculeCounts
 # TODO: move to the wholecell package & write interface such that it will
 # function without requiring the state (will save an empty file)
 
-from __future__ import division
+
 
 import numpy as np
 
@@ -48,7 +48,7 @@ class UniqueMoleculeCounts(wholecell.listeners.listener.Listener):
     def update(self):
         # TODO: add interface to unique objects container
 
-        for i in xrange(self.uniqueMoleculeCounts.size):
+        for i in range(self.uniqueMoleculeCounts.size):
             self.uniqueMoleculeCounts[i] = (
                 self.uniqueMolecules.container._collections[i]["_entryState"]
                 == self.uniqueMolecules.container._entryActive

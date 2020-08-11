@@ -2,8 +2,8 @@
 Test the filepath utility.
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import nose.plugins.attrib as noseAttrib
 import nose.tools

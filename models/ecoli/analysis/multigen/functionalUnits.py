@@ -16,7 +16,7 @@ Notes:
 @date: Created 7/12/2018
 """
 
-from __future__ import absolute_import
+
 
 import os
 import pickle
@@ -71,7 +71,7 @@ def plot(proteinIds, zeroAtLeastOnce, essential, ax, axEssential, xloc, width, f
 class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
     def do_plot(self, seedOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -132,7 +132,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
         ## Identify functional units that have a 0 count for at least one timestep
         proteinIds = list(set(subgenMonomerOnlyIds + subgenComplexIds))
         if not len(proteinIds):
-            print "Returned -- No subgenerational functional units were found."
+            print("Returned -- No subgenerational functional units were found.")
             return
         zeroAtLeastOnce = np.zeros(len(proteinIds), dtype = bool)
         for i, simDir in enumerate(allDir):

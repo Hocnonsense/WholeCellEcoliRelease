@@ -10,7 +10,7 @@ Run with '-h' for command line help.
 Set PYTHONPATH when running this.
 """
 
-from __future__ import absolute_import, division, print_function
+
 
 import pickle
 import re
@@ -158,7 +158,7 @@ class RunSimulation(scriptBase.ScriptBase):
         timestamp, description = parse_timestamp_description(args.sim_path)
 
         variant_type = args.variant[0]
-        variants_to_run = xrange(int(args.variant[1]), int(args.variant[2]) + 1)
+        variants_to_run = range(int(args.variant[1]), int(args.variant[2]) + 1)
 
         cli_sim_args = data.select_keys(vars(args), (
             'length_sec',
@@ -217,10 +217,10 @@ class RunSimulation(scriptBase.ScriptBase):
                 )
             task.run_task({})
 
-            for j in xrange(args.seed, args.seed + args.init_sims):  # init sim seeds
+            for j in range(args.seed, args.seed + args.init_sims):  # init sim seeds
                 seed_directory = fp.makedirs(variant_directory, "%06d" % j)
 
-                for k in xrange(args.generations):  # generation number k
+                for k in range(args.generations):  # generation number k
                     gen_directory = fp.makedirs(seed_directory, "generation_%06d" % k)
 
                     # l is the daughter number among all of this generation's cells,

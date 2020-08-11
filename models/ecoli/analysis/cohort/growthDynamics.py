@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 import os
 import pickle
@@ -33,7 +33,7 @@ def mm2inch(value):
 class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
     def do_plot(self, variantDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(variantDir):
-            raise Exception, "variantDir does not currently exist as a directory"
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -148,7 +148,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
         try:
             T_ADD_AA = sim_data.external_state.environment.nutrients_time_series[nutrients_time_series_label][1][0] / 60.
         except Exception as e:
-            print "nutrients_time_series does not have correct dimensions for this analysis. Exiting.", e
+            print("nutrients_time_series does not have correct dimensions for this analysis. Exiting.", e)
             return
         axes_list = [ax0, ax1, ax2]#, ax3, ax4]
         for a in axes_list:

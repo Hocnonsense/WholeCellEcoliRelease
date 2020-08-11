@@ -2,8 +2,8 @@
 Common code for Single analysis plots.
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 from models.ecoli.analysis import analysisPlot
 from runscripts.manual import analysisSingle

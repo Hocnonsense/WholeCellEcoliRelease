@@ -6,7 +6,7 @@ SimulationData for bulk molecules state
 @date: Created 02/13/2015
 """
 
-from __future__ import division
+
 
 import numpy as np
 
@@ -29,8 +29,8 @@ class BulkMolecules(object):
 
         # Add units to values
         field_units = {
-            "id"        :    None,
-            "mass"                :    units.g / units.mol,
+            "id": None,
+            "mass": units.g / units.mol,
             }
 
         self.bulkData = UnitStructArray(bulkData, field_units)

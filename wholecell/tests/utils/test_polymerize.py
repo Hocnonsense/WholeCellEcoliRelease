@@ -49,9 +49,9 @@ class Test_polymerize(unittest.TestCase):
             (self.nMonomers, self.nSequences, self.sequenceLength),
             dtype=np.bool
             )
-        for monomerIndex in xrange(self.nMonomers):
+        for monomerIndex in range(self.nMonomers):
             self.sequenceMonomers[monomerIndex, ...] = (sequences == monomerIndex)
-        self.activeSequences = np.array(xrange(self.nSequences))
+        self.activeSequences = np.array(range(self.nSequences))
 
     @noseAttrib.attr('polymerizeNew')
     @noseAttrib.attr('smalltest')

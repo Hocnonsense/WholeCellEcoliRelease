@@ -6,8 +6,8 @@ linear and quadratic objectives.
 @date: Created 6/14/2018
 '''
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 from collections import defaultdict
 
@@ -60,12 +60,10 @@ class NetworkFlowCPLEX(NetworkFlowProblemBase):
     def setFlowMaterialCoeff(self, flow, material, coefficient):
         if self._eqConstBuilt:
             materialIdx = self._materialIdxLookup.get(material, None)
-            if materialIdx is None:
-                raise Exception("Invalid material")
+            assert materialIdx, "Invalid material"
 
             flowIdx = self._flows.get(flow, None)
-            if flowIdx is None:
-                raise Exception("Invalid flow")
+            assert flowIdx, "Invalid flow"
 
             coeffs, flowIdxs = zip(*self._materialCoeffs[material])
             coeffs = list(coeffs)

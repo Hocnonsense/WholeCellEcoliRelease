@@ -5,8 +5,8 @@ Template for variant analysis plots
 @date: Created 8/2/18
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import pickle
 from matplotlib import pyplot as plt
@@ -23,7 +23,7 @@ from wholecell.utils import filepath
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, 'inputDir does not currently exist as a directory'
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         filepath.makedirs(plotOutDir)
 

@@ -10,7 +10,7 @@ Abstract class which defines the interface loggers expose to the simulation
 @date: Created 3/28/2013
 """
 
-from __future__ import division
+
 
 import abc
 

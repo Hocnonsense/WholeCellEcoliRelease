@@ -8,7 +8,7 @@ GrowthLimits
 @date: Created 6/25/15
 """
 
-from __future__ import division
+
 
 import numpy as np
 

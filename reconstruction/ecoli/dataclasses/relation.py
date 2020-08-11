@@ -6,7 +6,7 @@ SimulationData relation functions
 @date: Created 03/10/2015
 """
 
-from __future__ import division
+
 
 import re
 import numpy as np

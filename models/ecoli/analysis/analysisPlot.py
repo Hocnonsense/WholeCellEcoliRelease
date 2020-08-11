@@ -21,8 +21,8 @@ check that `os.path.isdir(simOutDir)`, instantiate an AnalysisPaths (except for
 SingleAnalysisPlot subclasses), etc.
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import abc
 import matplotlib as mp

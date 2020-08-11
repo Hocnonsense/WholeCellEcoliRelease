@@ -6,7 +6,7 @@ with experimental data in Scott et al., Science (2010).
 @date: Created 4/29/19
 """
 
-from __future__ import absolute_import, print_function, division
+
 
 from matplotlib import pyplot as plt
 import numpy as np
@@ -33,7 +33,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
             return
 
         if not os.path.isdir(inputDir):
-            raise Exception, 'inputDir does not currently exist as a directory'
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         filepath.makedirs(plotOutDir)
 

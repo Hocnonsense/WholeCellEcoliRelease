@@ -5,7 +5,7 @@
 # Outputs TFoutput.tsv to directory that script is run from
 # Need to replace ' with " in file after script runs
 
-from __future__ import division
+
 
 import os
 

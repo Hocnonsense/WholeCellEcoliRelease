@@ -13,8 +13,6 @@ TODO:
 @date: Created 03/06/2015
 """
 
-from __future__ import division
-
 from wholecell.utils import units
 import wholecell
 import os
@@ -186,7 +184,7 @@ class Metabolism(object):
             reversible = reaction["is reversible"]
 
             if len(stoich) <= 1:
-                raise Exception("Invalid biochemical reaction: {}, {}".format(reactionID, stoich))
+                raise ValueError("Invalid biochemical reaction: {}, {}".format(reactionID, stoich))
 
             reactionStoich[reactionID] = stoich
 
@@ -242,7 +240,7 @@ class Metabolism(object):
                 # In current implementation, anything with a concentration exists in the cytosol
                 substrateWithCompartment = substrate.encode("utf-8") + "[c]"
                 if substrateWithCompartment not in self.concDict:
-                    raise Exception, "Don't have concentration for %s" % substrateWithCompartment
+                    raise AttributeError("Don't have concentration for %s" % substrateWithCompartment)
                 concentrationSubstrates.append(substrateWithCompartment)
                 kineticsSubstratesList.append(substrateWithCompartment)
             constraint["Concentration Substrates"] = concentrationSubstrates
@@ -257,7 +255,7 @@ class Metabolism(object):
                         substrateFound = True
                         substrates.append(rxnSubstrate.encode("utf-8"))
                 if not substrateFound:
-                    raise Exception, "Could not find compartment for substrate %s" % substrate
+                    raise AttributeError("Could not find compartment for substrate %s" % substrate)
             constraint["substrateIDs"] = substrates
 
             # Adjust kcat for temperature
@@ -280,7 +278,7 @@ class Metabolism(object):
             elif np.all(stoichVals > 0):
                 forward = False
             else:
-                raise Exception, "Have data for some reactants and some products (this is an inconsistency)"
+                raise ValueError("Have data for some reactants and some products (this is an inconsistency)")
 
             constraint["reactionID"] = constraint["reactionID"].encode("utf-8")
             if forward == False:
@@ -380,15 +378,15 @@ class Metabolism(object):
 #        constraintToReactionMatrix[constraintToReactionMatrixI, constraintToReactionMatrixJ] = constraintToReactionMatrixV
 
         # Use Sympy to create vector function that returns all kinetic constraints
-        kineticsSubstrates = sp.symbols(["kineticsSubstrates[%d]" % idx for idx in xrange(len(kineticsSubstratesList))])
-        enzymes = sp.symbols(["enzymes[%d]" % idx for idx in xrange(len(enzymeIdList))])
+        kineticsSubstrates = sp.symbols(["kineticsSubstrates[%d]" % idx for idx in range(len(kineticsSubstratesList))])
+        enzymes = sp.symbols(["enzymes[%d]" % idx for idx in range(len(enzymeIdList))])
         constraints = [sp.symbol.S.Zero] * len(constraintIdList)
         constraintIsKcatOnly = np.zeros(len(constraintIdList))
 
         for constraintIdx, constraintId in enumerate(constraintIdList):
             constraint = constraintDict[constraintId]
             if constraint["rateEquationType"] == "custom":
-                raise Exception
+                raise Exception  # what happened @Hwrn: ?
 
             enzymeIdx = enzymeIdList.index(constraint["enzymeIDs"])
             constraints[constraintIdx] = constraint["kcatAdjusted"].asNumber(1 / units.s) * enzymes[enzymeIdx]

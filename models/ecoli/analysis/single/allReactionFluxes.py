@@ -4,7 +4,7 @@
 @date: Created 7/14/2016
 """
 
-from __future__ import absolute_import
+
 
 import os
 import pickle
@@ -33,7 +33,7 @@ MOVING_AVE_WINDOW_SIZE = 200
 class Plot(singleAnalysisPlot.SingleAnalysisPlot):
     def do_plot(self, simOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(simOutDir):
-            raise Exception, "simOutDir does not currently exist as a directory"
+            raise NotADirectoryError("simOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)

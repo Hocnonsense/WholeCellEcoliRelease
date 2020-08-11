@@ -5,7 +5,7 @@ variant kinetic_constraints_factorial_experiments.
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 """
 
-from __future__ import absolute_import, division, print_function
+
 
 import pickle
 import os
@@ -50,7 +50,7 @@ SUCC_DISTANCE = np.log2(2)
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, 'inputDir does not currently exist as a directory'
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         filepath.makedirs(plotOutDir)
 

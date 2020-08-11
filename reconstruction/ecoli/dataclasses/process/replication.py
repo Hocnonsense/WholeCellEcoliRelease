@@ -6,7 +6,7 @@ SimulationData for replication process
 @date: Created 02/13/2015
 """
 
-from __future__ import division
+
 
 import numpy as np
 import collections

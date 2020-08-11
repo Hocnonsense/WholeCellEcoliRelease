@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 import os
 
@@ -25,7 +25,7 @@ ADDED_MASS_UPPER_LIM = 1.7
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, "variantDir does not currently exist as a directory"
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -33,7 +33,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         ap = AnalysisPaths(inputDir, variant_plot = True)
 
         if ap.n_generation == 1:
-            print "Need more data to create addedMass"
+            print("Need more data to create addedMass")
             return
 
         allScatter = plt.figure()

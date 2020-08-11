@@ -3,9 +3,9 @@
     @author: Derek Macklin
     @organization: Covert Lab, Department of Bioengineering, Stanford University
     @date: Created 4/2/2013
-    LastEditors: Hwrn
-    LastEditTime: 2020-08-09 08:15:45
-    FilePath: /WholeCellEcoliRelease/wholecell/processes/process.py
+    @LastEditors: Hwrn
+    @LastEditTime: 2020-08-11 15:54:35
+    @FilePath: /WholeCellEcoliRelease/wholecell/processes/process.py
     Description:
         Process
         Process submodel base class. Defines interface that processes expose to the simulation and to the states.
@@ -130,7 +130,7 @@ class Process:
 
     def readFromListener(self, listenerName, attributeName):
         if listenerName not in self._sim.listeners.viewkeys():
-            raise Exception("The {} process attempted to read {} from the {} listener, but there is no listener with that name.".format(
+            raise AttributeError("The {} process attempted to read {} from the {} listener, but there is no listener with that name.".format(
                 self._name,
                 attributeName,
                 listenerName
@@ -140,7 +140,7 @@ class Process:
             listener = self._sim.listeners[listenerName]
 
             if not hasattr(listener, attributeName):
-                raise Exception("The {} process attempted to read {} from the {} listener, but the listener does not have that attribute.".format(
+                raise AttributeError("The {} process attempted to read {} from the {} listener, but the listener does not have that attribute.".format(
                     self._name,
                     attributeName,
                     listenerName

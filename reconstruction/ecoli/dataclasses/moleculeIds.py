@@ -5,7 +5,7 @@ SimulationData moleculeIds
 @date: Created 07/18/2018
 """
 
-from __future__ import division
+
 
 class MoleculeIds(object):
     """

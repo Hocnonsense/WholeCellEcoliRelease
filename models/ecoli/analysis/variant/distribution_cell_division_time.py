@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 
 import os
@@ -26,11 +26,11 @@ def mm2inch(value):
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if metadata is not None and SHUFFLE_VARIANT_TAG not in metadata["variant"]:
-            print "This plot only runs for variants where parameters are shuffled."
+            print("This plot only runs for variants where parameters are shuffled.")
             return
 
         if not os.path.isdir(inputDir):
-            raise Exception, "variantDir does not currently exist as a directory"
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)

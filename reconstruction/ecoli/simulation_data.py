@@ -5,7 +5,7 @@ Raw data processed into forms convienent for whole-cell modeling
 
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 """
-from __future__ import division
+
 
 import numpy as np
 import collections
@@ -148,9 +148,9 @@ class SimulationDataEcoli(object):
             self.tfToFC[tf][target] = FC
 
         if VERBOSE:
-            print "The following target genes listed in foldChanges.tsv have no corresponding entry in genes.tsv:"
+            print("The following target genes listed in foldChanges.tsv have no corresponding entry in genes.tsv:")
             for item in notFound:
-                print item
+                print(item)
 
         self.tfToActiveInactiveConds = {}
         for row in raw_data.condition.tf_condition:
@@ -163,7 +163,7 @@ class SimulationDataEcoli(object):
             if tf not in self.tfToActiveInactiveConds:
                 self.tfToActiveInactiveConds[tf] = {}
             else:
-                print "Warning: overwriting TF fold change conditions for %s" % tf
+                print("Warning: overwriting TF fold change conditions for %s" % tf)
 
             self.tfToActiveInactiveConds[tf]["active genotype perturbations"] = activeGenotype
             self.tfToActiveInactiveConds[tf]["active nutrients"] = activeNutrients
@@ -198,6 +198,7 @@ class SimulationDataEcoli(object):
             if len(self.conditions[condition]["perturbations"]) > 0:
                 continue
             nutrientLabel = self.conditions[condition]["nutrients"]
-            if nutrientLabel in self.nutrientToDoublingTime and self.conditionToDoublingTime[condition] != self.nutrientToDoublingTime[nutrientLabel]:
-                raise Exception, "Multiple doubling times correspond to the same media conditions"
+            if nutrientLabel in self.nutrientToDoublingTime and \
+                    self.conditionToDoublingTime[condition] != self.nutrientToDoublingTime[nutrientLabel]:
+                raise LookupError("Multiple doubling times correspond to the same media conditions")
             self.nutrientToDoublingTime[nutrientLabel] = self.conditionToDoublingTime[condition]

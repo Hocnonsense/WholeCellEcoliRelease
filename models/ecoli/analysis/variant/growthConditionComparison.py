@@ -7,7 +7,7 @@ Multiple generations of the same variant will be plotted together
 @date: Created 6/7/16
 """
 
-from __future__ import absolute_import
+
 
 
 import os
@@ -28,7 +28,7 @@ PROTEIN_MW = 110.0
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, "inputDir does not currently exist as a directory"
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         ap = AnalysisPaths(inputDir, variant_plot = True)
         all_cells = ap.get_cells()

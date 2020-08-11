@@ -4,9 +4,9 @@
     @organization: Covert Lab, Department of Bioengineering, Stanford University
     @date: Created 03/06/2015
     Date: 2020-08-07 23:06:41
-    LastEditors: Hwrn
-    LastEditTime: 2020-08-08 20:35:05
-    FilePath: /WholeCellEcoliRelease/reconstruction/ecoli/dataclasses/process/transcription.py
+    @LastEditors: Hwrn
+    @LastEditTime: 2020-08-11 16:36:28
+    @FilePath: /WholeCellEcoliRelease/reconstruction/ecoli/dataclasses/process/transcription.py
     Description:
         SimulationData for transcription process
     TODO:
@@ -17,7 +17,7 @@ import numpy as np
 from wholecell.utils import units
 from wholecell.utils.unit_struct_array import UnitStructArray
 from wholecell.utils.polymerize import polymerize
-from wholecell.utils.biorandom import make_elongation_rates, make_elongation_rates_flat
+from wholecell.utils.random import make_elongation_rates, make_elongation_rates_flat
 
 #RNA_SEQ_ANALYSIS = "seal_rpkm"
 RNA_SEQ_ANALYSIS = "rsem_tpm"
@@ -64,11 +64,11 @@ class Transcription:
             if len(arb_exp):
                 expression.append(arb_exp[0])
             elif rna['type'] == 'mRNA' or rna['type'] == 'miscRNA':
-                raise Exception('No RNA-seq data found for {}'.format(rna['id']))
+                raise ValueError('No RNA-seq data found for {}'.format(rna['id']))
             elif rna['type'] == 'rRNA' or rna['type'] == 'tRNA':
                 expression.append(0.)
             else:
-                raise Exception('Unknown RNA {}'.format(rna['id']))
+                raise ValueError('Unknown RNA {}'.format(rna['id']))
 
         expression = np.array(expression)
         synthProb = expression * (

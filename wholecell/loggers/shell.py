@@ -10,8 +10,6 @@ Prints a very brief summary of a whole-cell simulation to standard output
 @date: Created 3/29/2013
 """
 
-from __future__ import division
-
 import time
 import sys
 import numpy as np
@@ -39,6 +37,12 @@ class Shell(wholecell.loggers.logger.Logger):
         self._headerBoundary = None
 
 
+    def _checkHeaders(self):
+        """
+            @description: for .initialize()
+        """
+        pass
+
     def initialize(self, sim):
         self.columns = []
 
@@ -49,7 +53,7 @@ class Shell(wholecell.loggers.logger.Logger):
                     break
 
             else:
-                raise Exception("Could not find column named {}".format(header))
+                raise KeyError("Could not find column named {}".format(header))
 
         # Build the header
         self._buildHeader()
@@ -88,7 +92,7 @@ class Shell(wholecell.loggers.logger.Logger):
 
         # Rearrange the header lines
         headerLines = []
-        for headerLineIndex in xrange(max(len(lines) for lines in columnHeaderLines)):
+        for headerLineIndex in range(max(len(lines) for lines in columnHeaderLines)):
             line = []
             for lines in columnHeaderLines:
                 if len(lines) > headerLineIndex:
@@ -139,7 +143,7 @@ class Shell(wholecell.loggers.logger.Logger):
         if self.nLines % self.headerFreq == 0:
             self.printHeaders()
 
-        for iColumn in xrange(len(self.columns)):
+        for iColumn in range(len(self.columns)):
             column = self.columns[iColumn]
 
             if iColumn > 0:

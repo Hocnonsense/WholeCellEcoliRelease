@@ -5,7 +5,7 @@ Comparison of metabolite concentrations that are not produced without CdsA.
 @date: Created 9/23/19
 """
 
-from __future__ import absolute_import, division, print_function
+
 
 import os
 
@@ -29,7 +29,7 @@ LIMITED_METABOLITES = [
 class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
     def do_plot(self, variantDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(variantDir):
-            raise Exception, 'variantDir does not currently exist as a directory'
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         filepath.makedirs(plotOutDir)
 

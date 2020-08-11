@@ -20,14 +20,11 @@ def boilerplate_end(h):
 #    h.write("</html>")
 
 def svg_draw(h, count, frac1, frac2):
-    if frac1 < 0 or frac1 >= 1:
-        raise Exception, "frac1 is out of bounds"
-    if frac2 < 0 or frac2 >= 0.5:
-        raise Exception, "frac2 is out of bounds"
-    if frac2 > frac1:
-        raise Exception, "frac1 must be greater than frac2"
-    if count <= 0 or count > 2:
-        raise Exception, "count must be 1 or 2"
+    assert 0 < count and count <= 2, "count must be 1 or 2"
+    assert 0 <= frac1 and frac1 < 1, "frac1 is out of bounds"
+    assert 0 <= frac2 and frac2 < 0.5, "frac2 is out of bounds"
+    assert frac1 < frac2, "frac1 must be greater than frac2"
+
     xVal = 0.
     yVal1 = 0.
     useOuter = 0

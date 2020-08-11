@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 
 import os
@@ -19,7 +19,7 @@ FONT_SIZE=9
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, "variantDir does not currently exist as a directory"
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -27,7 +27,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         ap = AnalysisPaths(inputDir, variant_plot = True)
 
         if ap.n_generation == 1:
-            print "Need more data to create plot"
+            print("Need more data to create plot")
             return
 
         fig = plt.figure()
@@ -63,7 +63,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
                     simOutDir = os.path.join(simDir, "simOut")
                     time = TableReader(os.path.join(simOutDir, "Main")).readColumn("time")
                 except Exception as e:
-                    print 'Error reading data for %s; %s' % (simDir, e)
+                    print('Error reading data for %s; %s' % (simDir, e))
 
                 doublingTimes[idx] = (time[-1] - time[0]) / 60.
 

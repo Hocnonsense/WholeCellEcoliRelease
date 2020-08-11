@@ -115,7 +115,7 @@ if LAST_VARIANT_INDEX == -1:
     LAST_VARIANT_INDEX = nameToNumIndicesMapping[VARIANT]
 
 # This variable gets iterated over in multiple places
-# So be careful if you change it to xrange
+# So be careful if you change it to range
 VARIANTS_TO_RUN = range(FIRST_VARIANT_INDEX, LAST_VARIANT_INDEX + 1)
 
 ### Set other simulation parameters
@@ -187,14 +187,14 @@ for i in VARIANTS_TO_RUN:
     VARIANT_METADATA_DIRECTORY = filepath.makedirs(VARIANT_DIRECTORY, "metadata")
     VARIANT_COHORT_PLOT_DIRECTORY = filepath.makedirs(VARIANT_DIRECTORY, "plotOut")
 
-    for j in xrange(N_INIT_SIMS):
+    for j in range(N_INIT_SIMS):
         SEED_DIRECTORY = filepath.makedirs(VARIANT_DIRECTORY, "%06d" % j)
         SEED_PLOT_DIRECTORY = filepath.makedirs(SEED_DIRECTORY, "plotOut")
 
-        for k in xrange(N_GENS):
+        for k in range(N_GENS):
             GEN_DIRECTORY = filepath.makedirs(SEED_DIRECTORY, "generation_%06d" % k)
 
-            for l in (xrange(2**k) if not SINGLE_DAUGHTERS else [0]):
+            for l in (range(2**k) if not SINGLE_DAUGHTERS else [0]):
                 CELL_DIRECTORY = filepath.makedirs(GEN_DIRECTORY, "%06d" % l)
                 CELL_SIM_OUT_DIRECTORY = filepath.makedirs(CELL_DIRECTORY, "simOut")
                 CELL_PLOT_OUT_DIRECTORY = filepath.makedirs(CELL_DIRECTORY, "plotOut")
@@ -540,7 +540,7 @@ for i in VARIANTS_TO_RUN:
 
     fw_this_variant_this_seed_this_analysis = None
 
-    for j in xrange(N_INIT_SIMS):
+    for j in range(N_INIT_SIMS):
         if VERBOSE_QUEUE:
             print("\tQueueing Seed {}".format(j))
         SEED_DIRECTORY = os.path.join(VARIANT_DIRECTORY, "%06d" % j)
@@ -569,13 +569,13 @@ for i in VARIANTS_TO_RUN:
 
         sims_this_seed = collections.defaultdict(list)
 
-        for k in xrange(N_GENS):
+        for k in range(N_GENS):
             if VERBOSE_QUEUE:
                 print("\t\tQueueing Gen %02d." % (k,))
             GEN_DIRECTORY = os.path.join(SEED_DIRECTORY, "generation_%06d" % k)
             metadata["gen"] = k
 
-            for l in (xrange(2**k) if not SINGLE_DAUGHTERS else [0]):
+            for l in (range(2**k) if not SINGLE_DAUGHTERS else [0]):
 
                 if VERBOSE_QUEUE:
                     print("\t\t\tQueueing Cell {}".format(l))

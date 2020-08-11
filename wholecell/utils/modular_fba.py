@@ -4,10 +4,6 @@
 @date: Created 7/14/2014
 """
 
-from __future__ import absolute_import
-from __future__ import division
-
-
 import warnings
 
 import numpy as np
@@ -33,7 +29,9 @@ QUADRATIC = {
 
 SOLVERS = {}
 try:
-    from ._netflow.nf_cplex import NetworkFlowCPLEX
+    # cannot install cplex correctly.
+    # from ._netflow.nf_cplex import NetworkFlowCPLEX
+    pass
 except ImportError:
     pass
 else:
@@ -48,14 +46,14 @@ else:
     SOLVERS[S_GLPK] = NetworkFlowGLPK
 
 if not SOLVERS:
-    raise Exception("No solvers available.")
+    raise ImportError("No solvers available.")
 
 for solver in _SOLVER_PREFERENCE:
     if solver in SOLVERS:
         DEFAULT_SOLVER = solver
         break
 else:
-    raise Exception("Could not choose a default solver.")
+    raise ImportError("Could not choose a default solver.")
 
 # Errors
 
@@ -673,7 +671,8 @@ class FluxBalanceAnalysis(object):
         # Unless given, assume no reactions are one-sided targets (ie kcat only targets)
         self._oneSidedReactions = set(objectiveParameters.get("oneSidedReactionTargets", ""))
         if len(self._oneSidedReactions) and self._solver.quadratic_objective:
-            raise Exception('One sided reactions not implemented for quadratic objectives')
+            raise NotImplementedError(
+                'One sided reactions not implemented for quadratic objectives')
 
         # Track the kinetic target levels
         self._currentKineticTargets = objective
@@ -956,7 +955,7 @@ class FluxBalanceAnalysis(object):
             flowID = self._generatedID_externalExchange.format(moleculeID)
 
             if level < 0:
-                print "Setting a negative external molecule level - be sure this is intended behavior."
+                print("Setting a negative external molecule level - be sure this is intended behavior.")
 
                 self._solver.setFlowBounds(
                     flowID,
@@ -1026,7 +1025,8 @@ class FluxBalanceAnalysis(object):
             upperBounds = [None] * nReactions
 
         if nReactions != len(lowerBounds) or nReactions != len(upperBounds):
-            raise Exception("There must be equal numbers of reactionIDs and bounds to set limits.")
+            raise IndexError(
+                "There must be equal numbers of reactionIDs and bounds to set limits.")
 
         # Set reaction flux bounds for each reaction
         for reactionID, lb, ub in zip(reactionIDs, lowerBounds, upperBounds):
@@ -1223,7 +1223,8 @@ class FluxBalanceAnalysis(object):
             reactionTargets = [reactionTargets]
 
         if len(reactionIDs) != len(reactionTargets):
-            raise Exception("There must be equal numbers of reactionIDs and reactionTargets when changing the kinetic target.")
+            raise IndexError(
+                "There must be equal numbers of reactionIDs and reactionTargets when changing the kinetic target.")
 
         if (np.array(reactionTargets) < 0).any():
             raise FBAError("Rate targets cannot be negative. {} were provided with targets of {}".format(np.array(reactionIDs)[np.array(reactionTargets) < 0], np.array(reactionTargets)[np.array(reactionTargets) < 0]))
@@ -1262,7 +1263,7 @@ class FluxBalanceAnalysis(object):
 
         # If no reactions specified, enable all kinetic reactions
         if reactionIDs == None:
-            print "enabled kinetic rates"
+            print("enabled kinetic rates")
             reactionIDs = self.getKineticTargetFluxNames()
 
         for reactionID in reactionIDs:
@@ -1295,7 +1296,7 @@ class FluxBalanceAnalysis(object):
 
         # If no reactions specified, disable all kinetic reactions
         if reactionIDs == None:
-            print "disabled kinetic rates"
+            print("disabled kinetic rates")
             reactionIDs = self.getKineticTargetFluxNames()
 
         for reactionID in reactionIDs:
@@ -1332,13 +1333,13 @@ class FluxBalanceAnalysis(object):
 
     def getArrayBasedModel(self):
         return {
-        "S_matrix": self._solver.getSMatrix(),
-        "Reactions": self._solver.getFlowNames(),
-        "Metabolites": self._solver.getMaterialNames(),
-        "Upper bounds": self._solver.getUpperBounds(),
-        "Lower bounds": self._solver.getLowerBounds(),
-        "Objective": self._solver.getObjective(),
-        }
+            "S_matrix": self._solver.getSMatrix(),
+            "Reactions": self._solver.getFlowNames(),
+            "Metabolites": self._solver.getMaterialNames(),
+            "Upper bounds": self._solver.getUpperBounds(),
+            "Lower bounds": self._solver.getLowerBounds(),
+            "Objective": self._solver.getObjective(),
+            }
 
     def getMassAccumulated(self):
         return self._solver.getFlowRates(self._massExchangeOutName)
@@ -1350,5 +1351,5 @@ class FluxBalanceAnalysis(object):
             try:
                 self._solver._solve()
             except Exception as inst:
-                print "Warning: {} error while solving FBA - repeating FBA solve".format(inst)
+                print("Warning: {} error while solving FBA - repeating FBA solve".format(inst))
                 self.solve(iterations - 1)

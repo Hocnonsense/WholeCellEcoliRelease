@@ -12,7 +12,7 @@ Mass listener. Represents the total cellular mass.
 
 # TODO: generalize this logic for use with a generic simulation
 
-from __future__ import division
+
 
 import numpy as np
 

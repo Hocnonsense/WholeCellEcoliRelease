@@ -1,7 +1,7 @@
 import os
 import csv
 import re
-import yaml
+import pyyaml
 import json
 from reconstruction.spreadsheets import JsonReader
 
@@ -72,7 +72,7 @@ reactionIds = getReactionIds()
 reactionStoich = getReactionStoich()
 reactionReversibility = getReactionReversibility()
 
-jsonData = yaml.safe_load(open(ECOCYC_DUMP, "r"))
+jsonData = pyyaml.safe_load(open(ECOCYC_DUMP, "r"))
 
 rxnNamesEnzymes = dict([(x["name"], x["annotation"]["enzymes"]) for x in jsonData["reactions"] if "enzymes" in x["annotation"]])
 

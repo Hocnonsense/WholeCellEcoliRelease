@@ -6,7 +6,7 @@ conditions, to compare with experimental data in Wallden et al.
 @date: Created 4/19/19
 """
 
-from __future__ import absolute_import, print_function, division
+
 
 import pickle
 from matplotlib import pyplot as plt
@@ -27,7 +27,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
             return
 
         if not os.path.isdir(inputDir):
-            raise Exception, 'inputDir does not currently exist as a directory'
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         filepath.makedirs(plotOutDir)
 

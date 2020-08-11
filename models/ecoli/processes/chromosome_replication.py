@@ -6,7 +6,7 @@ ChromosomeReplication
 @date: Created 5/12/2014
 """
 
-from __future__ import division
+
 
 import numpy as np
 

@@ -10,7 +10,7 @@ Records RNA synthesis probabilities
 @date: Created 6/17/2016
 """
 
-from __future__ import division
+
 
 import numpy as np
 

@@ -5,8 +5,8 @@ Template for single analysis plots
 @date: Created 8/2/18
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import pickle
 from matplotlib import pyplot as plt
@@ -22,7 +22,7 @@ from wholecell.utils import filepath
 class Plot(singleAnalysisPlot.SingleAnalysisPlot):
     def do_plot(self, simOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(simOutDir):
-            raise Exception, 'simOutDir does not currently exist as a directory'
+            raise NotADirectoryError("simOutDir does not currently exist as a directory")
 
         filepath.makedirs(plotOutDir)
 

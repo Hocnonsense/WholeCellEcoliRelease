@@ -9,7 +9,7 @@ The UniqueMolecules State instantiates a UniqueObjectsContainer object, which
 creates and manages the structured arrays in memory.
 """
 
-from __future__ import division
+
 
 
 import collections

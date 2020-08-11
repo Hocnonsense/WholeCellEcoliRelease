@@ -10,7 +10,7 @@ Records dynamics of FBA output.
 @date: Created 6/24/2014
 """
 
-from __future__ import division
+
 
 import numpy as np
 

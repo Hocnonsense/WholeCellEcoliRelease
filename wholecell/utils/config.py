@@ -20,7 +20,7 @@ globals().update(defaultConfig)
 userConfigPath = os.path.join('user', 'user_config.cfg')
 
 if not os.path.exists(userConfigPath):
-    print "Creating blank user configuration file at {}".format(userConfigPath)
+    print("Creating blank user configuration file at {}".format(userConfigPath))
     with open(userConfigPath, 'w') as configFile:
         json.dump({}, configFile)
 
@@ -29,7 +29,7 @@ userConfig = json.load(open(userConfigPath))
 unknownOptions = userConfig.viewkeys() - defaultConfig.keys()
 
 if unknownOptions:
-    raise Exception("Unknown configuration options defined in {}: {}".format(
+    raise AttributeError("Unknown configuration options defined in {}: {}".format(
         userConfigPath,
         ', '.join(unknownOptions)
         ))

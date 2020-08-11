@@ -6,8 +6,8 @@ multiple-seed simulations.
 @date: Created 4/20/2018
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import os
 import pickle
@@ -32,7 +32,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
     def do_plot(self, variantDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         # Check if the given variant directory exists
         if not os.path.isdir(variantDir):
-            raise Exception, "variantDir does not currently exist as a directory."
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         # Make plotOut directory if none exists
         makedirs(plotOutDir)
@@ -44,7 +44,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
 
         # If the simulation does not have multiple seeds, skip analysis
         if n_seed <= 1:
-            print "Skipping -- proteinCopyNumberDistribution only runs for simulations with multiple seeds."
+            print("Skipping -- proteinCopyNumberDistribution only runs for simulations with multiple seeds.")
             return
 
         # Divide simulations by generation number

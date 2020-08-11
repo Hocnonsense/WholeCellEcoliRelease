@@ -17,7 +17,7 @@ discovered as a test method:
     python -m unittest -v wholecell.tests.utils.test_library_performance.Test_library_performance.multitest_dot
 """
 
-from __future__ import absolute_import
+
 
 import resource
 import time
@@ -221,7 +221,7 @@ class Test_library_performance(unittest.TestCase):
     @noseAttrib.attr('performance')
     def multitest_dot(self):
         """Time NumPy matrix dot() many times."""
-        for iteration in xrange(100):
+        for iteration in range(100):
             self.test_dot()
 
     @noseAttrib.attr('performance')

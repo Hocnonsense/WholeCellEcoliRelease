@@ -9,7 +9,7 @@ modified to reevaluate this script on new data.
 
 """
 
-from __future__ import absolute_import, division, print_function
+
 
 import pickle
 import os
@@ -194,7 +194,7 @@ def main(unfit_path, fit_path, condition = 'basal'):
             return_counts = True
             )
 
-        elements = [np.where(inverse == i)[0] for i in xrange(values.size)]
+        elements = [np.where(inverse == i)[0] for i in range(values.size)]
 
         for (r, e, c) in zip(values, elements, counts):
             if c < cutoff:

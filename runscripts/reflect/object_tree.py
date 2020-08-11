@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+
 
 import unum
 import numpy as np
@@ -170,7 +170,7 @@ def diff_trees(a, b):
             a = list(a) + (len(b) - len(a)) * [Repr('--')]
 
         diff = []
-        for index in xrange(len(a)):
+        for index in range(len(a)):
             subdiff = diff_trees(a[index], b[index])
             if subdiff:
                 diff.append(subdiff)

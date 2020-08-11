@@ -5,7 +5,7 @@ SimulationData moleculeGroups
 @date: Created 02/13/2015
 """
 
-from __future__ import division
+
 
 from reconstruction.ecoli.dataclasses.state.stateFunctions import createIdsWithCompartments
 

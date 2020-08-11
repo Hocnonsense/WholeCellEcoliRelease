@@ -16,7 +16,7 @@ def default_input(prompt, default):
 
     response = raw_input("{} (e.g., {}): ".format(prompt, default))
     if response == "":
-        print "Using default: {}".format(default)
+        print("Using default: {}".format(default))
         response = default
 
     return response
@@ -25,7 +25,7 @@ def main():
 
     home = os.environ["HOME"]
 
-    print "Enter the following information for your launchpad.  Hitting return on directories will accept the default value."
+    print("Enter the following information for your launchpad.  Hitting return on directories will accept the default value.")
     logdir_launchpad = default_input("Launchpad logging directory", os.path.join(home, "fw", "logs", "launchpad"))
     db_host = raw_input("Database host (e.g., x.mlab.com): ")
     db_name = raw_input("Database name (e.g., wc_ecoli): ")
@@ -74,9 +74,9 @@ def main():
     with open(my_qadapter, "w") as f:
         f.write(my_qadapter_text)
 
-    print ""
-    print "Created {} with the information provided.".format(my_launchpad)
-    print "Created {} with the information provided.".format(my_qadapter)
+    print("")
+    print("Created {} with the information provided.".format(my_launchpad))
+    print("Created {} with the information provided.".format(my_qadapter))
 
 if __name__ == "__main__":
     main()

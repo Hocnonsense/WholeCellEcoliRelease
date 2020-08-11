@@ -4,7 +4,7 @@
 @date: Created 4/29/2016
 """
 
-from __future__ import absolute_import, division
+
 
 import os
 import pickle
@@ -27,7 +27,7 @@ FLUX_UNITS = COUNTS_UNITS / VOLUME_UNITS / TIME_UNITS
 class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
     def do_plot(self, variantDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(variantDir):
-            raise Exception, "variantDir does not currently exist as a directory"
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -44,7 +44,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
 
         seed_color = {}
         line_instances = {}
-        for seed_num in xrange(ap.n_seed):
+        for seed_num in range(ap.n_seed):
             # Get all cells in this seed
             seedDir = ap.get_cells(seed=[seed_num])
 

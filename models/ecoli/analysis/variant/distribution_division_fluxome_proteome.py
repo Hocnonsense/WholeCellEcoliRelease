@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 
 import os
@@ -187,16 +187,16 @@ def getFinalMass((variant, ap)):
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if metadata is not None and SHUFFLE_VARIANT_TAG not in metadata["variant"]:
-            print "This plot only runs for variants where parameters are shuffled."
+            print("This plot only runs for variants where parameters are shuffled.")
             return
 
         if not os.path.isdir(inputDir):
-            raise Exception, "variantDir does not currently exist as a directory"
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
 
-        print "Loading validation data"
+        print("Loading validation data")
         validation_data = pickle.load(open(validationDataFile, "rb"))
 
         schmidtCounts = validation_data.protein.schmidt2015Data["glucoseCounts"]
@@ -207,14 +207,14 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         toyaFluxesDict = dict(zip(toyaReactions, toyaFluxes))
         toyaStdevDict = dict(zip(toyaReactions, toyaStdev))
 
-        print "Getting simulation paths"
+        print("Getting simulation paths")
         ap = AnalysisPaths(inputDir, variant_plot = True)
 
 
-        print "Initializing worker pool"
+        print("Initializing worker pool")
         pool = Pool(processes=parallelization.plotter_cpus())
 
-        print "Begin processing"
+        print("Begin processing")
 
         # Get simulation time data
         start = time.time()
@@ -222,7 +222,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         divisionResult = pool.map(getDivisionTime, args)
         stop = time.time()
         pickle.dump(divisionResult, open(os.path.join(plotOutDir, plotOutFileName + "_division.pickle"), "w"))
-        print "%d seconds:\tTo get simulation time data (to compute division time) -- completed" % (stop - start)
+        print("%d seconds:\tTo get simulation time data (to compute division time) -- completed" % (stop - start))
 
         # Get initial mass
         start = time.time()
@@ -230,7 +230,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         initialMassResult = pool.map(getInitialMass, args)
         stop = time.time()
         pickle.dump(initialMassResult, open(os.path.join(plotOutDir, plotOutFileName + "_initialMass.pickle"), "w"))
-        print "%d seconds:\tTo get initial mass data -- completed" % (stop - start)
+        print("%d seconds:\tTo get initial mass data -- completed" % (stop - start))
 
         # Get final mass
         start = time.time()
@@ -238,7 +238,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         finalMassResult = pool.map(getFinalMass, args)
         stop = time.time()
         pickle.dump(finalMassResult, open(os.path.join(plotOutDir, plotOutFileName + "_finalMass.pickle"), "w"))
-        print "%d seconds:\tTo get final mass data -- completed" % (stop - start)
+        print("%d seconds:\tTo get final mass data -- completed" % (stop - start))
 
         # Get fluxome correlation
         start = time.time()
@@ -246,7 +246,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         fluxomeResult = pool.map(getPCCFluxome, args)
         stop = time.time()
         pickle.dump(fluxomeResult, open(os.path.join(plotOutDir, plotOutFileName + "_fluxome.pickle"), "w"))
-        print "%d seconds:\tTo get fluxome correlation -- completed" % (stop - start)
+        print("%d seconds:\tTo get fluxome correlation -- completed" % (stop - start))
 
         # Get proteome correlation
         start = time.time()
@@ -254,7 +254,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         proteomeResult = pool.map(getPCCProteome, args)
         stop = time.time()
         pickle.dump(proteomeResult, open(os.path.join(plotOutDir, plotOutFileName + "_proteome.pickle"), "w"))
-        print "%d seconds:\tTo get proteome correlation -- completed" % (stop - start)
+        print("%d seconds:\tTo get proteome correlation -- completed" % (stop - start))
 
         pool.close()
         pool.join()

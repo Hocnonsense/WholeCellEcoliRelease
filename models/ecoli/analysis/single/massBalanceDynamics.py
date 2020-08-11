@@ -1,5 +1,5 @@
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import os
 
@@ -16,7 +16,7 @@ THRESHOLD = 1e-5
 class Plot(singleAnalysisPlot.SingleAnalysisPlot):
     def do_plot(self, simOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(simOutDir):
-            raise Exception, "simOutDir does not currently exist as a directory"
+            raise NotADirectoryError("simOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)

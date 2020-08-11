@@ -13,7 +13,7 @@ There are hard-coded validation values:
       the 40 minute and 60 minute doubling cells.
 """
 
-from __future__ import absolute_import
+
 
 import os
 import pickle
@@ -73,7 +73,7 @@ def mp_worker(sim_dir):
 class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
     def do_plot(self, variantDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(variantDir):
-            raise Exception, 'variantDir does not currently exist as a directory'
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -83,7 +83,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
 
         # Check for sufficient generations
         if n_gens - 1 < FIRST_GENERATION:
-            print 'Not enough generations to plot.'
+            print('Not enough generations to plot.')
             return
 
         sim_dirs = analysis_paths.get_cells(

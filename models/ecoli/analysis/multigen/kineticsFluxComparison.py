@@ -6,8 +6,8 @@ Compare fluxes in simulation to target fluxes
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import os
 import pickle
@@ -37,7 +37,7 @@ BURN_IN_STEPS = 20
 class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
     def do_plot(self, seedOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -109,7 +109,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
             if rxn[0] not in excluded:
                 siteStr += "&rnids=%s" % rxn[0]
             rxns.append(rxn[0])
-        # print siteStr
+        # print(siteStr)
 
         csvFile = open(os.path.join(plotOutDir, plotOutFileName + ".tsv"), "wb")
         output = csv.writer(csvFile, delimiter = "\t")

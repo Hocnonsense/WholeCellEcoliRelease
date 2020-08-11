@@ -5,8 +5,8 @@ Analyze results from metabolism_kinetic_objective_weight variant
 @date: Created 6/7/18'
 '''
 
-from __future__ import division
-from __future__ import absolute_import
+
+
 
 import argparse
 import os
@@ -197,7 +197,7 @@ def analyze_variant((variant, ap, toya_reactions, toya_fluxes, outlier_filter)):
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, 'inputDir does not currently exist as a directory'
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         ap = AnalysisPaths(inputDir, variant_plot=True)
         variants = ap.get_variants()

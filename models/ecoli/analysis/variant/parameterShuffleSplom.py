@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 from xlrd import open_workbook
 import numpy as np
@@ -36,13 +36,13 @@ def cleanAxis(ax):
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, "inputDir does not currently exist as a directory"
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
 
         if not os.path.exists(os.path.join(plotOutDir, "distribution_division_fluxome_proteome_data_matrix.xls")):
-            print "%s must exist as an .xls file for this plot." % "distribution_division_fluxome_proteome_data_matrix.xls"
+            print("%s must exist as an .xls file for this plot." % "distribution_division_fluxome_proteome_data_matrix.xls")
             return
 
         # Load data
@@ -63,7 +63,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         flag2 = 0  # 3-hour upper limit
         flag3 = 0  # final dry mass < 750
         data = []
-        for varId, row in enumerate(xrange(2, data_raw.nrows)):
+        for varId, row in enumerate(range(2, data_raw.nrows)):
             row_values = data_raw.row_values(row)
 
             if (varId + 1) in failures:

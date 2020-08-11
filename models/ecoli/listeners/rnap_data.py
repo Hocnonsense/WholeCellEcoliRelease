@@ -8,7 +8,7 @@ RnapData
 @date: Created 6/18/15
 """
 
-from __future__ import division
+
 
 import numpy as np
 

@@ -6,7 +6,7 @@ Test fitkb1.py
 @date: Created 9/23/2014
 """
 
-from __future__ import division
+
 
 import unittest
 import warnings

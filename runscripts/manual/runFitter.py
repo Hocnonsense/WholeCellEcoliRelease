@@ -8,9 +8,6 @@ Run with '-h' for command line help.
 Set PYTHONPATH when running this.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-
 import os
 
 from wholecell.fireworks.firetasks import FitSimDataTask
@@ -183,10 +180,10 @@ class RunFitter(scriptBase.ScriptBase):
             kb_directory, constants.SERIALIZED_VALIDATION_DATA)
 
         if args.debug or args.cached:
-            print "{}{}Fitter".format(
+            print("{}{}Fitter".format(
                 'DEBUG ' if args.debug else '',
                 'CACHED ' if args.cached else '',
-                )
+                ))
 
         tasks = [
             InitRawDataTask(
@@ -245,8 +242,8 @@ class RunFitter(scriptBase.ScriptBase):
         for task in tasks:
             task.run_task({})
 
-        print '\n\t'.join(['Wrote', raw_data_file, sim_data_file,
-            most_fit_filename, raw_validation_data_file, validation_data_file])
+        print('\n\t'.join(['Wrote', raw_data_file, sim_data_file,
+            most_fit_filename, raw_validation_data_file, validation_data_file]))
 
 
 if __name__ == '__main__':

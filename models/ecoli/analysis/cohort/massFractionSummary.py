@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 import os
 from matplotlib import pyplot as plt
@@ -35,7 +35,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
                     ]
 
         if not os.path.isdir(variantDir):
-            raise Exception, "variantDir does not currently exist as a directory"
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)

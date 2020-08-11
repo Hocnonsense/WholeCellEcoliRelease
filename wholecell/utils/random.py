@@ -5,7 +5,7 @@
     @date: Created 6/2/2014
     @Date: 2020-08-07 12:16:20
     @LastEditors: Hwrn
-    @LastEditTime: 2020-08-09 17:49:34
+    @LastEditTime: 2020-08-10 22:35:09
     @FilePath: /WholeCellEcoliRelease/wholecell/utils/random.py
     @Description:
         Special random number generators.  Most are holdovers from the original port.
@@ -20,15 +20,15 @@ def randCounts(randomState, counts, N):
     if counts.shape == ():
         counts = counts.reshape(1)
     if np.any(counts < 0) or counts.dtype != np.dtype(np.int):
-        raise Exception("counts must contain positive integers.")
+        raise ValueError("counts must contain positive integers.")
     if N < 0:
-        raise Exception("N must be positive.")
+        raise ValueError("N must be positive.")
 
     cumsumCounts = np.cumsum(counts)
     positiveSelect = True
 
     if N > cumsumCounts[-1]:
-        raise Exception("N must be at most the total available counts.")
+        raise ValueError("N must be at most the total available counts.")
 
     if N == cumsumCounts[-1]:
         return counts
@@ -38,7 +38,7 @@ def randCounts(randomState, counts, N):
 
     selectedCounts = np.zeros(np.shape(counts))
 
-    for i in xrange(N):
+    for i in range(N):
         idx = np.ravel(np.where(randomState.randi(cumsumCounts[-1]) + 1 <= cumsumCounts))[0]
         selectedCounts[idx] += 1
         cumsumCounts[idx:] -= 1

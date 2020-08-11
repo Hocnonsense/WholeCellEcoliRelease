@@ -19,7 +19,7 @@ reactionNames = kb.process.metabolism.reactionNames
 
 sorting = np.argsort(np.abs(reactionNetMass))[::-1]
 
-print "-"*79
+print("-"*79)
 
 moleculeMass = dict([(x['id'],x['mw7.2']) for x in kb._metabolites])
 moleculeFormula = dict([(x['id'],x['formula7.2']) for x in kb._metabolites])
@@ -39,13 +39,13 @@ for index in sorting:
     stoich = [x['stoichiometry'] for x in kb._reactions if reactionIds[index] == x['id']][0]
     stoich_short = [(x['coeff'],x['molecule'],moleculeMass[x['molecule']],moleculeFormula[x['molecule']]) for x in stoich]
 
-    print "{}\t{}\t{}\t{}".format(reactionIds[index], reactionNames[index], reactionNetMass[index], stoich_short)
+    print("{}\t{}\t{}\t{}".format(reactionIds[index], reactionNames[index], reactionNetMass[index], stoich_short))
 
     i += 1
 
-print "-"*79
-print "Summary:"
-print "{} bad reactions (out of {})".format(i-1, len(reactionNames))
-print "{} reactions were under the threshold of {}".format(nSkipped, THRESHOLD)
-print "{} reactions contained the substring 'exchange' or 'sink'".format(nExchange)
-print "-"*79
+print("-"*79)
+print("Summary:")
+print("{} bad reactions (out of {})".format(i-1, len(reactionNames)))
+print("{} reactions were under the threshold of {}".format(nSkipped, THRESHOLD))
+print("{} reactions contained the substring 'exchange' or 'sink'".format(nExchange))
+print("-"*79)

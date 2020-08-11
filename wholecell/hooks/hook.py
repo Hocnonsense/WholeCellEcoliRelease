@@ -8,7 +8,7 @@ cannot be modeled at this time.
 @date: Created 5/8/2014
 """
 
-from __future__ import division
+
 
 import numpy as np
 

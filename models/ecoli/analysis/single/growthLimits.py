@@ -6,7 +6,7 @@ Plots various effects that may be limiting growth
 @date: Created 6/18/2015
 """
 
-from __future__ import absolute_import
+
 
 import os
 
@@ -22,7 +22,7 @@ from models.ecoli.analysis import singleAnalysisPlot
 class Plot(singleAnalysisPlot.SingleAnalysisPlot):
     def do_plot(self, simOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(simOutDir):
-            raise Exception, "simOutDir does not currently exist as a directory"
+            raise NotADirectoryError("simOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -105,8 +105,8 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
         # plt.plot(time / 60., atpsHydrolyzed)
         # plt.xlabel("Time (min)", fontsize = 5)
         # plt.ylabel("GTP counts", fontsize = 5)
-        print "GTP consumption by polypeptide elongation = %d" % np.sum(gtpUsed)
-        # print "ATP hydrolyzed for non-growth associated maintenance = %d" % np.sum(atpsHydrolyzed)
+        print("GTP consumption by polypeptide elongation = %d" % np.sum(gtpUsed))
+        # print("ATP hydrolyzed for non-growth associated maintenance = %d" % np.sum(atpsHydrolyzed))
 
         for idx in range(len(moleculeIds)):
             ax = plt.subplot(7,4,idx+1)

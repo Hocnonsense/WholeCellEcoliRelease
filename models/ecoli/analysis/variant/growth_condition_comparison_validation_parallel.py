@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 import os
 import pickle
@@ -84,7 +84,7 @@ def mp_worker(sim_dir):
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, "variantDir does not currently exist as a directory"
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -126,7 +126,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
                 is_rRNA = sim_data.process.transcription.rnaData["isRRna"]
 
             except Exception as e:
-                print "Couldn't load sim_data object. Exiting.", e
+                print("Couldn't load sim_data object. Exiting.", e)
                 return
 
             p = Pool(parallelization.cpus())

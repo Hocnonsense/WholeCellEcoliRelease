@@ -122,7 +122,8 @@ class EnzymeKinetics(object):
                         keepReaction = False
             else:
                 # Reaction type is unknown
-                raise Exception("Reaction type '%s' is unknown. Must be either 'standard' or 'custom'." % (reactionType))
+                raise AttributeError(
+                    "Reaction type '%s' is unknown. Must be either 'standard' or 'custom'." % (reactionType))
 
             # Keep the reaction only if both substrates and enzymes are known
             if keepReaction:
@@ -243,10 +244,12 @@ class EnzymeKinetics(object):
                     unknownReactions.add(reactionID)
 
         if len(unknownConstraints) > 0:
-            raise Exception("No rate estimate found for the following {} constraintIDs {}.".format(len(unknownConstraints), unknownConstraints))
+            raise AttributeError("No rate estimate found for the following {} constraintIDs {}.".format(
+                len(unknownConstraints), unknownConstraints))
 
         if len(unknownReactions) > 0:
-            raise Exception("No rate estimate found for the following {} reactionIDs {}.".format(len(unknownReactions), unknownReactions))
+            raise AttributeError("No rate estimate found for the following {} reactionIDs {}.".format(
+                len(unknownReactions), unknownReactions))
 
         return rates
 
@@ -258,7 +261,8 @@ class EnzymeKinetics(object):
         if not self.inputsChecked:
             knownConstraints, unusableConstraints, unknownVals = self.checkKnownSubstratesAndEnzymes(metaboliteConcentrationsDict, enzymeConcentrationsDict, removeUnknowns=False)
             if len(unusableConstraints) > 0:
-                raise Exception("Unable to compute kinetic rate for these reactions: {}\n. Missing values for: {}".format(unusableConstraints.keys(), unknownVals))
+                raise AttributeError("Unable to compute kinetic rate for these reactions: {}\n. Missing values for: {}".format(
+                    unusableConstraints.keys(), unknownVals))
 
         unknownConstraints = set()
 
@@ -272,7 +276,8 @@ class EnzymeKinetics(object):
                     unknownConstraints.add(constraintID)
 
         if len(unknownConstraints) > 0:
-            raise Exception("No rate estimate found for constraintIDs {}.".format(unknownConstraints))
+            raise AttributeError(
+                "No rate estimate found for constraintIDs {}.".format(unknownConstraints))
 
         return rates
 
@@ -286,7 +291,8 @@ class EnzymeKinetics(object):
         if not self.inputsChecked:
             knownConstraints, unusableConstraints, unknownVals = self.checkKnownSubstratesAndEnzymes(metaboliteConcentrationsDict, enzymeConcentrationsDict, removeUnknowns=False)
             if len(unusableConstraints) > 0:
-                raise Exception("Unable to compute kinetic rate for these reactions: {}\n. Missing values for: {}".format(unusableConstraints.keys(), unknownVals))
+                raise AttributeError("Unable to compute kinetic rate for these reactions: {}\n. Missing values for: {}".format(
+                    unusableConstraints.keys(), unknownVals))
 
         unknownReactions = set()
 
@@ -301,7 +307,8 @@ class EnzymeKinetics(object):
                     unknownReactions.add(reactionID)
 
         if len(unknownReactions) > 0:
-            raise Exception("No rate estimate found for reactionIDs {}.".format(unknownReactions))
+            raise AttributeError(
+                "No rate estimate found for reactionIDs {}.".format(unknownReactions))
 
 
         return rates

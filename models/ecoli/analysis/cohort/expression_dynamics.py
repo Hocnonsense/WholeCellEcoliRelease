@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 import os
 
@@ -26,7 +26,7 @@ def mm2inch(value):
 class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
     def do_plot(self, seedOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -34,7 +34,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
         # Check if basal sim
         sim_data = pickle.load(open(simDataFile, "rb"))
         if sim_data.condition != "basal":
-            print "Skipping - plot only runs for basal sim."
+            print("Skipping - plot only runs for basal sim.")
             return
 
         # Get all cells
@@ -42,7 +42,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
         allDir = ap.get_cells(seed=[0], generation = GENS)
         n_gens = GENS.size
         if len(allDir) < n_gens:
-            print "Skipping - particular seed and/or gens were not simulated."
+            print("Skipping - particular seed and/or gens were not simulated.")
             return
 
         # Get all ids reqiured
@@ -73,7 +73,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
         ratioFinalToInitialCountMultigen = np.zeros((n_gens, n_monomers), dtype = np.float)
 
         if not FROM_CACHE:
-            print "Re-running - not using cache"
+            print("Re-running - not using cache")
             for gen_idx, simDir in enumerate(allDir):
                 simOutDir = os.path.join(simDir, "simOut")
 
@@ -84,7 +84,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
                 bulkMolecules = TableReader(os.path.join(simOutDir, "BulkMolecules"))
 
                 if first_build:
-                    print "Running first build code"
+                    print("Running first build code")
                     moleculeIds = bulkMolecules.readAttribute("objectNames")
 
                     complexationIdx = np.array([moleculeIds.index(x) for x in ids_complexation]) # Complexes of proteins, and protein monomers
@@ -158,7 +158,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
             protein_idx = protein_index_of_interest[0]
             protein_idx_burst = protein_index_of_interest_burst[7]
         except Exception as exc:
-            print "Error: %s" % exc
+            print("Error: %s" % exc)
             return
 
         fig, axesList = plt.subplots(ncols = 2, nrows = 2, sharex = True)

@@ -6,7 +6,7 @@ The environmental state object
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 """
 
-from __future__ import division
+
 
 import numpy as np
 

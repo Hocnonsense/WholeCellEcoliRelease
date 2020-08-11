@@ -6,7 +6,7 @@ Plots fluxes across different conditions.
 @date: Created 1/19/2017'
 """
 
-from __future__ import absolute_import
+
 
 
 import os
@@ -28,7 +28,7 @@ from models.ecoli.analysis import variantAnalysisPlot
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, "inputDir does not currently exist as a directory"
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         ap = AnalysisPaths(inputDir, variant_plot = True)
         variants = sorted(ap._path_data['variant'].tolist()) # Sorry for accessing private data

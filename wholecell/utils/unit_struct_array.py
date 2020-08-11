@@ -14,6 +14,7 @@ being used while loading constants.
 import numpy as np
 import unum
 
+# avoid var-name conflict
 from wholecell.utils import units as units_pkg
 
 # TODO: Write test!
@@ -27,24 +28,17 @@ class UnitStructArray(object):
         self.units = units
 
     def _validate(self, struct_array, units):
-        s = ''
-        if not isinstance(struct_array, np.ndarray):
-            s += 'UnitStructArray must be initialized with a numpy array!\n'
-        elif not isinstance(units, dict):
-            s += 'UnitStructArray must be initialized with a dict storing units!\n'
-        elif set([x[0] for x in struct_array.dtype.descr]) != set(units.keys()):
-            s += 'Struct array fields do not match unit fields!\n'
-        if len(s):
-            raise Exception, s
+        assert isinstance(struct_array, np.ndarray), 'UnitStructArray must be initialized with a numpy array!\n'
+        assert isinstance(units, dict), 'UnitStructArray must be initialized with a dict storing units!\n'
+        assert set([x[0] for x in struct_array.dtype.descr]) == set(units.keys()), 'Struct array fields do not match unit fields!\n'
 
     def _field(self, fieldname):
-        if not units_pkg.hasUnit(self.units[fieldname]):
-            if self.units[fieldname] == None:
-                return self.struct_array[fieldname]
-            else:
-                raise Exception, 'Field has incorrect units or unitless designation!\n'
-        else:
+        if units_pkg.hasUnit(self.units[fieldname]):
             return self.units[fieldname] * self.struct_array[fieldname]
+        if self.units[fieldname]:
+            raise TypeError(
+                'Field has incorrect units or unitless designation!\n')
+        return self.struct_array[fieldname]
 
     def fullArray(self):
         return self.struct_array
@@ -67,19 +61,22 @@ class UnitStructArray(object):
             try:
                 self.units[key].matchUnits(value)
             except unum.IncompatibleUnitsError:
-                raise Exception, 'Units do not match!\n'
+                raise TypeError('Units do not match!\n')
 
             self.struct_array[key] = value.asNumber()
             self.units[key] = units_pkg.getUnit(value)
 
         elif type(value) == list or type(value) == np.ndarray:
+            # so unly unit * array is avaible but not vice versa
             if units_pkg.hasUnit(self.units[key]):
-                raise Exception, 'Units do not match! Quantity has units your input does not!\n'
+                raise TypeError(
+                    'Units do not match! Quantity has units your input does not!\n')
             self.struct_array[key] = value
             self.units[key] = None
 
         else:
-            raise Exception, 'Cant assign data-type other than unum datatype or list/numpy array!\n'
+            raise TypeError(
+                'Cant assign data-type other than unum datatype or list/numpy array!\n')
 
     def __len__(self):
         return len(self.struct_array)
@@ -88,16 +85,10 @@ class UnitStructArray(object):
         return 'STRUCTURED ARRAY:\n{}\nUNITS:\n{}'.format(self.struct_array.__repr__(), self.units)
 
     def __eq__(self, other):
-        if type(other) != type(self):
-            return False
-        elif self.struct_array.dtype != other.struct_array.dtype:
-            return False
-        elif not all(self.struct_array == other.struct_array):
-            return False
-        elif self.units != other.units:
-            return False
-        else:
-            return True
+        return type(other) == type(self) and \
+            self.struct_array.dtype == other.struct_array.dtype and \
+            all(self.struct_array == other.struct_array) and \
+            self.units == other.units
 
     def __ne__(self, other):
         return not self.__eq__(other)

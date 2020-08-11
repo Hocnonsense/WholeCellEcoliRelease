@@ -5,7 +5,7 @@ Plots transcription events across multiple generations
 @date: Created 2/7/2017
 """
 
-from __future__ import absolute_import
+
 
 import os
 import pickle
@@ -25,7 +25,7 @@ N_GENES_TO_PLOT = -1
 class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
     def do_plot(self, seedOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -51,7 +51,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
             simulatedSynthProbs = []
             transcriptionEvents = []
             for gen, simDir in enumerate(allDir):
-                # print gen
+                # print(gen)
                 simOutDir = os.path.join(simDir, "simOut")
 
                 time += TableReader(os.path.join(simOutDir, "Main")).readColumn("time").tolist()

@@ -6,7 +6,7 @@ test_unique_objects_partitioning.py
 @data: Created 3/4/2014
 '''
 
-from __future__ import division
+
 
 import unittest
 

@@ -4,7 +4,7 @@
     @organization: Covert Lab, Department of Bioengineering, Stanford University
     @date: Created 3/22/2013
     @LastEditors: Hwrn
-    @LastEditTime: 2020-08-09 16:58:15
+    @LastEditTime: 2020-08-10 22:49:49
     @FilePath: /WholeCellEcoliRelease/wholecell/utils/linear_programming.py
     @Description:
         保证可替换性 | Wrapper over cvxopt to call glpk (can be extended in the future to use other solvers)
@@ -61,7 +61,8 @@ def linearProgramming(
     if not np.all(np.array(variableTypes) == "C"):
         assert False, "At least one of your variableTypes is not currently supported."
     if options != None and options["glpk"] != None: # 实际上作者还没用到这个参数
-        raise Exception("Passing GLPK options is not currently supported.")
+        raise NotImplementedError(
+            "Passing GLPK options is not currently supported.")
 
     if maximizeFlag.lower() == "maximize":
         f = f * (-1.0)            # 否则变成指针 DO *****NOT***** DO "*=" AS THAT WILL PERFORM MODIFICATION IN PLACE

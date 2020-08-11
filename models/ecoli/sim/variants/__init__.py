@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from __future__ import division
+
 
 from models.ecoli.sim.variants.gene_knockout import geneKnockout
 from models.ecoli.sim.variants.gene_knockout import geneKnockoutTotalIndices

@@ -17,7 +17,7 @@ Expected variant indices:
     1+: modify random fraction of parameters
 '''
 
-from __future__ import division
+
 
 import numpy as np
 

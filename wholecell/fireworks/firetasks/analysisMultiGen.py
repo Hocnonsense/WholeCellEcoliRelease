@@ -37,7 +37,7 @@ class AnalysisMultiGenTask(FireTaskBase):
     def run_task(self, fw_spec):
 
         startTime = time.time()
-        print "\n%s: Running multiple generation analysis" % time.ctime(startTime)
+        print("\n%s: Running multiple generation analysis" % time.ctime(startTime))
 
         fileList = self.get("plots_to_run", [])
         if not fileList:
@@ -64,7 +64,7 @@ class AnalysisMultiGenTask(FireTaskBase):
             if "WC_ANALYZE_FAST" in os.environ:
                 results[f] = pool.apply_async(run_plot, args=(mod.Plot, args, f))
             else:
-                print "%s: Running %s" % (time.ctime(), f)
+                print("%s: Running %s" % (time.ctime(), f))
                 try:
                     mod.Plot.main(*args)
                 except Exception:
@@ -81,19 +81,19 @@ class AnalysisMultiGenTask(FireTaskBase):
         timeTotal = time.time() - startTime
 
         if exceptionFileList:
-            print "Completed multiple generation analysis in %s with an exception in:" % (time.strftime("%H:%M:%S", time.gmtime(timeTotal)))
+            print("Completed multiple generation analysis in %s with an exception in:" % (time.strftime("%H:%M:%S", time.gmtime(timeTotal))))
             for file in exceptionFileList:
-                print "\t%s" % file
-            raise Exception("Error in multigen analysis")
+                print("\t%s" % file)
+            raise RuntimeError("Error in multigen analysis")
         else:
-            print "Completed multiple generation analysis in %s" % (time.strftime("%H:%M:%S", time.gmtime(timeTotal)))
+            print("Completed multiple generation analysis in %s" % (time.strftime("%H:%M:%S", time.gmtime(timeTotal))))
 
 def run_plot(plot_class, args, name):
     try:
-        print "%s: Running %s" % (time.ctime(), name)
+        print("%s: Running %s" % (time.ctime(), name))
         plot_class.main(*args)
     except KeyboardInterrupt:
         import sys; sys.exit(1)
-    except Exception as e:
+    except Exception:
         traceback.print_exc()
-        raise Exception(e)  # TODO: Return e so the caller can print it?
+        raise  # TODO: Return e so the caller can print(it?)

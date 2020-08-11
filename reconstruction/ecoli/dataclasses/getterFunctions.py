@@ -6,7 +6,7 @@ SimulationData getter functions
 @date: Created 02/12/2015
 """
 
-from __future__ import division
+
 
 import re
 import numpy as np
@@ -29,7 +29,7 @@ class getterFunctions(object):
 
         except IndexError:
             if i not in self._allMass["id"]:
-                raise Exception("Unrecognized id: {}".format(i))
+                raise IndexError("Unrecognized id: {}".format(i))
 
             else:
                 raise

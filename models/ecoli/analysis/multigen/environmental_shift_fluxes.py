@@ -5,7 +5,7 @@ Plot fluxes for metabolic map figure during a shift
 @date: Created 2/13/17
 """
 
-from __future__ import absolute_import
+
 
 import os
 import pickle
@@ -32,7 +32,7 @@ MA_WIDTH = 15
 class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
     def do_plot(self, seedOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)

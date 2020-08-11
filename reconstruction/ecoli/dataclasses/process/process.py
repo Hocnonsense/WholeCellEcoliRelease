@@ -6,7 +6,7 @@ SimulationData process associated data
 @date: Created 02/12/2015
 """
 
-from __future__ import division
+
 
 from reconstruction.ecoli.dataclasses.process.replication import Replication
 from reconstruction.ecoli.dataclasses.process.metabolism import Metabolism

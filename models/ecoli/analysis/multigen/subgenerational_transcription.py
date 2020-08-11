@@ -6,7 +6,7 @@ Generates plots related to the subgenerational transcription of genes.
 @date: Created 2/12/2017
 """
 
-from __future__ import absolute_import
+
 
 import os
 import pickle
@@ -34,7 +34,7 @@ def remove_xaxis(axis):
 class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
     def do_plot(self, seedOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -44,7 +44,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
         allDir = ap.get_cells()
 
         if len(allDir) <= 1:
-            print "Skipping - this plot only runs for multigen sims"
+            print("Skipping - this plot only runs for multigen sims")
             return
 
         sim_data = pickle.load(open(simDataFile, "rb"))
@@ -153,7 +153,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
         whitePadSparklineAxis(scatterAxis)
 
         N, bins, patches = histAxis.hist(transcribedBoolOrdered, bins = len(allDir) + 1, orientation = 'horizontal')
-        for i in xrange(1, len(patches) - 1):
+        for i in range(1, len(patches) - 1):
             plt.setp(patches[i], facecolor = "none", edgecolor = color_subgen)
         plt.setp(patches[0], facecolor = "none", edgecolor = color_never)
         plt.setp(patches[-1], facecolor = "none", edgecolor = color_always)

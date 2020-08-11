@@ -10,7 +10,7 @@ Large-scale, low-overhead evaluation time tracker for process/state operations.
 @date: Created 6/10/2014
 """
 
-from __future__ import division
+
 
 import numpy as np
 

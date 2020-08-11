@@ -1,5 +1,5 @@
 
-from __future__ import division
+
 import numpy as np
 
 from wholecell.containers.bulk_objects_container import BulkObjectsContainer
@@ -56,7 +56,7 @@ def fitSimData_2(kb, simOutDir):
 
     proteinTotalCounts = calcProteinTotalCounts(kb, proteinMass, proteinDistribution)
 
-    for seed in xrange(N_SEEDS):
+    for seed in range(N_SEEDS):
         randomState = np.random.RandomState(seed)
 
         allMoleculesView.countsIs(0)

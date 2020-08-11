@@ -6,7 +6,7 @@ Plots fraction of mRNAs transcribed (out of all genes to be transcribed) for all
 @date: Created 6/29/2016
 """
 
-from __future__ import absolute_import
+
 
 import os
 import pickle
@@ -25,7 +25,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
         return
 
         if not os.path.isdir(variantDir):
-            raise Exception, "variantDir does not currently exist as a directory"
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -49,7 +49,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
         ap = AnalysisPaths(variantDir, cohort_plot = True)
 
         if ap.n_generation == 1:
-            print "Only runs for 2 or more cells."
+            print("Only runs for 2 or more cells.")
             return
 
         second_half_cells = ap.get_cells(generation=range(ap.n_generation//2,ap.n_generation))

@@ -6,7 +6,7 @@ Produces histograms of frequency that production of a metabolite is limited (at 
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 """
 
-from __future__ import absolute_import, division
+
 
 import os
 import pickle
@@ -25,7 +25,7 @@ WINDOW = 50
 class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
     def do_plot(self, seedOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -61,7 +61,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
 
             diff = np.diff(normalizedCounts, axis = 0)
             limited = []
-            for i in xrange(diff.shape[0] - WINDOW):
+            for i in range(diff.shape[0] - WINDOW):
                 currentStepLimited = np.where(np.any(diff[i:i + WINDOW] > 0, axis = 0) == False)[0].astype(int)
                 metaboliteLimited[i, currentStepLimited] = 1
                 limited = np.append(limited, currentStepLimited).astype(int)

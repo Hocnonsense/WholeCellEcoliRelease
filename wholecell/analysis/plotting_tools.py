@@ -74,8 +74,8 @@ def plotSplom(arrayOfdataArrays, nameArray="", stdArrays=None, labels=None, fig=
 
     num_entries = len(arrayOfdataArrays)
     plottingIndex = 1
-    for rowNum in xrange(1,num_entries+1):
-        for colNum in xrange(1,num_entries+1):
+    for rowNum in range(1,num_entries+1):
+        for colNum in range(1,num_entries+1):
             if colNum < plottingIndex:
                 continue
             plt.subplot(num_entries,num_entries,num_entries*(rowNum-1)+(colNum))

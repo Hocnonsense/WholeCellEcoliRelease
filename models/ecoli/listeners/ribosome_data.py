@@ -8,7 +8,7 @@ RibosomeData
 @date: Created 5/21/14
 """
 
-from __future__ import division
+
 
 import numpy as np
 

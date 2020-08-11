@@ -6,8 +6,8 @@ Plots counts of rna degraded and the resulting free NMPs
 @date: Created 1/15/2015 - Updated 8/10/2015
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import os
 
@@ -47,7 +47,7 @@ def sparklineAxis(axis, x, y, tickPos, lineType, color):
 class Plot(singleAnalysisPlot.SingleAnalysisPlot):
     def do_plot(self, simOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(simOutDir):
-            raise Exception, "simOutDir does not currently exist as a directory"
+            raise NotADirectoryError("simOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -82,7 +82,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
             plt.xlabel("Km First Order Decay (Log10, M)", fontsize = 14)
             plt.ylabel("Km Non-linear Decay (Log10, M)", fontsize = 14)
             plt.title("Relative error = %.2f%%" % Error, fontsize = 16)
-            # print np.corrcoef(KmFirstOrderDecay, KmNonLinearDecay)[0,1]
+            # print(np.corrcoef(KmFirstOrderDecay, KmNonLinearDecay)[0,1])
 
 
         if sim_data.constants.EndoRNaseCooperation:

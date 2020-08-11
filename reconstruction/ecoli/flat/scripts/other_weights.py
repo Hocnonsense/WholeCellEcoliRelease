@@ -228,8 +228,7 @@ def lod_to_dod(list_of_dicts, dict_key):
 
     out = dict(entries)
 
-    if len(entries) != len(out):
-        raise Exception("Repeated keys (non-unique)")
+    assert len(entries) == len(out), "Repeated keys (non-unique)"
 
     return out
 
@@ -503,7 +502,8 @@ while comp_rxns:
             for s in comp_rxn["stoichiometry"]
             } - species_weights.viewkeys() - comp_data.viewkeys()
 
-        raise Exception("{} unrecognized subunits: {}".format(len(unrecognized_subunits), "\n".join(unrecognized_subunits)))
+        raise RuntimeError("{} unrecognized subunits: {}".format(
+            len(unrecognized_subunits), "\n".join(unrecognized_subunits)))
 
 with open(COMP_FILE, "w") as f:
     writer = JsonWriter(f, fieldnames)

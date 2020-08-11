@@ -36,7 +36,7 @@ This sub-model encodes molecular simulation of RNA degradation as two main steps
 6. Update pull of metabolites (H and H2O) because of exonucleolytic digestion
 """
 
-from __future__ import division
+
 
 import numpy as np
 import math

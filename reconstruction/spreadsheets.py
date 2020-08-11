@@ -37,7 +37,7 @@ class JsonReader(csv.DictReader):
             )
 
         # This is a hack to strip extra quotes from the field names
-        # Not proud of it, but it works.
+        # Not proud of it, but it works. :)
         self.fieldnames # called for side effect
 
         self._fieldnames = [
@@ -45,6 +45,14 @@ class JsonReader(csv.DictReader):
             ]
 
     def next(self):
+        """
+            @description:
+            @param {type}
+            @return {
+                key:json.loads(value) if value else "" # catch for empty field
+                for key, value in csv.DictReader.next(self).viewitems()
+                }
+        """
         attributeDict = {}
         for key, raw_value in csv.DictReader.next(self).viewitems():
             try:
@@ -52,17 +60,12 @@ class JsonReader(csv.DictReader):
 
             except (ValueError, TypeError) as e:
                 repr(e)
-                raise Exception("failed to parse json string:{}".format(raw_value))
+                raise ValueError("failed to parse json string:{}".format(raw_value))
 
             try:
                 attribute = re.search('(.*?) \(', key).group(1)
-                value_units =  eval(re.search('\((.*?)\)',key).group(1))
+                value_units = eval(re.search('\((.*?)\)',key).group(1))
                 attributeDict[attribute] = value * value_units
             except AttributeError:
                 attributeDict[key] = value
         return attributeDict
-
-        # return {
-        #     key:json.loads(value) if value else "" # catch for empty field
-        #     for key, value in csv.DictReader.next(self).viewitems()
-        #     }

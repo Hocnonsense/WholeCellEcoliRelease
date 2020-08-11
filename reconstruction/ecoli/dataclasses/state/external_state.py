@@ -25,7 +25,7 @@ This base class includes all data associated with states external to the cells.
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 """
 
-from __future__ import division
+
 
 from wholecell.utils import units
 from wholecell.utils.unit_struct_array import UnitStructArray

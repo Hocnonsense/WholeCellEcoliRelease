@@ -13,8 +13,6 @@ moleculesToNextTimeStep()
 
 """
 
-from __future__ import absolute_import
-
 import numpy as np
 import os
 import pickle
@@ -309,6 +307,7 @@ class TwoComponentSystem(object):
         else:
             needToCreate = True
 
+        # where is it?
         if needToCreate:
             self._makeDerivative()
             self._makeDerivativeFitter()
@@ -421,7 +420,7 @@ class TwoComponentSystem(object):
         y = scipy.integrate.odeint(self.derivatives, y_init, t = [0, timeStepSec], Dfun = self.derivativesJacobian, mxstep = 10000)
 
         if np.any(y[-1, :] * (cellVolume * nAvogadro) <= -1):
-            raise Exception, "Have negative values -- probably due to numerical instability"
+            raise ValueError("Have negative values -- probably due to numerical instability")
 
         y[y < 0] = 0
         yMolecules = y * (cellVolume * nAvogadro)
@@ -450,7 +449,7 @@ class TwoComponentSystem(object):
         y = scipy.integrate.odeint(self.derivativesFitter, y_init, t = [0, timeStepSec], Dfun = self.derivativesFitterJacobian)
 
         if np.any(y[-1, :] * (cellVolume * nAvogadro) <= -1):
-            raise Exception, "Have negative values -- probably due to numerical instability"
+            raise ValueError("Have negative values -- probably due to numerical instability")
 
         y[y < 0] = 0
         yMolecules = y * (cellVolume * nAvogadro)

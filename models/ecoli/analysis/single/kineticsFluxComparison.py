@@ -6,8 +6,8 @@ Compare fluxes in simulation to target fluxes
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import os
 import pickle
@@ -36,7 +36,7 @@ BURN_IN_STEPS = 20
 class Plot(singleAnalysisPlot.SingleAnalysisPlot):
     def do_plot(self, simOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(simOutDir):
-            raise Exception, "simOutDir does not currently exist as a directory"
+            raise NotADirectoryError("simOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -95,7 +95,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
                 if rxn[0] not in excluded:
                     siteStr += "&rnids=%s" % rxn[0]
                 rxns.append(rxn[0])
-        # print siteStr
+        # print(siteStr)
 
         csvFile = open(os.path.join(plotOutDir, plotOutFileName + ".tsv"), "wb")
         output = csv.writer(csvFile, delimiter = "\t")

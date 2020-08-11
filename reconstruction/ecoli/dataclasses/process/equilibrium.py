@@ -10,8 +10,6 @@ fluxesAndMoleculesToSS()
     Consider relocating (since it's useful for both the fitter and simulation)
 """
 
-from __future__ import absolute_import
-
 import numpy as np
 import os
 import pickle
@@ -51,7 +49,8 @@ class Equilibrium(object):
         complexationReactionIds = set([x["id"] for x in raw_data.complexationReactions])
 
         if equilibriumReactionIds.intersection(complexationReactionIds) != set():
-            raise Exception, "The following reaction ids are specified in equilibriumReactions and complexationReactions: %s" % (equilibriumReactionIds.intersection(complexationReactionIds))
+            raise ValueError("The following reaction ids are specified in equilibriumReactions and complexationReactions: %s" % (
+                equilibriumReactionIds.intersection(complexationReactionIds)))
 
         # Remove complexes that are currently not simulated
         FORBIDDEN_MOLECULES = {
@@ -283,11 +282,11 @@ class Equilibrium(object):
         metsToRxnFluxes = self.stoichMatrix().copy()
 
         metsToRxnFluxes[(np.abs(metsToRxnFluxes) > EPS).sum(axis = 1) > 1, : ] = 0
-        for colIdx in xrange(metsToRxnFluxes.shape[1]):
+        for colIdx in range(metsToRxnFluxes.shape[1]):
             try:
                 firstNonZeroIdx = np.where(np.abs(metsToRxnFluxes[:, colIdx]) > EPS)[0][0]
             except IndexError:
-                raise Exception, "Column %d of S matrix not linearly independent!" % colIdx
+                raise IndexError("Column %d of S matrix not linearly independent!" % colIdx)
             metsToRxnFluxes[:firstNonZeroIdx, colIdx] = 0
             metsToRxnFluxes[(firstNonZeroIdx + 1):, colIdx] = 0
 
@@ -300,15 +299,15 @@ class Equilibrium(object):
         '''
         S = self.stoichMatrix()
 
-        yStrings = ["y[%d]" % x for x in xrange(S.shape[0])]
-        ratesFwdStrings = ["kf[%d]" % x for x in xrange(S.shape[0])]
-        ratesRevStrings = ["kr[%d]" % x for x in xrange(S.shape[0])]
+        yStrings = ["y[%d]" % x for x in range(S.shape[0])]
+        ratesFwdStrings = ["kf[%d]" % x for x in range(S.shape[0])]
+        ratesRevStrings = ["kr[%d]" % x for x in range(S.shape[0])]
         y = sp.symbols(yStrings)
         ratesFwd = sp.symbols(ratesFwdStrings)
         ratesRev = sp.symbols(ratesRevStrings)
         dy = [sp.symbol.S.Zero] * S.shape[0]
 
-        for colIdx in xrange(S.shape[1]):
+        for colIdx in range(S.shape[1]):
             negIdxs = np.where(S[:, colIdx] < 0)[0]
             posIdxs = np.where(S[:, colIdx] > 0)[0]
 
@@ -345,7 +344,7 @@ class Equilibrium(object):
         dYMolecules = np.zeros_like(moleculeCounts)
         monomersTotal = moleculeCounts + np.dot(self._stoichMatrixMonomers, -1. * moleculeCounts[self._complexIdxs])
         countsToMolarLog = -1. * (np.log10(cellVolume) + np.log10(nAvogadro))
-        for colIdx in xrange(self._stoichMatrix.shape[1]):
+        for colIdx in range(self._stoichMatrix.shape[1]):
             dYMolecules[self._rxnNonZeroIdxs[colIdx]] = (self._solveSS(
                 monomersTotal,
                 self._stoichMatrix[:, colIdx],
@@ -388,7 +387,7 @@ class Equilibrium(object):
     def getMetabolite(self, cplxId):
         D = self.getMonomers(cplxId)
         if len(D["subunitIds"]) > 2:
-            raise Exception, "Calling this function only makes sense for reactions with 2 reactants"
+            raise TypeError("Calling this function only makes sense for reactions with 2 reactants")
         for subunit in D["subunitIds"]:
             if subunit in self.metaboliteSet:
                 return subunit
@@ -396,7 +395,7 @@ class Equilibrium(object):
     def getMetaboliteCoeff(self, cplxId):
         D = self.getMonomers(cplxId)
         if len(D["subunitIds"]) > 2:
-            raise Exception, "Calling this function only makes sense for reactions with 2 reactants"
+            raise TypeError("Calling this function only makes sense for reactions with 2 reactants")
         for subunit, stoich in zip(D["subunitIds"], D["subunitStoich"]):
             if subunit in self.metaboliteSet:
                 return stoich
@@ -404,7 +403,7 @@ class Equilibrium(object):
     def getUnbound(self, cplxId):
         D = self.getMonomers(cplxId)
         if len(D["subunitIds"]) > 2:
-            raise Exception, "Calling this function only makes sense for reactions with 2 reactants"
+            raise TypeError("Calling this function only makes sense for reactions with 2 reactants")
         for subunit in D["subunitIds"]:
             if subunit not in self.metaboliteSet:
                 return subunit

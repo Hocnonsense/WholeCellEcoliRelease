@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 
 import os
@@ -19,11 +19,11 @@ NUMERICAL_ZERO = 1e-12
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if metadata["variant"] != "tfActivity":
-            print "This plot only runs for the 'tfActivity' variant."
+            print("This plot only runs for the 'tfActivity' variant.")
             return
 
         if not os.path.isdir(inputDir):
-            raise Exception, "inputDir does not currently exist as a directory"
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         ap = AnalysisPaths(inputDir, variant_plot = True)
         variants = sorted(ap._path_data['variant'].tolist()) # Sorry for accessing private data

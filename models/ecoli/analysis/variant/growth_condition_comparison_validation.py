@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 
 import os
@@ -34,7 +34,7 @@ EXP_PLOT_STYLE = dict(
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, "variantDir does not currently exist as a directory"
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -80,7 +80,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
             try:
                 sim_data = pickle.load(open(ap.get_variant_kb(variant)))
             except Exception as e:
-                print "Couldn't load sim_data object. Exiting.", e
+                print("Couldn't load sim_data object. Exiting.", e)
                 return
 
             num_origin_at_init = np.zeros(len(all_cells))
@@ -90,7 +90,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
             meanRrnInitRate = np.zeros(len(all_cells))
 
             for idx, simDir in enumerate(all_cells):
-                print "cell {} of {}".format(idx, len(all_cells))
+                print("cell {} of {}".format(idx, len(all_cells)))
 
                 simOutDir = os.path.join(simDir, "simOut")
 
@@ -98,7 +98,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
                     time = TableReader(os.path.join(simOutDir, "Main")).readColumn("time")
                     doubling_time[idx] = time[-1] - time[0]
                 except Exception as e:
-                    print 'Error with data for %s: %s' % (simDir, e)
+                    print('Error with data for %s: %s' % (simDir, e))
                     continue
 
                 timeStepSec = TableReader(os.path.join(simOutDir, "Main")).readColumn("timeStepSec")

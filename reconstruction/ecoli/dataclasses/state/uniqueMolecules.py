@@ -6,7 +6,7 @@ SimulationData for unique molecules state
 @date: Created 02/19/2015
 """
 
-from __future__ import division
+
 import collections
 
 import numpy as np

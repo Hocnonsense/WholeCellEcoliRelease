@@ -12,7 +12,7 @@ is modeled.
 @date: Created 7/20/2015
 """
 
-from __future__ import division
+
 
 import wholecell.processes.process
 from wholecell.utils import units

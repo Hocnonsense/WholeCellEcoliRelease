@@ -84,7 +84,7 @@ class AnalysisCohortTask(FireTaskBase):
             print("Completed cohort analysis in %s with an exception in:" % (time.strftime("%H:%M:%S", time.gmtime(timeTotal))))
             for file in exceptionFileList:
                 print("\t%s" % file)
-            raise Exception("Error in cohort analysis")
+            raise RuntimeErrorW("Error in cohort analysis")
         else:
             print("Completed cohort analysis in %s" % (time.strftime("%H:%M:%S", time.gmtime(timeTotal))))
 
@@ -94,6 +94,6 @@ def run_plot(plot_class, args, name):
         plot_class.main(*args)
     except KeyboardInterrupt:
         import sys; sys.exit(1)
-    except Exception as e:
+    except Exception:
         traceback.print_exc()
-        raise Exception(e)
+        raise

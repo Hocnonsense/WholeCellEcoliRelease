@@ -6,8 +6,8 @@ test_bulk_objects_container.py
 @data: Created 2/27/2014
 '''
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import unittest
 

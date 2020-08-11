@@ -8,8 +8,8 @@ Set the environment variable WC_ANALYZE_FAST to run multiple analysis scripts
 in parallel processes.
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import os
 

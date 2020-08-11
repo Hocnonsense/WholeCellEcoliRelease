@@ -6,7 +6,7 @@ SimulationData for rna decay process
 @date: Created 08/18/2015
 """
 
-from __future__ import division
+
 
 from wholecell.utils import units
 from wholecell.utils.unit_struct_array import UnitStructArray

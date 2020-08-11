@@ -6,7 +6,7 @@ SimulationData constants
 @date: Created 03/9/2015
 """
 
-from __future__ import division
+
 
 class Constants(object):
     """ Constants """

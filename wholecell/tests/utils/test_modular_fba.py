@@ -6,7 +6,7 @@
 @date: Created 7/19/2013
 """
 
-from __future__ import division
+
 
 import unittest
 import warnings

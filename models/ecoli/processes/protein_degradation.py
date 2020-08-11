@@ -14,7 +14,7 @@ TODO:
 @date: Created 5/16/2013
 """
 
-from __future__ import division
+
 
 import numpy as np
 

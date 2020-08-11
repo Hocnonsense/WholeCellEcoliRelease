@@ -5,7 +5,7 @@ Glucose mass yield distributions.
 @date: Created 9/19/19
 """
 
-from __future__ import absolute_import, division, print_function
+
 
 import pickle
 import os
@@ -42,7 +42,7 @@ VALIDATION_YIELD = 0.46
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, 'inputDir does not currently exist as a directory'
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         filepath.makedirs(plotOutDir)
 

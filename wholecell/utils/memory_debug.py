@@ -14,9 +14,6 @@ flags when done. It should work fine to nest `with detect_leaks(False)` for a
 block of code inside `with detect_leaks(True)`.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-
 from contextlib import contextmanager
 import gc
 import os
@@ -27,7 +24,8 @@ import os
 # collect. You need to combine it with DEBUG_OBJECTS to print info about
 # objects and DEBUG_INSTANCES to print info about instances of old-style
 # classes (not derived from object).
-TRACE_UNCOLLECTABLES = gc.DEBUG_UNCOLLECTABLE | gc.DEBUG_OBJECTS | gc.DEBUG_INSTANCES
+# DEBUG_OBJECTS and DEBUG_INSTANCES are not avaible in python3
+TRACE_UNCOLLECTABLES = gc.DEBUG_UNCOLLECTABLE  # | gc.DEBUG_OBJECTS | gc.DEBUG_INSTANCES
 TRACE_NONE = 0
 
 

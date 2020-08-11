@@ -6,7 +6,7 @@ Only runs with two variants (old degradation rates and new degradation rates).
 @date: Created 7/30/19
 """
 
-from __future__ import absolute_import, division, print_function
+
 
 import pickle
 import os
@@ -38,7 +38,7 @@ PROTEINS_WITH_HALF_LIFE = [
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, 'inputDir does not currently exist as a directory'
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         filepath.makedirs(plotOutDir)
 

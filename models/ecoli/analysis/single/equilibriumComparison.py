@@ -6,7 +6,7 @@ Plot empirical Kd's (from the simulation) and their expected value (from the sim
 @date: Created 8/24/15
 """
 
-from __future__ import absolute_import
+
 
 import os
 
@@ -25,7 +25,7 @@ IGNORE_FIRST_PERCENTAGE = 0.1
 class Plot(singleAnalysisPlot.SingleAnalysisPlot):
     def do_plot(self, simOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(simOutDir):
-            raise Exception, "simOutDir does not currently exist as a directory"
+            raise NotADirectoryError("simOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -61,7 +61,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
         cols = 6
         num_subentries = 3
 
-        for idx in xrange(stoichMatrix.shape[1]):
+        for idx in range(stoichMatrix.shape[1]):
 
             grid_loc = idx + 1 + (cols*(num_subentries + 1))*( idx / cols)
 
@@ -106,7 +106,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
             ax.set_xticks([])
 
             # Plot all reactant concentrations for this reaction
-            for reactantIndex in xrange(0,np.amin([reactantConcentrations.shape[1]]+[2])):
+            for reactantIndex in range(0,np.amin([reactantConcentrations.shape[1]]+[2])):
 
                 # import ipdb; ipdb.set_trace()
 
@@ -134,7 +134,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
                 ax.set_xticks([])
 
             # Plot all product concentrations for this reaction
-            for productIndex in xrange(0,np.amin([productConcentrations.shape[1]]+[2])):
+            for productIndex in range(0,np.amin([productConcentrations.shape[1]]+[2])):
                 ax = plt.subplot(rows * (num_subentries + 2), cols, grid_loc + (cols * (productIndex+reactantIndex+2)))
 
                 ax.plot(time[1:] / 60., productConcentrations[1:,productIndex], linewidth=1, label="Product concentration", color="r")

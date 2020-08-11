@@ -9,7 +9,7 @@ The UniqueObjectsContainer uses _UniqueObject objects to present a clean
 interface to a specific molecule"s attributes.
 """
 
-from __future__ import division
+
 
 from copy import deepcopy
 import warnings
@@ -220,7 +220,7 @@ class UniqueObjectsContainer(object):
         if operations:
             results = []
 
-            for collectionIndex in xrange(len(self._collections)):
+            for collectionIndex in range(len(self._collections)):
                 results.append(self._queryObjects(collectionIndex, **operations))
 
             return _UniqueObjectSet(self, np.concatenate([

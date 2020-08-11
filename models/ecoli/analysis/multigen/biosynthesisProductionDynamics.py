@@ -7,8 +7,8 @@ for regulated genes that are involved in AA biosynthesis
 @date: Created 6/17/2016
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import os
 
@@ -25,7 +25,7 @@ from models.ecoli.analysis import multigenAnalysisPlot
 class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
     def do_plot(self, seedOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)

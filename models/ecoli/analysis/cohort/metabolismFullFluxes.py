@@ -4,8 +4,8 @@
 @date: Created 5/30/2016
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import os
 
@@ -27,7 +27,7 @@ CMAP_OVER = [0, 1, 0.75]
 class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
     def do_plot(self, variantDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(variantDir):
-            raise Exception, "variantDir does not currently exist as a directory"
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -39,8 +39,8 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
 
         plt.suptitle("Full Metabolic Network Reaction Fluxes")
 
-        for seedNum in xrange(ap.n_seed):
-            for generationNum in xrange(ap.n_generation):
+        for seedNum in range(ap.n_seed):
+            for generationNum in range(ap.n_generation):
 
                 # Only plot one cell per seed per generation
                 simDir = ap.get_cells(seed=[seedNum], generation=[generationNum])[0]

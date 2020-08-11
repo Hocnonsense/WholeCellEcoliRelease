@@ -6,8 +6,8 @@ each kinetic constraint being disabled.
 @date: Created 7/25/19
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FormatStrFormatter
@@ -102,11 +102,11 @@ def plot_threshold(ax, data, threshold, reactions):
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if metadata.get('variant', '') != 'flux_sensitivity':
-            print 'This plot only runs for the flux_sensitivity variant.'
+            print('This plot only runs for the flux_sensitivity variant.')
             return
 
         if not os.path.isdir(inputDir):
-            raise Exception, 'inputDir does not currently exist as a directory'
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
 
         filepath.makedirs(plotOutDir)
 

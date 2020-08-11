@@ -1,5 +1,5 @@
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import pickle
 import time
@@ -58,11 +58,11 @@ class FitSimDataTask(FireTaskBase):
                     print("Copied sim data from cache (modified %s)" % (mod_time,))
                     return
                 except Exception as exc:
-                    print ("Warning: could not copy cached sim data due to"
-                           " exception (%s), running fitter") % (exc,)
+                    print(("Warning: could not copy cached sim data due to"
+                           " exception (%s), running fitter") % (exc,))
 
             if self["cpus"] > 1:
-                print ("Warning: running fitter in parallel with %i processes -"
+                print("Warning: running fitter in parallel with %i processes -"
                        " ensure there are enough cpus_per_task allocated" % (self["cpus"],))
 
             with open(self["input_data"], "rb") as f:

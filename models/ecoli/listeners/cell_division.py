@@ -12,7 +12,7 @@ Cell division listener. Checks for cell division criteria..
 
 # TODO: generalize this logic for use with a generic simulation
 
-from __future__ import division
+
 
 import numpy as np
 

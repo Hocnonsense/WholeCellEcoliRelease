@@ -5,8 +5,8 @@ Template for cohort analysis plots
 @date: Created 8/2/18
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import pickle
 from matplotlib import pyplot as plt
@@ -23,7 +23,7 @@ from wholecell.utils import filepath
 class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
     def do_plot(self, variantDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(variantDir):
-            raise Exception, 'variantDir does not currently exist as a directory'
+            raise NotADirectoryError("variantDir does not currently exist as a directory")
 
         filepath.makedirs(plotOutDir)
 

@@ -14,8 +14,8 @@ TODO:
 @date: Created 5/23/14
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import numpy as np
 
@@ -127,7 +127,7 @@ class polymerize(object): # Class name is lowercase because interface is functio
         self._sequenceMonomers = np.empty(
             (self._nMonomers, self._nSequences, self._sequenceLength),
             dtype = np.bool)
-        for monomerIndex in xrange(self._nMonomers):
+        for monomerIndex in range(self._nMonomers):
             self._sequenceMonomers[monomerIndex, ...] = (
                 self._sequences == monomerIndex)
 

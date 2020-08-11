@@ -2,7 +2,6 @@
 divide_cell.py
 Functions needed for division from mother cell into daughter cells
 """
-from __future__ import division
 
 import numpy as np
 import os
@@ -43,7 +42,8 @@ def divide_cell(sim):
         bulkMolecules.divisionIds['partialChromosome'])
     uneven_counts = partial_chromosome_counts - partial_chromosome_counts.min()
     if uneven_counts.any():
-        raise Exception("You won the lottery! There is an uneven number of partial chromosomes...")
+        raise NotImplementedError(
+            "You won the lottery! There is an uneven number of partial chromosomes...")
 
     # Transform any leftover partial chromosomes into full a chromosome. This
     # should have happened in the chromosome_formation process but we could get

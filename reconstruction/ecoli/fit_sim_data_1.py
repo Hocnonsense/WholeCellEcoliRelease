@@ -5,9 +5,6 @@ TODO: establish a controlled language for function behaviors (i.e. create* set* 
 TODO: functionalize so that values are not both set and returned from some methods
 """
 
-from __future__ import absolute_import
-from __future__ import division
-
 import numpy as np
 import os
 import csv
@@ -604,7 +601,8 @@ def buildCombinedConditionCellSpecifications(
             for gene in sim_data.tfToFC[tf]:
                 if gene in fcData:
                     # fcData[gene] *= sim_data.tfToFC[tf][gene]
-                    raise Exception("Check this implementation: multiple genes regulated")
+                    raise NotImplementedError(
+                        "Check this implementation: multiple genes regulated")
                 else:
                     fcData[gene] = sim_data.tfToFC[tf][gene]
         expression = expressionFromConditionAndFoldChange(
@@ -713,7 +711,7 @@ def expressionConverge(
         sim_data.process.transcription.rnaData['isRProtein'],
         sim_data.process.transcription.rnaData['isRnap'])
 
-    for iteration in xrange(MAX_FITTING_ITERATIONS):
+    for iteration in range(MAX_FITTING_ITERATIONS):
         if VERBOSE > 1:
             print('Iteration: {}'.format(iteration))
 
@@ -754,7 +752,7 @@ def expressionConverge(
             break
 
     else:
-        raise Exception("Fitting did not converge")
+        raise RuntimeError("Fitting did not converge")
 
     return expression, synthProb, avgCellDryMassInit, fitAvgSolubleTargetMolMass, bulkContainer, concDict, rnapActivity, mrnaDegRate
 
@@ -1935,7 +1933,7 @@ def calculateBulkDistributions(sim_data, expression, concDict, avgCellDryMassIni
         print("Bulk distribution seed:")
 
     # Instantiate cells to find average copy numbers of macromolecules
-    for seed in xrange(N_SEEDS):
+    for seed in range(N_SEEDS):
         if VERBOSE > 1:
             print(seed)
         randomState = np.random.RandomState(seed)
@@ -2003,8 +2001,7 @@ def calculateBulkDistributions(sim_data, expression, concDict, avgCellDryMassIni
             metDiffs = metabolitesView.counts() - metCounts.asNumber().round()
 
             nIters += 1
-            if nIters > 100:
-                raise Exception("Equilibrium reactions are not converging!")
+            assert nIters <= 100, "Equilibrium reactions are not converging!"
 
         allMoleculeCounts[seed, :] = allMoleculesView.counts()
 
@@ -2629,7 +2626,7 @@ def fitPromoterBoundProbability(sim_data, cellSpecs):
             nTfs = len(tfsWithData)
 
             # For all possible combinations of TFs
-            for combinationIdx in xrange(2**nTfs):
+            for combinationIdx in range(2**nTfs):
                 # Add a row for each combination
                 rowName = rnaIdNoLoc + "__%d" % combinationIdx
                 rowNames.append(rowName)
@@ -2938,7 +2935,7 @@ def fitPromoterBoundProbability(sim_data, cellSpecs):
             fixedTFs.append(tf)
 
     # Repeat for a fixed maximum number of iterations
-    for i in xrange(PROMOTER_MAX_ITERATIONS):
+    for i in range(PROMOTER_MAX_ITERATIONS):
         # Construct matrices used in optimizing R
         # TODO: Make these matrix names more meaningful
         # TODO: separate the routine that gets k and kInfo
@@ -2968,7 +2965,7 @@ def fitPromoterBoundProbability(sim_data, cellSpecs):
         prob_r.solve(solver = "ECOS")
 
         if prob_r.status != "optimal":
-            raise Exception("Solver could not find optimal value")
+            raise AttributeError("Solver could not find optimal value")
 
         # Get optimal value of R
         r = np.array(R.value).reshape(-1)
@@ -3019,7 +3016,7 @@ def fitPromoterBoundProbability(sim_data, cellSpecs):
         prob_p.solve(solver = "ECOS")
 
         if prob_p.status != "optimal":
-            raise Exception("Solver could not find optimal value")
+            raise AttributeError("Solver could not find optimal value")
 
         # Get optimal value of P
         p = np.array(P.value).reshape(-1)

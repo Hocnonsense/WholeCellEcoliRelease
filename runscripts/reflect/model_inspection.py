@@ -105,7 +105,7 @@ def save_genes(raw_data, sim_data, output):
                 elif subunit in validMonomers:
                     metMonomers += [subunit]
         else:
-            raise Exception
+            raise AttributeError
 
     monomers += metMonomers
 
@@ -163,7 +163,7 @@ def save_genes(raw_data, sim_data, output):
                 elif subunit in validMonomers:
                     tfMonomers += [subunit]
         else:
-            raise Exception
+            raise AttributeError
 
     monomers += tfMonomers
 

@@ -6,8 +6,6 @@ SimulationData mass data
 @date: Created 03/13/2015
 """
 
-from __future__ import division
-
 import numpy as np
 from scipy import interpolate
 from wholecell.utils import units
@@ -158,7 +156,7 @@ class Mass(object):
         y = massFraction[::-1]
         massParams = interpolate.splrep(x, y)
         if np.sum(np.absolute(interpolate.splev(self._doubling_time_vector.asNumber(units.min), massParams) - massFraction)) / massFraction.size > 1.:
-            raise Exception("Fitting {} with double exponential, residuals are huge!".format(massFractionName))
+            raise ValueError("Fitting {} with double exponential, residuals are huge!".format(massFractionName))
         return massParams
 
     def _buildCDPeriod(self, raw_data, sim_data):
@@ -174,7 +172,7 @@ class Mass(object):
     # Set mass fractions based on growth rate
     def getMassFraction(self, doubling_time):
         if type(doubling_time) != unum.Unum:
-            raise Exception("Doubling time was not set!")
+            raise TypeError("Doubling time was not set!")
 
         D = {}
         dnaMassFraction = self._calculateGrowthRateDependentDnaMass(doubling_time) / self.getAvgCellDryMass(doubling_time)
@@ -394,7 +392,7 @@ class Mass(object):
         CD_PERIOD = C_PERIOD + D_PERIOD
 
         if doubling_time < D_PERIOD:
-            raise Exception, "Can't have doubling time shorter than cytokinesis time!"
+            raise ValueError("Can't have doubling time shorter than cytokinesis time!")
 
         doubling_time_unit = units.getUnit(doubling_time)
 
@@ -532,7 +530,7 @@ def _getFitParameters(list_of_dicts, key):
     # Generate fit
     parameters = interpolate.splrep(x, y)
     if np.sum(np.absolute(interpolate.splev(x, parameters) - y)) / y.size > 1.:
-        raise Exception("Fitting {} with 3d spline, residuals are huge!".format(key))
+        raise ValueError("Fitting {} with 3d spline, residuals are huge!".format(key))
 
     return {'parameters' : parameters, 'x_units' : x_units, 'y_units' : y_units, 'dtype' : y.dtype}
 
@@ -541,7 +539,7 @@ def _useFitParameters(x_new, parameters, x_units, y_units, dtype):
     if units.hasUnit(x_units):
         x_new = x_new.asNumber(x_units)
     elif units.hasUnit(x_new):
-        raise Exception("New x value has units but fit does not!")
+        raise TypeError("New x value has units but fit does not!")
 
     # Calculate new interpolated y value
     y_new = interpolate.splev(x_new, parameters)
@@ -564,7 +562,7 @@ def _loadTableIntoObjectGivenDoublingTime(obj, list_of_dicts):
     table_keys = list_of_dicts[0].keys()
 
     if 'doublingTime' not in table_keys:
-        raise Exception, 'This data has no doubling time column but it is supposed to be growth rate dependent!'
+        raise KeyError('This data has no doubling time column but it is supposed to be growth rate dependent!')
     else:
         table_keys.pop(table_keys.index('doublingTime'))
 

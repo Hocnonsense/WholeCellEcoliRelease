@@ -1,6 +1,4 @@
 
-from __future__ import division
-
 import os
 import re
 
@@ -64,7 +62,7 @@ for line in open(_LPLOG_FILE):
         compound_id_to_name[lp_id] = reduce_compartment(name)
 
     else:
-        raise Exception("Unparsable line:\n{}".format(line))
+        raise KeyError("Unparsable line:\n{}".format(line))
 
 # Load reaction stoich
 
@@ -96,12 +94,11 @@ for line in open(_LP_FILE):
         for stoich_str, reaction_id in stoich_raw:
             stoich = 1.0 if (stoich_str == "+") else float(stoich_str)
 
-            if int(stoich) != stoich:
-                raise Exception("non-float reaction stoich: {} {} ({})".format(
+            assert int(stoich) == stoich, "non-float reaction stoich: {} {} ({})".format(
                     stoich,
                     compound_id,
                     reaction_id
-                    ))
+                    )
 
             stoich = int(stoich)
 
@@ -219,7 +216,7 @@ with open(_FBA_FILE) as fba_file:
                     })
 
             else:
-                print "could not parse line:", line.strip()
+                print("could not parse line:", line.strip())
 
 # Write a table of biomass components:
 # group name, metabolite name, coeff

@@ -5,8 +5,8 @@ Compare protein counts to Schmidt 2015 data set
 @date: Created 12/4/2017
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import os
 
@@ -27,7 +27,7 @@ LOW_COUNT_THRESHOLD = 30
 class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
     def do_plot(self, seedOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)

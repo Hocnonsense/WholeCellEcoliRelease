@@ -6,7 +6,7 @@ Plots average RNA counts per cell vs average protein counts per cell.
 @date: Created 11/1/2017
 """
 
-from __future__ import absolute_import
+
 
 import os
 import pickle
@@ -45,7 +45,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
         USE_CACHE = False # value of this boolean may change (see line 50)
 
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -56,7 +56,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
             colors = figure5B_data["colors"]
             mrnaIds = figure5B_data["id"].tolist()
         else:
-            print "Requires figure5B.pickle from figure5B_E_F_G.py"
+            print("Requires figure5B.pickle from figure5B_E_F_G.py")
             return
 
         # Check if cache exists
@@ -207,7 +207,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
 
         # plot monomers that are not involved in complexes or involved in only 1 complex
         monomersInvolvedInManyComplexes_index = [ids_translation.index(x) for x in monomersInvolvedInManyComplexes_id]
-        A = [x for x in xrange(len(ids_translation)) if x not in monomersInvolvedInManyComplexes_index]
+        A = [x for x in range(len(ids_translation)) if x not in monomersInvolvedInManyComplexes_index]
         for i in A:
             color = colors[mrnaIds.index(rnaIds[i])]
             ax.loglog(avgRnaCounts_perCell[i], avgProteinCounts_perCell[i], alpha = 0.5, marker = ".", lw = 0., color = color)

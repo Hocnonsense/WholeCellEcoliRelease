@@ -10,7 +10,7 @@ Replication fork position listener. Represents position of replication forks ove
 @date: Created 5/13/2014
 """
 
-from __future__ import division
+
 
 import numpy as np
 

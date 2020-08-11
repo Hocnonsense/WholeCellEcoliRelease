@@ -6,7 +6,7 @@ Plots Figure 5D. Data is obtained from an analysis of compendium of environment 
 @date: Created 3/29/2017
 """
 
-from __future__ import absolute_import
+
 
 import os
 
@@ -22,7 +22,7 @@ dataArea = [1143, 330, 1920, 79, 854, 500, 25]
 class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
     def do_plot(self, seedOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)

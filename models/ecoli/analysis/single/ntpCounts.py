@@ -6,7 +6,7 @@ Plot NTP counts
 @date: Created 5/8/2014
 """
 
-from __future__ import absolute_import
+
 
 import os
 
@@ -21,7 +21,7 @@ from models.ecoli.analysis import singleAnalysisPlot
 class Plot(singleAnalysisPlot.SingleAnalysisPlot):
     def do_plot(self, simOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(simOutDir):
-            raise Exception, "simOutDir does not currently exist as a directory"
+            raise NotADirectoryError("simOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -41,7 +41,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
 
         plt.figure(figsize = (8.5, 11))
 
-        for idx in xrange(4):
+        for idx in range(4):
 
             plt.subplot(2, 2, idx + 1)
 
@@ -50,7 +50,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
             plt.ylabel("Counts")
             plt.title(NTP_IDS[idx])
 
-        print "NTPs required for cell division (nt/cell-cycle) = %d" % sum(ntpCounts[0, :])
+        print("NTPs required for cell division (nt/cell-cycle) = %d" % sum(ntpCounts[0, :]))
         plt.subplots_adjust(hspace = 0.5)
 
         exportFigure(plt, plotOutDir, plotOutFileName, metadata)

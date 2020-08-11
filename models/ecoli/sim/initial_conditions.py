@@ -8,7 +8,7 @@ TODO:
 
 """
 
-from __future__ import division
+
 
 
 import scipy.sparse
@@ -299,7 +299,7 @@ def initializeRNApolymerase(bulkMolCntr, uniqueMolCntr, sim_data, randomState):
     rnaSynthProb[rnaSynthProb < 0] = 0.0
     rnaSynthProb /= rnaSynthProb.sum()
     if np.any(rnaSynthProb < 0):
-        raise Exception("Have negative RNA synthesis probabilities")
+        raise ValueError("Have negative RNA synthesis probabilities")
 
     # Adjust synthesis probabilities depending on environment
     synthProbFractions = rnaSynthProbFractions[currentNutrients]
@@ -506,7 +506,7 @@ def determineChromosomeState(C, D, tau, replication_length):
 
     # Loop through active replication rounds, starting from the oldest round.
     # If n_round = 0 skip loop entirely - no active replication round.
-    for n in xrange(n_round):
+    for n in range(n_round):
         # Determine at which location (base) of the chromosome the replication
         # forks should be initialized to
         rel_location = 1 - (((n + 1)*tau - D)/C)

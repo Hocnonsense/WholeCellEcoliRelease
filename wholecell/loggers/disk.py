@@ -12,7 +12,7 @@ Logs whole-cell simulations and metadata to disk.
 @date: Created 6/3/2013
 """
 
-from __future__ import division
+
 
 import os
 import time

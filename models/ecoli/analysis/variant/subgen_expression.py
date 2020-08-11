@@ -5,7 +5,7 @@ Plot to assess sensitivity of pabB behavior to model parameters.
 @date: Created 12/1/17
 """
 
-from __future__ import absolute_import, division, print_function
+
 
 import os
 import pickle
@@ -35,7 +35,7 @@ MARKERSIZE = 1
 class Plot(variantAnalysisPlot.VariantAnalysisPlot):
     def do_plot(self, inputDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(inputDir):
-            raise Exception, "inputDir does not currently exist as a directory"
+            raise NotADirectoryError("inputDir does not currently exist as a directory")
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
 
@@ -56,8 +56,8 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         enzyme_depletion = np.zeros([ap.n_seed, ap.n_variant])
         metabolite_depletion = np.zeros([ap.n_seed, ap.n_variant])
 
-        for variant in xrange(ap.n_variant):
-            for seed in xrange(ap.n_seed):
+        for variant in range(ap.n_variant):
+            for seed in range(ap.n_seed):
                 cells = ap.get_cells(variant=[variant], seed=[seed])
                 time_enzyme_depleted = []  # seconds
                 time_metabolite_depleted = []  # seconds

@@ -10,7 +10,7 @@ Polypeptide initiation sub-model.
 @date: Created 4/30/14
 """
 
-from __future__ import division
+
 
 import numpy as np
 

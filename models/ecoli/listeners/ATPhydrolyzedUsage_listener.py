@@ -8,7 +8,7 @@ ATPhydrolyzedUsageListener
 @date: Created 3/4/15
 """
 
-from __future__ import division
+
 
 import numpy as np
 

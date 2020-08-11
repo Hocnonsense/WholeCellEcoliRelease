@@ -4,8 +4,8 @@ Runs all single analysis plots for a given variant of a given sim.
 Run with '-h' for command line help.
 """
 
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import os
 

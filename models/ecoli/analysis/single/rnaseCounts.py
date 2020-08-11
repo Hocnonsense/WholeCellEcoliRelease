@@ -6,7 +6,7 @@ Plot RNAse counts
 @date: Created 1/14/2015
 """
 
-from __future__ import absolute_import
+
 
 import os
 
@@ -22,7 +22,7 @@ from models.ecoli.analysis import singleAnalysisPlot
 class Plot(singleAnalysisPlot.SingleAnalysisPlot):
     def do_plot(self, simOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(simOutDir):
-            raise Exception, "simOutDir does not currently exist as a directory"
+            raise NotADirectoryError("simOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -53,7 +53,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
 
         count = 0
         count_bis = len(RNase_IDS) / 2
-        for subplotIdx in xrange(0, len(RNase_IDS)):
+        for subplotIdx in range(0, len(RNase_IDS)):
             if not subplotIdx % 2:
                 rnapRnaCountsIdx = count
                 count += 1
@@ -106,7 +106,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
             fft_freq = sorted(zip(abs(fourier),freq))[n-6:n]
 
             # identifing peaks (frequency and period) with maximum PSD
-            for i in xrange(0,len(fft_freq)):
+            for i in range(0,len(fft_freq)):
                 if fft_freq[i][1] > 0.: # only positive frequencies
                     if 1. / fft_freq[i][1] < 3600.: # only periods lower than the doubling time
                         if abs(fft_freq[i][0] - M) / S > 3: # strong and significant fft

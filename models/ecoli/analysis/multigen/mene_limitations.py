@@ -3,7 +3,7 @@
 @date: Created 2/12/2017
 """
 
-from __future__ import absolute_import
+
 
 import os
 import pickle
@@ -36,7 +36,7 @@ def clearLabels(axis):
 class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
     def do_plot(self, seedOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(seedOutDir):
-            raise Exception, "seedOutDir does not currently exist as a directory"
+            raise NotADirectoryError("seedOutDir does not currently exist as a directory")
 
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
@@ -198,7 +198,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
         axesList = [rnaInitAxis, rnaAxis, monomerAxis, complexAxis, fluxAxis, metAxis]
         for axis in axesList:
             axis.tick_params(labelsize = LABELSIZE)
-            for i in xrange(len(patchStart)):
+            for i in range(len(patchStart)):
                 width = time_hours[patchEnd[i]] - time_hours[patchStart[i]]
                 if width <= 0.1:
                     continue

@@ -4,7 +4,7 @@
 @date: Created 6/27/2016
 """
 
-from __future__ import absolute_import, division
+
 
 import os
 import pickle
@@ -33,7 +33,7 @@ REPRESENTATIVE_MASSES = {
 class Plot(singleAnalysisPlot.SingleAnalysisPlot):
     def do_plot(self, simOutDir, plotOutDir, plotOutFileName, simDataFile, validationDataFile, metadata):
         if not os.path.isdir(simOutDir):
-            raise Exception, "simOutDir does not currently exist as a directory"
+            raise NotADirectoryError("simOutDir does not currently exist as a directory")
 
         # Load data from KB
         sim_data = pickle.load(open(simDataFile, "rb"))

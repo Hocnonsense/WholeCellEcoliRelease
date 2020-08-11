@@ -7,7 +7,7 @@ Raw data processed into forms convienent for validation and analysis
 @organization: Covert Lab, Department of Bioengineering, Stanford University
 @date: Created 11/30/2015
 """
-from __future__ import division
+
 
 import numpy as np
 import collections
