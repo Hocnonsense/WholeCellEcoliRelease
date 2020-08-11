@@ -14,7 +14,7 @@ import numpy as np
 import theano.tensor as T
 import theano
 
-class RnaDecay(object):
+class RnaDecay:
     """ RnaDecay """
 
     def __init__(self, raw_data, sim_data):

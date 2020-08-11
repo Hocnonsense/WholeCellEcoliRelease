@@ -181,6 +181,7 @@ class KnowledgeBaseEcoli:
                 filter(lambda x: x.lstrip()[0] != "#", csvfile), # Strip comments
                 dialect = CSV_DIALECT)
             setattr(path, attrName, [row for row in reader])
+            pass
 
     def _load_sequence(self, file_path):
         from Bio import SeqIO
@@ -205,7 +206,11 @@ class KnowledgeBaseEcoli:
             reader = csv.DictReader(csvfile, dialect = CSV_DIALECT)
             for row in reader:
                 if row['units'] != '':
-                    paramDict[row['name']] = json.loads(row['value']) * eval(row['units'])
+                    try:
+                        paramDict[row['name']] = json.loads(row['value']) * eval(row['units'])
+                    except TypeError:
+                        # an 'value': '[0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]' occures ???
+                        paramDict[row['name']] = [value * eval(row['units']) for value in json.loads(row['value'])]
                 else:
                     paramDict[row['name']] = json.loads(row['value'])
         setattr(self, attrName, paramDict)

@@ -37,7 +37,7 @@ from reconstruction.ecoli.dataclasses.state import stateFunctions as sf
 import re
 import numpy as np
 
-class ExternalState(object):
+class ExternalState:
     """ External State """
 
     def __init__(self, raw_data, sim_data):

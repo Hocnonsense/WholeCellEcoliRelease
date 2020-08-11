@@ -11,7 +11,7 @@ implementation is largely specific to the State.
 
 import numpy as np
 
-class View(object):
+class View:
     _stateID = None
 
     def __init__(self, state, process, query): # weight, priority, coupling id, option to not evaluate the query

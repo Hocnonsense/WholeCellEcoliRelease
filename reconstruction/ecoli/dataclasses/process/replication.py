@@ -14,7 +14,7 @@ import collections
 from wholecell.utils import units
 from wholecell.utils.polymerize import polymerize
 
-class Replication(object):
+class Replication:
     """ Replication """
 
     def __init__(self, raw_data, sim_data):

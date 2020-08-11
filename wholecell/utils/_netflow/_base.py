@@ -7,7 +7,7 @@ All functions required for implementation with modular_fba.py are listed.
 
 
 
-class NetworkFlowProblemBase(object):
+class NetworkFlowProblemBase:
     _maximize = True
     quadratic_objective = False
 

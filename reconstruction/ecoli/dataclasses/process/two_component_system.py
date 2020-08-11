@@ -24,7 +24,7 @@ import scipy
 import re
 import sympy as sp
 
-class TwoComponentSystem(object):
+class TwoComponentSystem:
     def __init__(self, raw_data, sim_data):
         # Store two component system raw data for use in analysis
         sim_data.moleculeGroups.twoComponentSystems = raw_data.twoComponentSystems

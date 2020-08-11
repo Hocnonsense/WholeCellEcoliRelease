@@ -17,7 +17,7 @@ class ComplexationError(Exception):
 class MoleculeNotFoundError(ComplexationError):
     pass
 
-class Complexation(object):
+class Complexation:
     def __init__(self, raw_data, sim_data):
         # Build the abstractions needed for complexation
         molecules = []  # List of all molecules involved in complexation

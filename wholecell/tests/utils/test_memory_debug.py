@@ -20,7 +20,7 @@ import unittest
 from wholecell.utils import memory_debug
 
 
-class Node(object):
+class Node:
     def __init__(self, name):
         self.name = str(name)
         self.link = None

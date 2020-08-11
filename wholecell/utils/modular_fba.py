@@ -29,9 +29,7 @@ QUADRATIC = {
 
 SOLVERS = {}
 try:
-    # cannot install cplex correctly.
-    # from ._netflow.nf_cplex import NetworkFlowCPLEX
-    pass
+    from ._netflow.nf_cplex import NetworkFlowCPLEX
 except ImportError:
     pass
 else:
@@ -79,7 +77,7 @@ class SolverUnavailableError(FBAError):
 # Classes
 
 
-class FluxBalanceAnalysis(object):
+class FluxBalanceAnalysis:
     """ FluxBalanceAnalysis
     Solver for various FBA implementations.
     Required arguments:

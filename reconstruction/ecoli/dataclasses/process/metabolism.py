@@ -30,7 +30,7 @@ USE_ALL_CONSTRAINTS = False # False will remove defined constraints from objecti
 
 reverseReactionString = "{} (reverse)"
 
-class Metabolism(object):
+class Metabolism:
     """ Metabolism """
 
     def __init__(self, raw_data, sim_data):
@@ -494,7 +494,7 @@ class Metabolism(object):
         return externalMoleculeLevels, newObjective
 
 # Class used to update metabolite concentrations based on the current nutrient conditions
-class ConcentrationUpdates(object):
+class ConcentrationUpdates:
     def __init__(self, concDict, equilibriumReactions, nutrientData):
         self.units = units.getUnit(concDict.values()[0])
         self.defaultConcentrationsDict = dict((key, concDict[key].asNumber(self.units)) for key in concDict)

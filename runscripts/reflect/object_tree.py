@@ -29,7 +29,7 @@ leaf_types = (
 
 WHITESPACE = re.compile(r'\s+')
 
-class Repr(object):
+class Repr:
     '''A Repr has the given repr() string without quotes and != any other value.'''
     def __init__(self, repr_):
         self.repr_ = repr_

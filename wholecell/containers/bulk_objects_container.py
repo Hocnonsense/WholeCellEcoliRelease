@@ -10,7 +10,7 @@ bulk_objects_container.py
 import numpy as np
 
 
-class BulkObjectsContainer(object):
+class BulkObjectsContainer:
     '''
     BulkObjectsContainer
 
@@ -123,7 +123,7 @@ class BulkObjectsContainer(object):
         self._counts = tableReader.readRow(tableIndex)["counts"]
 
 
-class _BulkObjectsView(object):
+class _BulkObjectsView:
     '''
     _BulkObjectsView
 
@@ -153,7 +153,7 @@ class _BulkObjectsView(object):
         self._container._counts[self._indexes] -= values
 
 
-class _BulkObjectView(object):
+class _BulkObjectView:
     '''
     _BulkObjectView
 

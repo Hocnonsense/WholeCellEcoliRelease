@@ -12,7 +12,7 @@ cannot be modeled at this time.
 
 import numpy as np
 
-class SimulationHook(object):
+class SimulationHook:
     _name = None
 
     def __init__(self):

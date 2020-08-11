@@ -29,7 +29,7 @@ import matplotlib as mp
 from wholecell.utils import memory_debug
 
 
-class AnalysisPlot(object):
+class AnalysisPlot:
     """Abstract Base Class for analysis plots.
 
     Each analysis class must override do_plot().

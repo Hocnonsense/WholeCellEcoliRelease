@@ -28,7 +28,7 @@ class UniqueObjectsContainerException(Exception):
     pass
 
 
-class UniqueObjectsContainer(object):
+class UniqueObjectsContainer:
     """
     UniqueObjectsContainer
 
@@ -332,7 +332,7 @@ class UniqueObjectsContainer(object):
                 self._collections[self._names.index(fieldName)] = value
 
 
-class _UniqueObject(object):
+class _UniqueObject:
     """
     _UniqueObject
 
@@ -422,7 +422,7 @@ class _UniqueObject(object):
         return not self.__eq__(other)
 
 
-class _UniqueObjectSet(object):
+class _UniqueObjectSet:
     """
     _UniqueObjectSet
 

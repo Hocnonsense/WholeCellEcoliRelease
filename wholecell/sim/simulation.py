@@ -55,7 +55,7 @@ DEFAULT_LISTENER_CLASSES = (
     EvaluationTime,
     )
 
-class Simulation(object):
+class Simulation:
     """ Simulation """
 
     # Attributes that must be set by a subclass

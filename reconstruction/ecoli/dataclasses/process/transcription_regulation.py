@@ -3,7 +3,7 @@ Transcription regulation.
 """
 import numpy as np
 
-class TranscriptionRegulation(object):
+class TranscriptionRegulation:
     def __init__(self, raw_data, sim_data):
         # Build lookups
         self._buildLookups(raw_data, sim_data)

@@ -18,7 +18,7 @@ import unum
 from wholecell.utils import units as units_pkg
 
 # TODO: Write test!
-class UnitStructArray(object):
+class UnitStructArray:
     """UnitStructArray"""
 
     def __init__(self, struct_array, units):

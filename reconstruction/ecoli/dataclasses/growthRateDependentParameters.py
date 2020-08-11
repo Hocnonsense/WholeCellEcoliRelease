@@ -14,7 +14,7 @@ import unum
 DNA_CRITICAL_MASS = {100: 600, 44: 975} # units of fg
 FRACTION_INCREASE_RNAP_PROTEINS = {100: 0, 44: 0.05}
 
-class Mass(object):
+class Mass:
     """ Mass """
 
     def __init__(self, raw_data, sim_data,
@@ -458,7 +458,7 @@ class Mass(object):
         abundance['molar_ratio_to_16SrRNA'] = [x(growth_rate) for x in trna_abundance_interpolation_functions]
         return abundance
 
-class GrowthRateParameters(object):
+class GrowthRateParameters:
     """
     GrowthRateParameters
     """

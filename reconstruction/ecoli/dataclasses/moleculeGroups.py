@@ -9,7 +9,7 @@ SimulationData moleculeGroups
 
 from reconstruction.ecoli.dataclasses.state.stateFunctions import createIdsWithCompartments
 
-class MoleculeGroups(object):
+class MoleculeGroups:
     """
     Helper class to extract molecule IDs of "special" groups of molecules. All
     values returned are lists of strings.

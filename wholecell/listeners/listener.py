@@ -8,7 +8,7 @@ Listener
 
 from enum import Enum
 
-class Listener(object):
+class Listener:
     _name = None
 
     def __init__(self):

@@ -25,7 +25,7 @@ LIST_OF_DICT_FILENAMES = (
     "geneFunctions.tsv",
     )
 
-class ValidationDataRawEcoli(object):
+class ValidationDataRawEcoli:
     """ ValidationDataRawEcoli """
 
     def __init__(self):

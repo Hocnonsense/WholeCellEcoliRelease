@@ -35,7 +35,7 @@ def choices(array, n):
     np.random.shuffle(indexes)
     return indexes[:n]
 
-class polymerize(object): # Class name is lowercase because interface is function-like
+class polymerize: # Class name is lowercase because interface is function-like
     """
     Polymerize the given DNA/RNA/protein sequences as far as possible within
     the given limits.

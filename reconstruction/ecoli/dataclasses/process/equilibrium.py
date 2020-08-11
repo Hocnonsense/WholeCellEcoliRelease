@@ -25,7 +25,7 @@ class EquilibriumError(Exception):
 class MoleculeNotFoundError(EquilibriumError):
     pass
 
-class Equilibrium(object):
+class Equilibrium:
     def __init__(self, raw_data, sim_data):
         # Build the abstractions needed for complexation
         molecules = []

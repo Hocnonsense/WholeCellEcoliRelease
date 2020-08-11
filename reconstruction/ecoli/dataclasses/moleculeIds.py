@@ -7,7 +7,7 @@ SimulationData moleculeIds
 
 
 
-class MoleculeIds(object):
+class MoleculeIds:
     """
     Helper class to extract molecule IDs of "special" molecules. All values
     returned are strings.

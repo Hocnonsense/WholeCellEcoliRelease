@@ -6,9 +6,6 @@ linear and quadratic objectives.
 @date: Created 6/14/2018
 '''
 
-
-
-
 from collections import defaultdict
 
 import cplex

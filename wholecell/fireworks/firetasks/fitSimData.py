@@ -1,6 +1,4 @@
 
-
-
 import pickle
 import time
 import os
@@ -17,7 +15,12 @@ class FitSimDataTask(FireTaskBase):
 
     _fw_name = "FitSimDataTask"
     required_params = ["fit_level", "input_data", "output_data"]
-    optional_params = [
+    optional_params = [ # all params are needed to exist here.
+        "cpus",
+        "debug",
+        "cached",
+        "cached_data"
+    ]+[
         "sim_out_dir",
         "disable_ribosome_capacity_fitting",
         "disable_rnapoly_capacity_fitting",

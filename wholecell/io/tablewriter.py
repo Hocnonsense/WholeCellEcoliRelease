@@ -62,7 +62,7 @@ class AttributeTypeError(TableWriterError):
     pass
 
 
-class _Column(object):
+class _Column:
     """
     Manages the written data for a specific TableWriter field.
 
@@ -164,7 +164,7 @@ class _Column(object):
         self.close()
 
 
-class TableWriter(object):
+class TableWriter:
     """
     Generic live output writer for NumPy ndarrays.
 

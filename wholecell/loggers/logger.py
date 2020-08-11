@@ -14,7 +14,7 @@ Abstract class which defines the interface loggers expose to the simulation
 
 import abc
 
-class Logger(object):
+class Logger:
     """ Logger """
 
     __metaclass__ = abc.ABCMeta

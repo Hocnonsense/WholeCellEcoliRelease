@@ -22,7 +22,7 @@ from reconstruction.ecoli.dataclasses.process.two_component_system import TwoCom
 import re
 import numpy as np
 
-class Process(object):
+class Process:
     """ Process """
 
     def __init__(self, raw_data, sim_data, options):

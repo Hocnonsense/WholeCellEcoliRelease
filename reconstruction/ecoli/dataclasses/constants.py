@@ -8,7 +8,7 @@ SimulationData constants
 
 
 
-class Constants(object):
+class Constants:
     """ Constants """
 
     def __init__(self, raw_data, sim_data):

@@ -11,7 +11,7 @@ import numpy as np
 
 from wholecell.utils import constants
 
-class AnalysisPaths(object):
+class AnalysisPaths:
     '''
     Object for easily accessing file paths to simulations based on
     variants, seeds, and generation. Within a specified variant you

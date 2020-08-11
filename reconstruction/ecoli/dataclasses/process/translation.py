@@ -15,7 +15,7 @@ from wholecell.utils.unit_struct_array import UnitStructArray
 from wholecell.utils.polymerize import polymerize
 from wholecell.utils.random import make_elongation_rates, make_elongation_rates_flat
 
-class Translation(object):
+class Translation:
     """ Translation """
 
     def __init__(self, raw_data, sim_data, options):

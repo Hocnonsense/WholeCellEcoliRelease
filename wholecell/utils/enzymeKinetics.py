@@ -24,7 +24,7 @@ COUNTS_UNITS = units.umol
 TIME_UNITS = units.s
 VOLUME_UNITS = units.L
 
-class EnzymeKinetics(object):
+class EnzymeKinetics:
     """
     EnzymeKinetics
 

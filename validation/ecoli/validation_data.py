@@ -26,7 +26,7 @@ from reconstruction.ecoli.dataclasses.process.process import Process
 from reconstruction.ecoli.dataclasses.growthRateDependentParameters import Mass, GrowthRateParameters
 from reconstruction.ecoli.dataclasses.relation import Relation
 
-class ValidationDataEcoli(object):
+class ValidationDataEcoli:
     """ ValidationDataEcoli """
 
     def __init__(self):
@@ -39,7 +39,7 @@ class ValidationDataEcoli(object):
         self.geneFunctions = GeneFunctions(validation_data_raw)
 
 
-class Protein(object):
+class Protein:
     """ Protein """
 
     def __init__(self, validation_data_raw, knowledge_base_raw):
@@ -178,7 +178,7 @@ class Protein(object):
 
         self.schmidt2015Data = schmidt2015Data
 
-class ReactionFlux(object):
+class ReactionFlux:
     """ ReactionFlux """
 
     def __init__(self, validation_data_raw, knowledge_base_raw):
@@ -196,7 +196,7 @@ class ReactionFlux(object):
             self.toya2010fluxes[idx]["reactionFlux"] = row["flux"]
             self.toya2010fluxes[idx]["reactionFluxStdev"] = row["flux standard deviation"]
 
-class EssentialGenes(object):
+class EssentialGenes:
     """ EssentialGenes """
 
     def __init__(self, validation_data_raw):
@@ -212,7 +212,7 @@ class EssentialGenes(object):
             self.essentialRnas.append(row["rnaID"] + "[c]")
             self.essentialProteins.append(row["proteinID"] + "[" + row["proteinLoc"] + "]")
 
-class GeneFunctions(object):
+class GeneFunctions:
     """ GeneFunctions """
 
     def __init__(self, validation_data_raw):

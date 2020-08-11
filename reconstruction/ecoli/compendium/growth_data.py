@@ -7,7 +7,7 @@ from wholecell.utils import units
 def exp2(x, a, b, c, d):
     return a * np.exp(b * x) + c * np.exp(d * x)
 
-class GrowthData(object):
+class GrowthData:
 
     def __init__(self, kb):
         self.tau_d = np.array(kb.cellDryMassComposition["doublingTime"].asNumber(units.min))

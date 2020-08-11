@@ -28,7 +28,7 @@ from wholecell.utils import units
 
 VERBOSE = False
 
-class SimulationDataEcoli(object):
+class SimulationDataEcoli:
     """ SimulationDataEcoli """
 
     def __init__(self):

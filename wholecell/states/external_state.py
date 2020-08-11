@@ -12,7 +12,7 @@ State variable base class. Defines the interface states expose to the simulation
 
 import numpy as np
 
-class ExternalState(object):
+class ExternalState:
     """ External State """
 
     _name = None

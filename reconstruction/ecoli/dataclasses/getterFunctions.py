@@ -15,7 +15,7 @@ import numpy as np
 from wholecell.utils import units
 from wholecell.utils.unit_struct_array import UnitStructArray
 
-class getterFunctions(object):
+class getterFunctions:
     """ getterFunctions """
 
     def __init__(self, raw_data, sim_data):

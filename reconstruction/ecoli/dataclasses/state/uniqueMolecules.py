@@ -17,7 +17,7 @@ from wholecell.utils.unit_struct_array import UnitStructArray
 from reconstruction.ecoli.dataclasses.state.stateFunctions import addToStateCommon
 
 
-class UniqueMolecules(object):
+class UniqueMolecules:
     """ UniqueMolecules """
 
     def __init__(self, raw_data, sim_data):

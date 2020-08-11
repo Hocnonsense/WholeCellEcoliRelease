@@ -7,8 +7,6 @@ Run with '-h' for command line help.
 Set PYTHONPATH when running this.
 """
 
-
-
 import abc
 import argparse
 import datetime
@@ -75,7 +73,7 @@ def str_to_bool(s):
     return s in {'true', '1'}
 
 
-class ScriptBase(object):
+class ScriptBase:
     """Abstract base class for scripts. This defines a template where
     `description()` describes the script,
     `define_parameters()` defines its command line parameters,
