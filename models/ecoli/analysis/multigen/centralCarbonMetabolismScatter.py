@@ -95,7 +95,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
                     modelFluxes[toyaReaction].append(np.mean(fluxTimeCourse).asNumber(units.mmol / units.g / units.h))
 
         toyaVsReactionAve = []
-        for rxn, toyaFlux in toyaFluxesDict.iteritems():
+        for rxn, toyaFlux in toyaFluxesDict.items():
             if rxn in modelFluxes:
                 toyaVsReactionAve.append((np.mean(modelFluxes[rxn]), toyaFlux.asNumber(units.mmol / units.g / units.h), np.std(modelFluxes[rxn]), toyaStdevDict[rxn].asNumber(units.mmol / units.g / units.h)))
 

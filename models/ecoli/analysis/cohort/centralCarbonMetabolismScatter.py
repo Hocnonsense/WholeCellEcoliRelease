@@ -95,7 +95,7 @@ class Plot(cohortAnalysisPlot.CohortAnalysisPlot):
 
         toyaVsReactionAve = []
         rxn_order = []
-        for rxn, toyaFlux in toyaFluxesDict.iteritems():
+        for rxn, toyaFlux in toyaFluxesDict.items():
             rxn_order.append(rxn)
             if rxn in modelFluxes:
                 toyaVsReactionAve.append((np.mean(modelFluxes[rxn]), toyaFlux.asNumber(units.mmol / units.g / units.h), np.std(modelFluxes[rxn]), toyaStdevDict[rxn].asNumber(units.mmol / units.g / units.h)))

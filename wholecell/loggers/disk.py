@@ -61,7 +61,7 @@ class Disk(wholecell.loggers.logger.Logger):
         sim.tableCreate(self.mainFile)
 
         # TODO: separate checkpointing and logging
-        for name, obj in itertools.chain(sim.internal_states.viewitems(), sim.external_states.viewitems(), sim.listeners.viewitems()):
+        for name, obj in itertools.chain(sim.internal_states.items(), sim.external_states.items(), sim.listeners.items()):
             saveFile = TableWriter(os.path.join(self.outDir, name))
 
             obj.tableCreate(saveFile)
@@ -93,7 +93,7 @@ class Disk(wholecell.loggers.logger.Logger):
     def copyData(self, sim):
         sim.tableAppend(self.mainFile)
 
-        for obj, saveFile in self.saveFiles.viewitems():
+        for obj, saveFile in self.saveFiles.items():
             obj.tableAppend(saveFile)
 
 

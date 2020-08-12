@@ -216,7 +216,7 @@ metadata = {
     "translation_supply": TRANSLATION_SUPPLY,
     }
 
-for key, value in metadata.iteritems():
+for key, value in metadata.items():
     if not isinstance(value, basestring):
         continue
     filepath.write_file(os.path.join(METADATA_DIRECTORY, key), value)

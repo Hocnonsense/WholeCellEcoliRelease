@@ -26,7 +26,7 @@ if not os.path.exists(userConfigPath):
 
 userConfig = json.load(open(userConfigPath))
 
-unknownOptions = userConfig.viewkeys() - defaultConfig.keys()
+unknownOptions = userConfig.keys() - defaultConfig.keys()
 
 if unknownOptions:
     raise AttributeError("Unknown configuration options defined in {}: {}".format(

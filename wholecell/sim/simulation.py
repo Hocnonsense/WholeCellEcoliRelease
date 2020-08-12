@@ -88,13 +88,13 @@ class Simulation:
                     )
 
         # Set instance attributes
-        for attrName, value in DEFAULT_SIMULATION_KWARGS.viewitems():
-            if attrName in kwargs.viewkeys():
+        for attrName, value in DEFAULT_SIMULATION_KWARGS.items():
+            if attrName in kwargs.keys():
                 value = kwargs[attrName]
 
             setattr(self, "_" + attrName, value)
 
-        unknownKeywords = kwargs.viewkeys() - DEFAULT_SIMULATION_KWARGS.viewkeys()
+        unknownKeywords = kwargs.keys() - DEFAULT_SIMULATION_KWARGS.keys()
 
         if any(unknownKeywords):
             raise SimulationException("Unknown keyword arguments: {}".format(unknownKeywords))
@@ -129,52 +129,52 @@ class Simulation:
         self._isDead = False
         self._finalized = False
 
-        for internal_state in self.internal_states.itervalues():
+        for internal_state in self.internal_states.values():
             internal_state.initialize(self, sim_data)
 
-        for external_state in self.external_states.itervalues():
+        for external_state in self.external_states.values():
             external_state.initialize(self, sim_data)
 
-        for process in self.processes.itervalues():
+        for process in self.processes.values():
             process.initialize(self, sim_data)
 
-        for listener in self.listeners.itervalues():
+        for listener in self.listeners.values():
             listener.initialize(self, sim_data)
 
-        for hook in self.hooks.itervalues():
+        for hook in self.hooks.values():
             hook.initialize(self, sim_data)
 
-        for internal_state in self.internal_states.itervalues():
+        for internal_state in self.internal_states.values():
             internal_state.allocate()
 
-        for listener in self.listeners.itervalues():
+        for listener in self.listeners.values():
             listener.allocate()
 
         self._initialConditionsFunction(sim_data)
 
         self._timeTotal = self.initialTime()
 
-        for hook in self.hooks.itervalues():
+        for hook in self.hooks.values():
             hook.postCalcInitialConditions(self)
 
         # Make permanent reference to evaluation time listener
         self._evalTime = self.listeners["EvaluationTime"]
 
         # Perform initial mass calculations
-        for state in self.internal_states.itervalues():
+        for state in self.internal_states.values():
             state.calculatePreEvolveStateMass()
             state.calculatePostEvolveStateMass()
 
         # Update environment state according to the current time in timeseries
-        for external_state in self.external_states.itervalues():
+        for external_state in self.external_states.values():
             external_state.update()
 
         # Perform initial listener update
-        for listener in self.listeners.itervalues():
+        for listener in self.listeners.values():
             listener.initialUpdate()
 
         # Start logging
-        for logger in self.loggers.itervalues():
+        for logger in self.loggers.values():
             logger.initialize(self)
 
     def _initLoggers(self):
@@ -232,14 +232,14 @@ class Simulation:
 
         if not self._finalized:
             # Run post-simulation hooks
-            for hook in self.hooks.itervalues():
+            for hook in self.hooks.values():
                 hook.finalize(self)
 
             # Divide mother into daughter cells
             self._divideCellFunction()
 
             # Finish logging
-            for logger in self.loggers.itervalues():
+            for logger in self.loggers.values():
                 logger.finalize(self)
 
             self._finalized = True
@@ -249,83 +249,83 @@ class Simulation:
 
         if self._simulationStep <= 1:
             # Update randstreams
-            for stateName, state in self.internal_states.iteritems():
+            for stateName, state in self.internal_states.items():
                 state.seed = self._seedFromName(stateName)
                 state.randomState = np.random.RandomState(seed = state.seed)
 
-            for processName, process in self.processes.iteritems():
+            for processName, process in self.processes.items():
                 process.seed = self._seedFromName(processName)
                 process.randomState = np.random.RandomState(seed = process.seed)
 
         self._adjustTimeStep()
 
         # Run pre-evolveState hooks
-        for hook in self.hooks.itervalues():
+        for hook in self.hooks.values():
             hook.preEvolveState(self)
 
         # Update queries
         # TODO: context manager/function calls for this logic?
-        for i, state in enumerate(self.internal_states.itervalues()):
+        for i, state in enumerate(self.internal_states.values()):
             t = time.time()
             state.updateQueries()
             self._evalTime.updateQueries_times[i] = time.time() - t
 
         # Calculate requests
-        for i, process in enumerate(self.processes.itervalues()):
+        for i, process in enumerate(self.processes.values()):
             t = time.time()
             process.calculateRequest()
             self._evalTime.calculateRequest_times[i] = time.time() - t
 
         # Partition states among processes
-        for i, state in enumerate(self.internal_states.itervalues()):
+        for i, state in enumerate(self.internal_states.values()):
             t = time.time()
             state.partition()
             self._evalTime.partition_times[i] = time.time() - t
 
         # Calculate mass of partitioned molecules
-        for state in self.internal_states.itervalues():
+        for state in self.internal_states.values():
             state.calculatePreEvolveStateMass()
 
         # Update listeners
-        for listener in self.listeners.itervalues():
+        for listener in self.listeners.values():
             listener.updatePostRequest()
 
         # Simulate submodels
-        for i, process in enumerate(self.processes.itervalues()):
+        for i, process in enumerate(self.processes.values()):
             t = time.time()
             process.evolveState()
             self._evalTime.evolveState_times[i] = time.time() - t
 
         # Check that timestep length was short enough
-        for process in self.processes.itervalues():
+        for process in self.processes.values():
             if not process.wasTimeStepShortEnough():
                 raise AttributeError("The timestep (%.3f) was too long at step %i, failed on process %s" % (
                     self._timeStepSec, self.simulationStep(), str(process.name())))
 
         # Merge state
-        for i, state in enumerate(self.internal_states.itervalues()):
+        for i, state in enumerate(self.internal_states.values()):
             t = time.time()
             state.merge()
             self._evalTime.merge_times[i] = time.time() - t
 
         # Calculate mass of partitioned molecules, after evolution
-        for state in self.internal_states.itervalues():
+        for state in self.internal_states.values():
             state.calculatePostEvolveStateMass()
 
         # update environment state
-        for state in self.external_states.itervalues():
+        for state in self.external_states.values():
             state.update()
 
         # Update listeners
-        for listener in self.listeners.itervalues():
+        for listener in self.listeners.values():
             listener.update()
 
         # Run post-evolveState hooks
-        for hook in self.hooks.itervalues():
+        for hook in self.hooks.values():
             hook.postEvolveState(self)
 
         # Append loggers
-        for logger in self.loggers.itervalues():
+        for logger in self.loggers.values():
             logger.append(self)
 
     def _seedFromName(self, name):
@@ -380,7 +380,7 @@ class Simulation:
         # Adjust timestep if needed or at a frequency of updateTimeStepFreq regardless
         validTimeSteps = self._maxTimeStep * np.ones(len(self.processes))
         resetTimeStep = False
-        for i, process in enumerate(self.processes.itervalues()):
+        for i, process in enumerate(self.processes.values()):
             if not process.isTimeStepShortEnough(self._timeStepSec, self._timeStepSafetyFraction) or self.simulationStep() % self._updateTimeStepFreq == 0:
                 validTimeSteps[i] = self._findTimeStep(0., self._maxTimeStep, process.isTimeStepShortEnough)
                 resetTimeStep = True

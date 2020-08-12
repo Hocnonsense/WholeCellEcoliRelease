@@ -4,7 +4,7 @@
     @organization: Covert Lab, Department of Bioengineering, Stanford University
     @date: Created 8/14/2014
     @LastEditors: Hwrn
-    @LastEditTime: 2020-08-10 21:52:48
+    @LastEditTime: 2020-08-12 18:18:12
     @FilePath: /WholeCellEcoliRelease/wholecell/utils/units.py
     @Description:
         Defines/registers custom units for Pint
@@ -49,13 +49,16 @@ def abs(array):
 def dot(a, b, out=None):
     assert hasUnit(a) or hasUnit(b), 'Only works on Unum!'
 
+    dot_unit = 1
     if isinstance(a, Unum):
+        dot_unit *= getUnit(a)
         a = a.asNumber()
 
     if isinstance(b,Unum):
+        dot_unit *= getUnit(b)
         b = b.asNumber()
 
-    return getUnit(a) * getUnit(b) * np.dot(a,b,out)
+    return dot_unit * np.dot(a, b, out)
 
 def floor(x):
     assert hasUnit(a), 'Only works on Unum!'
@@ -84,15 +87,15 @@ def getUnit(value):
         @description:
             if hasUnit(value):
                 return its Unit.
-            else: return blank unit.
+            else: return 1.
     """
     if hasUnit(value):
         value.normalize()
         value_units = value.copy()
         value_units._value = 1
+        return value_units
     else:
-        value_units = Unum.unit("")
-    return value_units
+        return 1
 
 def hasUnit(value):
     """

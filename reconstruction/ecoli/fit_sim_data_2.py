@@ -149,7 +149,7 @@ def fitSimData_2(kb, simOutDir):
     ## Assuming independence in variance
     synthetase_counts_by_group = np.zeros(len(kb.process.translation.AA_SYNTHETASE_GROUPS), dtype = np.float64)
     synthetase_variance_by_group = np.zeros(len(kb.process.translation.AA_SYNTHETASE_GROUPS), dtype = np.float)
-    for idx, synthetase_group in enumerate(kb.process.translation.AA_SYNTHETASE_GROUPS.itervalues()):
+    for idx, synthetase_group in enumerate(kb.process.translation.AA_SYNTHETASE_GROUPS.values()):
         group_count = 0.
         group_variance = 0.
         for synthetase in synthetase_group:

@@ -17,7 +17,7 @@ import numpy as np
 from reconstruction import spreadsheets
 
 def flip_dict(dct):
-    return {value:key for key, value in dct.viewitems()}
+    return {value:key for key, value in dct.items()}
 
 DIALECT = "excel-tab"
 KEY = "id"
@@ -201,8 +201,8 @@ DISABLED = { # complexes we don't form for modeling reasons
     }
 
 IGNORED = (
-    SUBUNIT_PROENZYME.viewkeys()
-    | MODIFIED_FORM.viewkeys()
+    SUBUNIT_PROENZYME.keys()
+    | MODIFIED_FORM.keys()
     | NONSPECIFIC_METABOLITES
     | UNIDENTIFIED_GENE
     | MISC_OR_UNEXPLAINED
@@ -337,13 +337,13 @@ poly.append({
 species_weights = {}
 
 met_index = MW_KEYS.index("metabolite")
-for key, value in met.viewitems():
+for key, value in met.items():
     w = np.zeros(N_MW)
     w[met_index] = value["mw7.2"]
     species_weights[key] = np.array(w)
 
 water_index = MW_KEYS.index("water")
-for key, value in water.viewitems():
+for key, value in water.items():
     w = np.zeros(N_MW)
     w[water_index] = value["mw7.2"]
     species_weights[key] = np.array(value["mw7.2"])
@@ -371,7 +371,7 @@ with open(RNA_FILE, "r") as f:
 
     rna_data = lod_to_dod(reader, KEY)
 
-for rna_id, rna_entry in rna_data.viewitems():
+for rna_id, rna_entry in rna_data.items():
     new_weight = ntp_terminal_weight + np.dot(ntp_weights, rna_entry["ntCount"])
 
     mw = rna_entry["mw"]
@@ -401,7 +401,7 @@ with open(PROT_FILE, "r") as f:
 
 prot_loc = {}
 
-for prot_id, prot_entry in prot_data.viewitems():
+for prot_id, prot_entry in prot_data.items():
     aa_counts = np.zeros(aa_weights.size, np.int64)
     for c in prot_entry["seq"]:
         aa_counts[AA_SYM_ORDER[c]] += 1
@@ -444,19 +444,19 @@ bad_rxns = set()
 while comp_rxns:
     to_remove = set()
 
-    for comp_rxn_id, comp_rxn in comp_rxns.viewitems():
+    for comp_rxn_id, comp_rxn in comp_rxns.items():
         stoich = {s["molecule"]:s["coeff"] for s in comp_rxn["stoichiometry"]}
 
-        subunits = set(mid for mid, c in stoich.viewitems() if c < 0)
+        subunits = set(mid for mid, c in stoich.items() if c < 0)
 
-        (comp_id,) = [mid for mid, c in stoich.viewitems() if c > 0]
+        (comp_id,) = [mid for mid, c in stoich.items() if c > 0]
 
         if (subunits & IGNORED) or comp_id in IGNORED:
             bad_rxns.add(comp_rxn_id)
             to_remove.add(comp_rxn_id)
             continue
 
-        if subunits <= set(species_weights.viewkeys()):
+        if subunits <= set(species_weights.keys()):
             weight = np.zeros(N_MW)
             for subunit in subunits:
                 weight += -stoich[subunit] * species_weights[subunit]
@@ -500,7 +500,7 @@ while comp_rxns:
             s["molecule"]
             for comp_rxn in comp_rxns.viewvalues()
             for s in comp_rxn["stoichiometry"]
-            } - species_weights.viewkeys() - comp_data.viewkeys()
+            } - species_weights.keys() - comp_data.keys()
 
         raise RuntimeError("{} unrecognized subunits: {}".format(
             len(unrecognized_subunits), "\n".join(unrecognized_subunits)))

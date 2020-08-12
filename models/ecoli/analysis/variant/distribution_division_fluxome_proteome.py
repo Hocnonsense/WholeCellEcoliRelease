@@ -26,7 +26,7 @@ FONT_SIZE=9
 trim = 0.05
 
 
-def getPCCProteome((variant, ap, monomerIds, schmidtCounts)):
+def getPCCProteome(variant, ap, monomerIds, schmidtCounts):
     try:
         simDir = ap.get_cells(variant = [variant])[0]
 
@@ -86,7 +86,7 @@ def getPCCProteome((variant, ap, monomerIds, schmidtCounts)):
         return np.nan, np.nan
 
 
-def getPCCFluxome((variant, ap, toyaReactions, toyaFluxesDict, toyaStdevDict)):
+def getPCCFluxome(variant, ap, toyaReactions, toyaFluxesDict, toyaStdevDict):
 
     try:
         simDir = ap.get_cells(variant = [variant])[0]
@@ -129,7 +129,7 @@ def getPCCFluxome((variant, ap, toyaReactions, toyaFluxesDict, toyaStdevDict)):
                 modelFluxes[toyaReaction].append(np.mean(fluxTimeCourse).asNumber(units.mmol / units.g / units.h))
 
         toyaVsReactionAve = []
-        for rxn, toyaFlux in toyaFluxesDict.iteritems():
+        for rxn, toyaFlux in toyaFluxesDict.items():
             if rxn in ["ISOCITDEH-RXN", "SUCCINATE-DEHYDROGENASE-UBIQUINONE-RXN-SUC/UBIQUINONE-8//FUM/CPD-9956.31."]:
                 continue
             if rxn in modelFluxes:
@@ -143,7 +143,7 @@ def getPCCFluxome((variant, ap, toyaReactions, toyaFluxesDict, toyaStdevDict)):
         print(e)
         return np.nan, np.nan
 
-def getDivisionTime((variant, ap)):
+def getDivisionTime(variant, ap):
     try:
         simDir = ap.get_cells(variant = [variant])[0]
 
@@ -157,7 +157,7 @@ def getDivisionTime((variant, ap)):
         print(e)
         return np.nan
 
-def getInitialMass((variant, ap)):
+def getInitialMass(variant, ap):
     try:
         simDir = ap.get_cells(variant = [variant])[0]
 
@@ -170,7 +170,7 @@ def getInitialMass((variant, ap)):
         print(e)
         return np.nan
 
-def getFinalMass((variant, ap)):
+def getFinalMass(variant, ap):
     try:
         simDir = ap.get_cells(variant = [variant])[0]
 

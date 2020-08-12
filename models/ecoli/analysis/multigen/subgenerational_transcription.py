@@ -298,7 +298,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
         geneFunctions = validation_data.geneFunctions.geneFunctions
         unknown = {"r": 0, "g": 0, "b": 0}
         resistance = {"r": 0, "g": 0, "b": 0}
-        for frameID, function_ in geneFunctions.iteritems():
+        for frameID, function_ in geneFunctions.items():
             if function_ in ["Unknown function", "Unclear/under-characterized"]:
                 i = np.where([frameID in x for x in mRnaIdsOrdered])[0][0]
                 f = transcribedBoolOrdered[i]

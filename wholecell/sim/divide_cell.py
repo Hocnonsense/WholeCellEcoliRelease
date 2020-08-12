@@ -231,7 +231,7 @@ def divideUniqueMolecules(uniqueMolecules, randomState, chromosome_counts, curre
 
     # Binomially divide unique molecules that should be binomially split
     # Note: again, the only unique molecules split here are the active RNAPs.
-    for moleculeName, moleculeAttributeDict in uniqueMoleculesToDivide.iteritems():
+    for moleculeName, moleculeAttributeDict in uniqueMoleculesToDivide.items():
         if moleculeName in nonbinomial_unique_molecules:
             continue
 

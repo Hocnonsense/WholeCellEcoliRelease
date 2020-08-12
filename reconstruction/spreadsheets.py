@@ -26,7 +26,7 @@ class JsonWriter(csv.DictWriter):
     def _dict_to_list(self, rowdict):
         return csv.DictWriter._dict_to_list(self, {
             key:json.dumps(array_to_list(value))
-            for key, value in rowdict.viewitems()
+            for key, value in rowdict.items()
             })
 
 
@@ -44,17 +44,15 @@ class JsonReader(csv.DictReader):
             fieldname.strip('"') for fieldname in self._fieldnames
             ]
 
-    def next(self):
+    def __next__(self):
         """
-            @description:
-            @param {type}
             @return {
                 key:json.loads(value) if value else "" # catch for empty field
-                for key, value in csv.DictReader.next(self).viewitems()
+                for key, value in csv.DictReader.next(self).items()
                 }
         """
         attributeDict = {}
-        for key, raw_value in csv.DictReader.next(self).viewitems():
+        for key, raw_value in csv.DictReader.__next__(self).items():
             try:
                 value = json.loads(raw_value) if raw_value else ""
 

@@ -43,7 +43,7 @@ class EnzymeKinetics:
         # Exclude any rows with more than a kcat
         if kcatsOnly:
             reactionRateInfoNew = {}
-            for constraintID, reactionInfo in self.reactionRateInfo.iteritems():
+            for constraintID, reactionInfo in self.reactionRateInfo.items():
                 # Kcat-only reactions will have no kMs, kIs, or custom equations
                 if len(reactionInfo["kM"]) or len(reactionInfo["kI"]) or reactionInfo["customRateEquation"]:
                     continue
@@ -53,7 +53,7 @@ class EnzymeKinetics:
         # Exclude any custom equation rows
         if not useCustoms:
             reactionRateInfoNew = {}
-            for constraintID, reactionInfo in self.reactionRateInfo.iteritems():
+            for constraintID, reactionInfo in self.reactionRateInfo.items():
                 if reactionInfo["customRateEquation"] == None:
                     reactionRateInfoNew[constraintID] = reactionInfo
             self.reactionRateInfo = reactionRateInfoNew
@@ -61,7 +61,7 @@ class EnzymeKinetics:
         # Throw out any kcat-only reactions
         if moreThanKcat:
             reactionRateInfoNew = {}
-            for constraintID, reactionInfo in self.reactionRateInfo.iteritems():
+            for constraintID, reactionInfo in self.reactionRateInfo.items():
                 if len(reactionInfo["kM"]) or len(reactionInfo["kI"]) or reactionInfo["customRateEquation"]:
                     reactionRateInfoNew[constraintID] = reactionInfo
             self.reactionRateInfo = reactionRateInfoNew
@@ -80,7 +80,7 @@ class EnzymeKinetics:
         unknownCustomVars = set()
 
 
-        for constraintID, reactionInfo in self.reactionRateInfo.iteritems():
+        for constraintID, reactionInfo in self.reactionRateInfo.items():
             keepReaction = True
             reactionType = reactionInfo["rateEquationType"]
             if reactionType == "standard":
@@ -199,7 +199,7 @@ class EnzymeKinetics:
 
     def allConstraintsDict(self, metaboliteConcentrationsDict, enzymeConcentrationsDict):
         constraintsDict = {}
-        for constraintID, reactionInfo in self.reactionRateInfo.iteritems():
+        for constraintID, reactionInfo in self.reactionRateInfo.items():
             constraintsDict[constraintID] = self.reactionRate(reactionInfo, metaboliteConcentrationsDict, enzymeConcentrationsDict)
 
         return constraintsDict
@@ -209,7 +209,7 @@ class EnzymeKinetics:
         Create a dict of dicts from reactionID to constraintIDs for that reaction, to rates for each constraintID.
         """
         reactionsDict = {}
-        for constraintID, reactionInfo in self.reactionRateInfo.iteritems():
+        for constraintID, reactionInfo in self.reactionRateInfo.items():
             reactionID = reactionInfo["reactionID"]
             if reactionID not in reactionsDict:
                 reactionsDict[reactionID] = {}

@@ -114,7 +114,7 @@ wildtypeBiomassFlux = fba.getBiomassReactionFlux()
 
 # Adjust kcats
 targetFluxes = {}
-for reactionID, enzymeID in reactionEnzymes.iteritems():
+for reactionID, enzymeID in reactionEnzymes.items():
     targetFluxes[reactionID] = enzymeConcentrations[enzymeID] * enzymeKcats[enzymeID]
 targetFluxes["v_biomass"] = wildtypeBiomassFlux
 
@@ -122,7 +122,7 @@ errors, rates = checkErrors(targetFluxes)
 
 errors_dict = dict(zip(enzymeKcats, errors))
 
-kcat_adjustments = {enzymeID: error / enzymeConcentrations[enzymeID] for enzymeID, error in errors_dict.iteritems()}
+kcat_adjustments = {enzymeID: error / enzymeConcentrations[enzymeID] for enzymeID, error in errors_dict.items()}
 
-for enzymeID, error in kcat_adjustments.iteritems():
+for enzymeID, error in kcat_adjustments.items():
     print("{} kcat error is {}.".format(enzymeID, error))

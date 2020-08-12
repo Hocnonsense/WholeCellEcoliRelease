@@ -141,7 +141,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
             ## Flux comparison with Toya
             toyaVsReactionAve = []
             rxn_order = []
-            for rxn, toyaFlux in toyaFluxesDict.iteritems():
+            for rxn, toyaFlux in toyaFluxesDict.items():
                 rxn_order.append(rxn)
                 if rxn in modelFluxes:
                     toyaVsReactionAve.append((np.mean(modelFluxes[rxn]), toyaFlux.asNumber(OUTPUT_FLUX_UNITS), np.std(modelFluxes[rxn]), toyaStdevDict[rxn].asNumber(OUTPUT_FLUX_UNITS)))

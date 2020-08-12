@@ -61,7 +61,7 @@ class UniqueMolecules(wholecell.states.internal_state.InternalState):
 
         # Add the submass difference attributes for processes to operate
         defaultMassAttributes = {}
-        for submassName in self.submassNameToIndex.viewkeys():
+        for submassName in self.submassNameToIndex.keys():
             massDiffPropertyName = "massDiff_" + submassName
             defaultMassAttributes[massDiffPropertyName] = np.float64
             self._submassNameToProperty[submassName] = massDiffPropertyName

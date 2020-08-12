@@ -27,7 +27,7 @@ FONT_SIZE=9
 trim = 0.05
 
 
-def getPCC((variant, ap, toyaReactions, toyaFluxesDict, toyaStdevDict)):
+def getPCC(variant, ap, toyaReactions, toyaFluxesDict, toyaStdevDict):
     try:
 
         simDir = ap.get_cells(variant = [variant])[0]
@@ -70,7 +70,7 @@ def getPCC((variant, ap, toyaReactions, toyaFluxesDict, toyaStdevDict)):
                 modelFluxes[toyaReaction].append(np.mean(fluxTimeCourse).asNumber(units.mmol / units.g / units.h))
 
         toyaVsReactionAve = []
-        for rxn, toyaFlux in toyaFluxesDict.iteritems():
+        for rxn, toyaFlux in toyaFluxesDict.items():
             if rxn in ["ISOCITDEH-RXN", "SUCCINATE-DEHYDROGENASE-UBIQUINONE-RXN-SUC/UBIQUINONE-8//FUM/CPD-9956.31."]:
                 continue
             if rxn in modelFluxes:

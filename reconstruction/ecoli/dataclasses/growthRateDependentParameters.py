@@ -166,6 +166,7 @@ class Mass:
     # Set based on growth rate avgCellDryMass
     def getAvgCellDryMass(self, doubling_time):
         doubling_time = self._clipTau_d(doubling_time)
+        # fg: femtogram
         avgCellDryMass = units.fg * float(interpolate.splev(doubling_time.asNumber(units.min), self._dryMassParams))
         return avgCellDryMass
 
@@ -227,18 +228,18 @@ class Mass:
             D["solublePool"] = float(interpolate.splev(doubling_time.asNumber(units.min), self._solublePoolMassFractionParams))
             D["inorganicIon"] = float(interpolate.splev(doubling_time.asNumber(units.min), self._inorganicIonMassFractionParams))
 
-        total = np.sum([y for x,y in D.iteritems()])
-        for key, value in D.iteritems():
+        total = np.sum([y for x,y in D.items()])
+        for key, value in D.items():
             if key != 'dna':
                 D[key] = value / total
-        assert np.absolute(np.sum([x for x in D.itervalues()]) - 1.) < 1e-3
+        assert np.absolute(np.sum([x for x in D.values()]) - 1.) < 1e-3
         return D
 
 
     def getFractionMass(self, doubling_time):
         D = {}
         massFraction = self.getMassFraction(doubling_time)
-        for key, value in massFraction.iteritems():
+        for key, value in massFraction.items():
             D[key + "Mass"] = value * self.getAvgCellDryMass(doubling_time)
 
         # Load from a different RNA mass fraction depending on alternate settings.
@@ -559,7 +560,7 @@ def _loadRow(key, list_of_dicts):
         return np.array([x[key] for x in list_of_dicts])
 
 def _loadTableIntoObjectGivenDoublingTime(obj, list_of_dicts):
-    table_keys = list_of_dicts[0].keys()
+    table_keys = list(list_of_dicts[0].keys())
 
     if 'doublingTime' not in table_keys:
         raise KeyError('This data has no doubling time column but it is supposed to be growth rate dependent!')

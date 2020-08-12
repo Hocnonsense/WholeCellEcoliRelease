@@ -119,9 +119,9 @@ for line in open(_LP_FILE):
 reaction_stoich = {
     reaction_id_to_name[reaction_id]: {
         compound_id_to_name[compound_id]:coeff
-        for compound_id, coeff in stoich.viewitems()
+        for compound_id, coeff in stoich.items()
         }
-    for reaction_id, stoich in reaction_stoich.viewitems()
+    for reaction_id, stoich in reaction_stoich.items()
     if len(stoich) > 1
     }
 
@@ -137,7 +137,7 @@ with open(os.path.join("reconstruction", "ecoli", "flat", "reactions.tsv"), "w")
 
     writer.writeheader()
 
-    for reaction_id, stoich in reaction_stoich.viewitems():
+    for reaction_id, stoich in reaction_stoich.items():
         writer.writerow({
             "reaction id":reaction_id,
             "stoichiometry":stoich,
@@ -173,7 +173,7 @@ with open(_FBA_FILE) as fba_file:
             if split[0].endswith(":"): # section heading
                 current_section = split[0][:-1]
 
-                assert current_section not in data.viewkeys()
+                assert current_section not in data.keys()
 
                 data[current_section] = []
 
@@ -262,7 +262,7 @@ biomassCoeffs = {
     for entry in data["biomass"]
     }
 
-biomassIDs = {mid[:-3] for mid in biomassCoeffs.viewkeys()}
+biomassIDs = {mid[:-3] for mid in biomassCoeffs.keys()}
 
 with open(os.path.join("reconstruction", "ecoli", "flat", "metabolites.tsv")) as massFile:
     for entry in JsonReader(massFile, dialect = "excel-tab"):
@@ -270,7 +270,7 @@ with open(os.path.join("reconstruction", "ecoli", "flat", "metabolites.tsv")) as
             for c in entry["location"]:
                 masses[entry["id"] + "[{}]".format(c)] = entry["mw7.2"]
 
-for outName, groupName in _MASS_CATEGORIES.viewitems():
+for outName, groupName in _MASS_CATEGORIES.items():
     moleculeIDs = {
         entry["molecule id"]
         for entry in data["biomass"]

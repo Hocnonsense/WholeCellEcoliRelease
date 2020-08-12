@@ -68,11 +68,11 @@ class TfBinding(wholecell.processes.process.Process):
         self.alphaView.requestAll()
 
         # Request all counts of active transcription factors
-        for view in self.tfMoleculeActiveView.itervalues():
+        for view in self.tfMoleculeActiveView.values():
             view.requestAll()
 
         # Request all counts of DNA bound transcription factors
-        for view in self.tfDnaBoundViews.itervalues():
+        for view in self.tfDnaBoundViews.values():
             view.requestAll()
 
 

@@ -103,13 +103,13 @@ def object_tree(obj, path='', debug=None):
         return obj
     elif isinstance(obj, collections.Mapping):
         return {key: object_tree(value, "{}['{}']".format(path, key), debug)
-            for (key, value) in obj.iteritems()}
+            for (key, value) in obj.items()}
     elif isinstance(obj, collections.Sequence):
         return [object_tree(subobj, "{}[{}]".format(path, index), debug) for index, subobj in enumerate(obj)]
     else:
         attrs = all_vars(obj)
         tree = {key: object_tree(value, "{}.{}".format(path, key), debug)
-                for (key, value) in attrs.iteritems()}
+                for (key, value) in attrs.items()}
         tree['!type'] = type(obj)
 
         return tree

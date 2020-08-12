@@ -61,7 +61,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
 
         toyaVsReactionAve = []
         toya_order = []
-        for toyaReactionID, toyaFlux in toya_fluxes_dict.iteritems():
+        for toyaReactionID, toyaFlux in toya_fluxes_dict.items():
             fluxTimeCourse = []
 
             for rxn in reactionIDs:

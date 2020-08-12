@@ -78,12 +78,12 @@ class UniqueObjectsContainer:
 
         self._names = sorted(self._specifications.keys())
 
-        defaultSpecKeys = self._defaultSpecification.viewkeys()
+        defaultSpecKeys = self._defaultSpecification.keys()
 
         # Add the attributes used internally
-        for name, specification in self._specifications.viewitems():
+        for name, specification in self._specifications.items():
             # Make sure there is no overlap in attribute names
-            invalidAttributeNames = (specification.viewkeys() & defaultSpecKeys)
+            invalidAttributeNames = (specification.keys() & defaultSpecKeys)
             if invalidAttributeNames:
                 raise UniqueObjectsContainerException(
                     "Invalid attribute names in specification for {}: {}".format(
@@ -102,7 +102,7 @@ class UniqueObjectsContainer:
                 1,
                 dtype = [
                     (attrName, attrType)
-                    for attrName, attrType in specification.viewitems()
+                    for attrName, attrType in specification.items()
                     ]
                 )
 
@@ -115,7 +115,7 @@ class UniqueObjectsContainer:
             1,
             dtype = [
                 (attrName, attrType)
-                for attrName, attrType in self._globalReferenceDtype.viewitems()
+                for attrName, attrType in self._globalReferenceDtype.items()
                 ]
             )
 
@@ -186,7 +186,7 @@ class UniqueObjectsContainer:
         collection["_globalIndex"][objectIndexes] = globalIndexes
         # collection["_uniqueId"][objectIndexes] = uniqueObjectIds
 
-        for attrName, attrValue in attributes.viewitems():
+        for attrName, attrValue in attributes.items():
             collection[attrName][objectIndexes] = attrValue
 
         self._globalReference["_entryState"][globalIndexes] = self._entryActive
@@ -273,7 +273,7 @@ class UniqueObjectsContainer:
                     collection[attrName],
                     queryValue
                     )
-                for attrName, (operator, queryValue) in operations.viewitems()
+                for attrName, (operator, queryValue) in operations.items()
             )
         )
 
@@ -295,7 +295,7 @@ class UniqueObjectsContainer:
     def emptyLike(self):
         specifications = deepcopy(self._specifications)
         specs_to_remove = self._defaultSpecification.keys()
-        for moleculeName, moleculeSpecs in specifications.iteritems():
+        for moleculeName, moleculeSpecs in specifications.items():
             for spec in specs_to_remove:
                 moleculeSpecs.pop(spec)
         new_copy = UniqueObjectsContainer(specifications)
@@ -324,7 +324,7 @@ class UniqueObjectsContainer:
 
 
     def tableLoad(self, tableReader, tableIndex):
-        for fieldName, value in tableReader.readRow(tableIndex).viewitems():
+        for fieldName, value in tableReader.readRow(tableIndex).items():
             if fieldName == "_globalReference":
                 self._globalReference = value
 
@@ -392,7 +392,7 @@ class _UniqueObject:
         if entry["_entryState"] == self._container._entryInactive:
             raise UniqueObjectsContainerException("Attempted to access an inactive object.")
 
-        for attribute, value in attributes.viewitems():
+        for attribute, value in attributes.items():
             if isinstance(entry[attribute], np.ndarray):
                 # Fix for the circumstance that the attribute is an ndarray -
                 # without the [:] assignment, only the first value will be
@@ -565,7 +565,7 @@ class _UniqueObjectSet:
             globalObjIndexes = np.where(inverse == i)
             objectIndexesInCollection = objectIndexes[globalObjIndexes]
 
-            for attribute, values in attributes.viewitems():
+            for attribute, values in attributes.items():
                 valuesAsArray = np.array(values, ndmin = 1)
 
                 if valuesAsArray.shape[0] == 1: # is a singleton

@@ -505,7 +505,7 @@ def buildTfConditionCellSpecifications(
             fcData = sim_data.tfToFC[tf]
         if choice == "__inactive" and conditionValue != sim_data.conditions["basal"]:
             fcDataTmp = sim_data.tfToFC[tf].copy()
-            for key, value in fcDataTmp.iteritems():
+            for key, value in fcDataTmp.items():
                 fcData[key] = 1. / value
         expression = expressionFromConditionAndFoldChange(
             sim_data.process.transcription.rnaData["id"],

@@ -73,7 +73,7 @@ class CellDivision(wholecell.listeners.listener.Listener):
             self.d_period_division = True
 
     def update(self):
-        masses = sum(state.mass() for state in self.internal_states.itervalues())
+        masses = sum(state.mass() for state in self.internal_states.values())
 
         postEvolveMasses = masses[1, ...]
 

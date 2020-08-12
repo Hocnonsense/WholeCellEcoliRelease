@@ -73,7 +73,7 @@ class Metabolism:
             for wildtypeID in wildtypeIDs
             } # this assumes biomass reaction components only exist in a single compartment
 
-        for metaboliteID, concentration in metaboliteConcentrationData.viewitems():
+        for metaboliteID, concentration in metaboliteConcentrationData.items():
             if metaboliteID in wildtypeIDtoCompartment:
                 metaboliteIDs.append(
                     metaboliteID + wildtypeIDtoCompartment[metaboliteID]
@@ -148,7 +148,7 @@ class Metabolism:
         metaboliteConcentrations.append(2.40e-5)
 
         # include metabolites that are part of biomass
-        for key, value in sim_data.mass.getBiomassAsConcentrations(sim_data.doubling_time).iteritems():
+        for key, value in sim_data.mass.getBiomassAsConcentrations(sim_data.doubling_time).items():
             metaboliteIDs.append(key)
             metaboliteConcentrations.append(value.asNumber(units.mol / units.L))
 
@@ -206,7 +206,7 @@ class Metabolism:
                 reverseReactionID = reverseReactionString.format(reactionID)
                 reactionStoich[reverseReactionID] = {
                     moleculeID:-stoichCoeff
-                    for moleculeID, stoichCoeff in reactionStoich[reactionID].viewitems()
+                    for moleculeID, stoichCoeff in reactionStoich[reactionID].items()
                     }
 
                 reversibleReactions.append(reactionID)
@@ -484,7 +484,7 @@ class Metabolism:
         for index, moleculeID in enumerate(exchangeIDs):
             if moleculeID in self._unconstrainedExchangeMolecules:
                 externalMoleculeLevels[index] = np.inf
-            elif moleculeID in self._constrainedExchangeMolecules.viewkeys():
+            elif moleculeID in self._constrainedExchangeMolecules.keys():
                 externalMoleculeLevels[index] = (
                     self._constrainedExchangeMolecules[moleculeID] * coefficient
                     ).asNumber(targetUnits)
@@ -496,7 +496,7 @@ class Metabolism:
 # Class used to update metabolite concentrations based on the current nutrient conditions
 class ConcentrationUpdates:
     def __init__(self, concDict, equilibriumReactions, nutrientData):
-        self.units = units.getUnit(concDict.values()[0])
+        self.units = units.getUnit(list(concDict.values())[0])
         self.defaultConcentrationsDict = dict((key, concDict[key].asNumber(self.units)) for key in concDict)
         self.nutrient_data = nutrientData
 
@@ -544,7 +544,7 @@ class ConcentrationUpdates:
 
         concDict = dict(zip(metaboliteTargetIds, concentrations))
 
-        for moleculeName, setAmount in self.moleculeSetAmounts.iteritems():
+        for moleculeName, setAmount in self.moleculeSetAmounts.items():
             if self._isNutrientExchangePresent(nutrientFluxes, moleculeName) and (moleculeName[:-3] + "[c]" not in self.moleculeScaleFactors or moleculeName == "L-SELENOCYSTEINE[c]"):
                 concDict[moleculeName] = setAmount
             if moleculeName in self.moleculeScaleFactors and self._isNutrientExchangePresent(nutrientFluxes, moleculeName[:-3] + "[p]"):
@@ -574,6 +574,6 @@ class ConcentrationUpdates:
             moleculeSetAmounts[moleculeName + "[p]"] = amountToSet * self.units
             moleculeSetAmounts[moleculeName + "[c]"] = amountToSet * self.units
 
-        for moleculeName, scaleFactor in self.moleculeScaleFactors.iteritems():
+        for moleculeName, scaleFactor in self.moleculeScaleFactors.items():
             moleculeSetAmounts[moleculeName] = scaleFactor * concDict[moleculeName] * self.units
         return moleculeSetAmounts

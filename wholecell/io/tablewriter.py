@@ -292,12 +292,12 @@ class TableWriter:
         if self._columns is None:
             self._columns = {
                 name:_Column(os.path.join(self._dirColumns, name))
-                for name in namesAndValues.viewkeys()
+                for name in namesAndValues.keys()
                 }
 
         else:
-            missingFields = self._columns.viewkeys() - namesAndValues.viewkeys()
-            unrecognizedFields = namesAndValues.viewkeys() - self._columns.viewkeys()
+            missingFields = self._columns.keys() - namesAndValues.keys()
+            unrecognizedFields = namesAndValues.keys() - self._columns.keys()
 
             if missingFields:
                 raise MissingFieldError(
@@ -309,7 +309,7 @@ class TableWriter:
                     "Unrecognized fields: {}".format(", ".join(unrecognizedFields))
                     )
 
-        for name, value in namesAndValues.viewitems():
+        for name, value in namesAndValues.items():
             self._columns[name].append(value)
 
 
@@ -333,7 +333,7 @@ class TableWriter:
 
         """
 
-        for name, value in namesAndValues.viewitems():
+        for name, value in namesAndValues.items():
             if name in self._attributeNames:
                 raise AttributeAlreadyExistsError(
                     "An attribute named '{}' already exists.".format(name)

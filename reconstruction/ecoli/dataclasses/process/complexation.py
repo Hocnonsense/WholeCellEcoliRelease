@@ -158,7 +158,7 @@ class Complexation:
         coefficient of one.
         '''
         info = self._moleculeRecursiveSearch(cplxId, self.stoichMatrix(), self.moleculeNames)
-        return {'subunitIds': np.array(info.keys()), 'subunitStoich': np.array(info.values())}
+        return {'subunitIds': np.array(list(info.keys())), 'subunitStoich': np.array(list(info.values()))}
 
     def _buildStoichMatrixMonomers(self):
         """

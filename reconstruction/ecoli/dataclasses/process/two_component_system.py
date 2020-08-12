@@ -337,11 +337,11 @@ class TwoComponentSystem:
         '''
         S = self.stoichMatrix()
 
-        yStrings = ["y[%d]" % x for x in xrange(S.shape[0])]
+        yStrings = ["y[%d]" % x for x in range(S.shape[0])]
         y = sp.symbols(yStrings)
         dy = [sp.symbol.S.Zero] * S.shape[0]
 
-        for colIdx in xrange(S.shape[1]):
+        for colIdx in range(S.shape[1]):
             negIdxs = np.where(S[:, colIdx] < 0)[0]
             posIdxs = np.where(S[:, colIdx] > 0)[0]
 
@@ -375,11 +375,11 @@ class TwoComponentSystem:
         '''
         S = self.stoichMatrix()
 
-        yStrings = ["y[%d]" % x for x in xrange(S.shape[0])]
+        yStrings = ["y[%d]" % x for x in range(S.shape[0])]
         y = sp.symbols(yStrings)
         dy = [sp.symbol.S.Zero] * S.shape[0]
 
-        for colIdx in xrange(S.shape[1]):
+        for colIdx in range(S.shape[1]):
             negIdxs = np.where(S[:, colIdx] < 0)[0]
             posIdxs = np.where(S[:, colIdx] > 0)[0]
 

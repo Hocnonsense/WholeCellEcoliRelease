@@ -181,7 +181,6 @@ class KnowledgeBaseEcoli:
                 filter(lambda x: x.lstrip()[0] != "#", csvfile), # Strip comments
                 dialect = CSV_DIALECT)
             setattr(path, attrName, [row for row in reader])
-            pass
 
     def _load_sequence(self, file_path):
         from Bio import SeqIO

@@ -33,7 +33,7 @@ def load_tsv(file_name):
     with open(file_name) as csvfile:
         reader = JsonReader(csvfile, dialect = CSV_DIALECT)
         for row in reader:
-            data.append(dict([(x, y) for x,y in row.iteritems()]))
+            data.append(dict([(x, y) for x,y in row.items()]))
     return data
 
 def write_tsv(file_name, l):

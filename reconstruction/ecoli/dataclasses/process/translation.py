@@ -56,7 +56,7 @@ class Translation:
 
             counts = []
 
-            for aa in sim_data.amino_acid_1_to_3_ordered.viewkeys():
+            for aa in sim_data.amino_acid_1_to_3_ordered.keys():
                 counts.append(
                     sequence.count(aa)
                     )
@@ -176,7 +176,7 @@ class Translation:
             for j, letter in enumerate(sequence):
                 self.translationSequences[i, j] = aaMapping[letter]
 
-        aaIDs = sim_data.amino_acid_1_to_3_ordered.values()
+        aaIDs = list(sim_data.amino_acid_1_to_3_ordered.values())
 
         self.translationMonomerWeights = (
             (

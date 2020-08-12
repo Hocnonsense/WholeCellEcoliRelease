@@ -37,7 +37,7 @@ with open(os.path.join(OUTPUT_DIR, "dryMassComposition.tsv"), "w") as outfile:
             key:entry[key] for key in keys
             })
 
-for kb_name, file_name in fraction_names.viewitems():
+for kb_name, file_name in fraction_names.items():
     array = getattr(kb, "_cell{}FractionData".format(kb_name))
     keys = array.dtype.names
 

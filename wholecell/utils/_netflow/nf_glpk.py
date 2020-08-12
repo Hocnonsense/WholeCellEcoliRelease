@@ -380,7 +380,7 @@ class NetworkFlowGLPK(NetworkFlowProblemBase):
             raise RuntimeError("Equality constraints not yet built. Finish construction of the problem before accessing S matrix.")
         A = np.zeros((len(self._materialCoeffs), len(self._flows)))
         self._materialIdxLookup = {}
-        for materialIdx, (material, pairs) in enumerate(sorted(self._materialCoeffs.viewitems())):
+        for materialIdx, (material, pairs) in enumerate(sorted(self._materialCoeffs.items())):
             self._materialIdxLookup[material] = materialIdx
             for pair in pairs:
                 A[materialIdx, pair[1]] = pair[0]
@@ -415,7 +415,7 @@ class NetworkFlowGLPK(NetworkFlowProblemBase):
         A = np.zeros((n_coeffs, n_flows))
         # avoid creating duplicate constraints
         self._materialIdxLookup = {}
-        for materialIdx, (material, pairs) in enumerate(sorted(self._materialCoeffs.viewitems())):
+        for materialIdx, (material, pairs) in enumerate(sorted(self._materialCoeffs.items())):
             self._materialIdxLookup[material] = materialIdx
             for pair in pairs:
                 A[materialIdx, pair[1]] = pair[0]

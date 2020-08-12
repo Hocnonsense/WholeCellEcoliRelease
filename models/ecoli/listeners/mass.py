@@ -146,7 +146,7 @@ class Mass(wholecell.listeners.listener.Listener):
     def update(self):
         oldDryMass = self.dryMass
 
-        masses = sum(state.mass() for state in self.internal_states.itervalues())
+        masses = sum(state.mass() for state in self.internal_states.values())
 
         preEvolveMasses = masses[0, ...]
         postEvolveMasses = masses[1, ...]
