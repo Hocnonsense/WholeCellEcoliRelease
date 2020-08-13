@@ -28,7 +28,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
         if not os.path.exists(plotOutDir):
             os.mkdir(plotOutDir)
 
-        sim_data = pickle.load(open(simDataFile, "r"))
+        sim_data = pickle.load(open(simDataFile, "rb"))
         trpIdx = sim_data.moleculeGroups.aaIDs.index("TRP[c]")
 
         growthLimits = TableReader(os.path.join(simOutDir, "GrowthLimits"))

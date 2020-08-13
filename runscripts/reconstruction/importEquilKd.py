@@ -26,14 +26,14 @@ REACTION_FILE = os.path.join("reconstruction","ecoli","flat","equilibriumReactio
 OUTPUT_FILE = "TFoutput.tsv"
 
 reactionDict = {}
-with open(DATA_FILE, "rU") as csvfile:
+with open(DATA_FILE, encoding="utf-8") as csvfile:
     reader = csv.DictReader(csvfile, dialect = CSV_DIALECT)
     for row in reader:
         if row["<Kd> (uM)"] != '' and row["<Kd> (uM)"] != '?':
             for reaction in row["EcoCyc ID reaction (metabolite vs. TF)"].split(", "):
                 reactionDict[reaction] = float(row["<Kd> (uM)"]) / 10**6
 
-with open(REACTION_FILE, "rU") as infile:
+with open(REACTION_FILE, encoding="utf-8") as infile:
     with open(OUTPUT_FILE, "w") as outfile:
         reader = csv.DictReader(infile, dialect = CSV_DIALECT)
         quoteDialect = CSV_DIALECT

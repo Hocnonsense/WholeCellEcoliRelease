@@ -37,6 +37,6 @@ class ValidationDataRawEcoli:
         attrName = file_name.split(os.path.sep)[-1].split(".")[0]
         setattr(self, attrName, [])
 
-        with open(file_name, 'rU') as csvfile:
+        with open(file_name, 'r', encoding='utf-8') as csvfile:
             reader = JsonReader(csvfile, dialect = CSV_DIALECT)
             setattr(self, attrName, [row for row in reader])

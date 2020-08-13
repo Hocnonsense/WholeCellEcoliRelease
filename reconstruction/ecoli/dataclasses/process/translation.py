@@ -124,13 +124,13 @@ class Translation:
         monomerData = np.zeros(
             size,
             dtype = [
-                ('id', 'a50'),
-                ('rnaId', 'a50'),
+                ('id', "U50"),
+                ('rnaId', "U50"),
                 ('degRate', 'f8'),
                 ('length', 'i8'),
                 ('aaCounts', '{}i8'.format(nAAs)),
                 ('mw', 'f8'),
-                ('sequence', 'a{}'.format(maxSequenceLength)),
+                ('sequence', 'U{}'.format(maxSequenceLength)),
                 ('isRProtein', 'bool'),
                 ]
             )
@@ -168,9 +168,7 @@ class Translation:
         self.translationSequences = np.empty((sequences.shape[0], maxLen), np.int8)
         self.translationSequences.fill(polymerize.PAD_VALUE)
 
-        aaIDs_singleLetter = sim_data.amino_acid_1_to_3_ordered.keys()
-
-        aaMapping = {aa:i for i, aa in enumerate(aaIDs_singleLetter)}
+        aaMapping = {aa:i for i, aa in enumerate(sim_data.amino_acid_1_to_3_ordered.keys())}
 
         for i, sequence in enumerate(sequences):
             for j, letter in enumerate(sequence):
@@ -197,14 +195,14 @@ class Translation:
         If alternate_translation_efficiency is set to True, the translation
         efficiency described by Mohammad et al. 2019 is used instead.
         """
-        monomerIds = [x["id"].encode("utf-8") + "[" + sim_data.getter.getLocation([x["id"]])[0][0] + "]" for x in raw_data.proteins]
-        monomerIdToGeneId = dict([(x["id"].encode("utf-8") + "[" + sim_data.getter.getLocation([x["id"]])[0][0] + "]", x["geneId"].encode("utf-8")) for x in raw_data.proteins])
+        monomerIds = [x["id"] + "[" + sim_data.getter.getLocation([x["id"]])[0][0] + "]" for x in raw_data.proteins]
+        monomerIdToGeneId = dict([(x["id"] + "[" + sim_data.getter.getLocation([x["id"]])[0][0] + "]", x["geneId"]) for x in raw_data.proteins])
 
         if alternate_translation_efficiency:
             geneIdToTrEff = dict(
-                [(x["geneId"].encode("utf-8"), x["translationEfficiency"]) for x in raw_data.translationEfficiency_alternate])
+                [(x["geneId"], x["translationEfficiency"]) for x in raw_data.translationEfficiency_alternate])
         else:
-            geneIdToTrEff = dict([(x["geneId"].encode("utf-8"), x["translationEfficiency"]) for x in raw_data.translationEfficiency if type(x["translationEfficiency"]) == float])
+            geneIdToTrEff = dict([(x["geneId"], x["translationEfficiency"]) for x in raw_data.translationEfficiency if type(x["translationEfficiency"]) == float])
 
         trEffs = []
         for monomerId in monomerIds:

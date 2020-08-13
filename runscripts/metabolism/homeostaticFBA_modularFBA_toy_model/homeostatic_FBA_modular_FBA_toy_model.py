@@ -111,8 +111,8 @@ for reactionIndex, reaction in enumerate(reactionIDs):
     if reaction in transportRates:
         maxReactionFluxes[reactionIndex] = transportRates[reaction]
 
-fba.setMinReactionFluxes(reactionIDs, np.zeros(nReactions))
-fba.setMaxReactionFluxes(reactionIDs, maxReactionFluxes)
+fba.setMinReactionFluxes(list(reactionIDs), np.zeros(nReactions))
+fba.setMaxReactionFluxes(list(reactionIDs), maxReactionFluxes)
 
 
 # Describe external molecule levels

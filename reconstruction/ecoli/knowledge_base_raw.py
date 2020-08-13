@@ -176,7 +176,7 @@ class KnowledgeBaseEcoli:
         attrName = file_name.split(os.path.sep)[-1].split(".")[0]
         setattr(path, attrName, [])
 
-        with open(file_name, 'rU') as csvfile:
+        with open(file_name, encoding="utf-8") as csvfile:
             reader = JsonReader(
                 filter(lambda x: x.lstrip()[0] != "#", csvfile), # Strip comments
                 dialect = CSV_DIALECT)
@@ -184,7 +184,7 @@ class KnowledgeBaseEcoli:
 
     def _load_sequence(self, file_path):
         from Bio import SeqIO
-        with open(file_path, "rU") as handle:
+        with open(file_path, "r") as handle:
             for record in SeqIO.parse(handle, "fasta"):
                 return record.seq
 
@@ -201,7 +201,7 @@ class KnowledgeBaseEcoli:
         """
         attrName = file_path.split(os.path.sep)[-1].split(".")[0]
         paramDict = {}
-        with open(file_path, "rU") as csvfile:
+        with open(file_path, encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile, dialect = CSV_DIALECT)
             for row in reader:
                 if row['units'] != '':

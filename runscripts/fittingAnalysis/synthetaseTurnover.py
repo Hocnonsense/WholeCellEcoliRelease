@@ -27,7 +27,7 @@ def main(plotOutDir, plotOutFileName, kbDirectory):
     # Load parameters
     measured_synthetase_rates = unfitKb.trna_synthetase_rates
     fit_synthetase_rates = mostfitKb.trna_synthetase_rates.asNumber()
-    amino_acid_labels = mostfitKb.aa_trna_groups.keys()
+    amino_acid_labels = list(mostfitKb.aa_trna_groups.keys())
 
     synthetase_mean = mostfitKb.synthetase_counts
     synthetase_variance = mostfitKb.synthetase_variance

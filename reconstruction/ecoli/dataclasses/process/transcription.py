@@ -5,7 +5,7 @@
     @date: Created 03/06/2015
     Date: 2020-08-07 23:06:41
     @LastEditors: Hwrn
-    @LastEditTime: 2020-08-11 16:36:28
+    @LastEditTime: 2020-08-12 23:01:22
     @FilePath: /WholeCellEcoliRelease/reconstruction/ecoli/dataclasses/process/transcription.py
     Description:
         SimulationData for transcription process
@@ -113,7 +113,7 @@ class Transcription:
         rnaData = np.zeros(
             size,
             dtype = [
-                ('id', 'a50'),
+                ('id', "U50"),
                 # ('synthProb', 'f8'),
                 # ('expression', 'float64'),
                 ('degRate', 'f8'),
@@ -129,8 +129,8 @@ class Transcription:
                 ('isRRna5S', 'bool'),
                 ('isRProtein', 'bool'),
                 ('isRnap',    'bool'),
-                ('sequence', 'a{}'.format(maxSequenceLength)),
-                ('geneId', 'a50'),
+                ('sequence', 'U{}'.format(maxSequenceLength)),
+                ('geneId', "U50"),
                 ('KmEndoRNase', 'f8'),
                 ]
             )

@@ -25,7 +25,7 @@ FONT_SIZE=9
 trim = 0.05
 
 
-def getPCC((variant, ap, monomerIds, schmidtCounts)):
+def getPCC(variant, ap, monomerIds, schmidtCounts):
     try:
         simDir = ap.get_cells(variant = [variant])[0]
 
@@ -107,10 +107,10 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         pool = Pool(processes=parallelization.plotter_cpus())
         args = zip(range(ap.n_variant), [ap] * ap.n_variant, [validation_data.protein.schmidt2015Data["monomerId"].tolist()] * ap.n_variant, [schmidtCounts] * ap.n_variant)
         result = pool.map(getPCC, args)
-        # pickle.dump(result, open("pcc_results.pickle", "w"), pickle.HIGHEST_PROTOCOL)
+        # pickle.dump(result, open("pcc_results.pickle", "wb"), pickle.HIGHEST_PROTOCOL)
         pool.close()
         pool.join()
-        # result = pickle.load(open("pcc_results.pickle", "r"))
+        # result = pickle.load(open("pcc_results.pickle", "rb"))
         controlPcc, controlPvalue = result[0]
         pccs, pvals = zip(*result[1:])
         pccs = np.array(pccs)

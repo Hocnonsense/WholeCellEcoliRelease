@@ -177,7 +177,7 @@ class UniqueMolecules(wholecell.states.internal_state.InternalState):
     def _calculateMass(self):
         masses = np.zeros(self._masses.shape[1:], np.float64)
 
-        submassDiffNames = self._submassNameToProperty.values() # TODO: cache
+        submassDiffNames = list(self._submassNameToProperty.values()) # TODO: cache
 
         for moleculeId, moleculeMasses in zip(self._moleculeIds, self._moleculeMasses):
             molecules = self.container.objectsInCollection(moleculeId)

@@ -59,7 +59,7 @@ class MoleculeGroups:
             's50_5sRRNA': ['RRFA-RRNA[c]', 'RRFB-RRNA[c]', 'RRFC-RRNA[c]',
                 'RRFD-RRNA[c]', 'RRFE-RRNA[c]', 'RRFG-RRNA[c]', 'RRFH-RRNA[c]'],
 
-            'aaIDs': sim_data.amino_acid_1_to_3_ordered.values(),
+            'aaIDs': list(sim_data.amino_acid_1_to_3_ordered.values()),
             'fragmentNT_IDs': [x['id'].replace('Polymerized','Fragment')
                 for x in raw_data.polymerized if x['is_ntp'] and not x['is_end']],
 

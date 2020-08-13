@@ -1,5 +1,6 @@
 import os
 import time
+import shutil
 
 from fireworks import FireTaskBase, explicit_serialize
 
@@ -12,10 +13,14 @@ class SymlinkTask(FireTaskBase):
     optional_params = ["overwrite_if_exists"]
 
     def run_task(self, fw_spec):
-        print("%s: Creating symlink" % (time.ctime()))
+        """
+            @description: CANNOT create symlink in win10!
+        """
+        print("%s: Cannot creating symlink, file instead" % (time.ctime()))
 
         if self["overwrite_if_exists"]:
             if os.path.exists(self["link"]):
-                os.unlink(self["link"])
+                os.remove(self["link"])
 
-        os.symlink(self["to"], self["link"])
+        path = os.path.split(self["link"])[0]
+        shutil.copy(os.path.join(path, self["to"]), self["link"])

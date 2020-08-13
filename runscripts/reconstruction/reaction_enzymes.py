@@ -18,7 +18,7 @@ NEW_REACTIONS_FILE = os.path.join("reconstruction", "ecoli", "flat", "reactions_
 def getReactionIds():
     reader = JsonReader(open(REACTIONS_FILE, "r"), dialect = CSV_DIALECT)
     data = [row for row in reader]
-    L = sorted(x["reaction id"].encode("utf-8") for x in data)
+    L = sorted(x["reaction id"] for x in data)
     return L
 
 def getReactionStoich():
@@ -55,7 +55,7 @@ def truncateNameRxnTrans(name):
 
 def addFilteredEntries(rxnNamesEnzymes):
     D = {}
-    for rxnName, enzymes in rxnNamesEnzymes.iteritems():
+    for rxnName, enzymes in rxnNamesEnzymes.items():
         if rxnName.endswith("-RXN"):
             continue
         if truncateNameRxnTrail(rxnName) != None:

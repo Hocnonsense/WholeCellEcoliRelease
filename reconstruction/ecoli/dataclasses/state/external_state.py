@@ -61,7 +61,7 @@ class ExternalState:
             for row in timeseries:
                 self.environment.nutrients_time_series[label].append((
                     row["time"].asNumber(units.s),
-                    row["nutrients"].encode("utf-8")
+                    row["nutrients"]
                     ))
 
     def _getNutrientData(self, raw_data):

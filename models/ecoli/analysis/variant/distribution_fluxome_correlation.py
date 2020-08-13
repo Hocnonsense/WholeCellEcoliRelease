@@ -110,10 +110,10 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         pool = Pool(processes=parallelization.plotter_cpus())
         args = zip(range(ap.n_variant), [ap] * ap.n_variant, [toyaReactions] * ap.n_variant, [toyaFluxesDict] * ap.n_variant, [toyaStdevDict] * ap.n_variant)
         result = pool.map(getPCC, args)
-        pickle.dump(result, open("pcc_results_fluxome.pickle", "w"), pickle.HIGHEST_PROTOCOL)
+        pickle.dump(result, open("pcc_results_fluxome.pickle", "wb"), pickle.HIGHEST_PROTOCOL)
         pool.close()
         pool.join()
-        result = pickle.load(open("pcc_results_fluxome.pickle", "r"))
+        result = pickle.load(open("pcc_results_fluxome.pickle", "rb"))
         controlPcc, controlPvalue = result[0]
         pccs, pvals = zip(*result[1:])
         pccs = np.array(pccs)

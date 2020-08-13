@@ -154,7 +154,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
                 }, open(os.path.join(plotOutDir, "transcriptionEvents.pickle"), "wb"))
 
         if USE_CACHE:
-            D = pickle.load(open(os.path.join(plotOutDir, "transcriptionEvents.pickle"), "r"))
+            D = pickle.load(open(os.path.join(plotOutDir, "transcriptionEvents.pickle"), "rb"))
             time = D["time"]
             alwaysTranscriptionEvents_E = D["always_E"]
             alwaysTranscriptionEvents_N = D["always_N"]

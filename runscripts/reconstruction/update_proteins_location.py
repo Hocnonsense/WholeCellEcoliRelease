@@ -16,7 +16,7 @@ ECOCYC_DUMP = os.path.join("reconstruction", "ecoli", "flat", "eco_wc_test_fun.j
 def getMonomerLocationsFromOurData():
     reader = JsonReader(open(EXISTING_MONOMER_FILE, "r"), dialect = CSV_DIALECT)
     data = [row for row in reader]
-    D = dict([(x["id"].encode("utf-8"), (x["location"][0].encode("utf-8"), x["comments"].encode("utf-8"))) for x in data])
+    D = dict([(x["id"], (x["location"][0], x["comments"])) for x in data])
     return D
 
 def getMonomerLocationsFromEcocyc(reactionData):
@@ -81,7 +81,7 @@ for monomer in data:
         "Location information from Ecocyc dump." if monomer["id"] in locationDifferences else monomer["comments"],
         monomer["codingRnaSeq"],
         monomer["mw"],
-        locationDifferences[monomer["id"]] if monomer["id"] in locationDifferences else monomer["location"][0].encode("utf-8"),
+        locationDifferences[monomer["id"]] if monomer["id"] in locationDifferences else monomer["location"][0],
         monomer["rnaId"],
         monomer["id"],
         monomer["geneId"],

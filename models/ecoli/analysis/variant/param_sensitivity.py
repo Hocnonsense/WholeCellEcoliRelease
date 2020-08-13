@@ -36,7 +36,7 @@ from wholecell.utils import constants, filepath, parallelization, sparkline, uni
 CONTROL_VARIANT = 0  # variant number for control simulation
 
 
-def analyze_variant((variant, total_params)):
+def analyze_variant(variant, total_params):
     '''
     Method to map each variant to for parallel analysis.
 

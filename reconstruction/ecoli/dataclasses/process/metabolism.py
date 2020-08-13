@@ -191,7 +191,7 @@ class Metabolism:
             catalystsForThisRxn = []
             for catalyst in reaction["catalyzed by"]:
                 try:
-                    catalystWithLoc = (catalyst + "[" + sim_data.getter.getLocation([catalyst])[0][0] + "]").encode("utf-8")
+                    catalystWithLoc = (catalyst + "[" + sim_data.getter.getLocation([catalyst])[0][0] + "]")
                     catalystsForThisRxn.append(catalystWithLoc)
                     catalystsList.append(catalystWithLoc)
                 # If we don't have the catalyst in our reconstruction, drop it
@@ -225,12 +225,12 @@ class Metabolism:
             if constraint["rateEquationType"] == "custom":
                 continue
 
-            constraintId = constraint["reactionID"].encode("utf-8") + "__" + constraint["enzymeIDs"].encode("utf-8") + "__%f" % (constraint["kcat"].asNumber(1 / units.s))
+            constraintId = constraint["reactionID"] + "__" + constraint["enzymeIDs"] + "__%f" % (constraint["kcat"].asNumber(1 / units.s))
             assert len(constraint["Concentration Substrates"]) == len(constraint["kM"]) + len(constraint["kI"]), "Concentration Substrates are wrong length"
             assert constraintId not in constraintIdList, "constraintId already exists"
 
             # Get compartment for enzyme
-            enzymeId = (constraint["enzymeIDs"] + "[" + sim_data.getter.getLocation([constraint["enzymeIDs"]])[0][0] + "]").encode("utf-8")
+            enzymeId = (constraint["enzymeIDs"] + "[" + sim_data.getter.getLocation([constraint["enzymeIDs"]])[0][0] + "]")
             constraint["enzymeIDs"] = enzymeId
             assert enzymeId in reactionCatalysts[constraint["reactionID"]], "%s is not a catalyst for %s according to FBA reconstruction" % (enzymeId, constraint["reactionID"])
 
@@ -238,7 +238,7 @@ class Metabolism:
             concentrationSubstrates = []
             for substrate in constraint["Concentration Substrates"]:
                 # In current implementation, anything with a concentration exists in the cytosol
-                substrateWithCompartment = substrate.encode("utf-8") + "[c]"
+                substrateWithCompartment = substrate + "[c]"
                 if substrateWithCompartment not in self.concDict:
                     raise AttributeError("Don't have concentration for %s" % substrateWithCompartment)
                 concentrationSubstrates.append(substrateWithCompartment)
@@ -253,7 +253,7 @@ class Metabolism:
                 for rxnSubstrate in reactionStoich[constraint["reactionID"]]:
                     if rxnSubstrate.startswith(substrate + "["):
                         substrateFound = True
-                        substrates.append(rxnSubstrate.encode("utf-8"))
+                        substrates.append(rxnSubstrate)
                 if not substrateFound:
                     raise AttributeError("Could not find compartment for substrate %s" % substrate)
             constraint["substrateIDs"] = substrates
@@ -280,7 +280,7 @@ class Metabolism:
             else:
                 raise ValueError("Have data for some reactants and some products (this is an inconsistency)")
 
-            constraint["reactionID"] = constraint["reactionID"].encode("utf-8")
+            constraint["reactionID"] = constraint["reactionID"]
             if forward == False:
                 constraint["reactionID"] = reverseReactionString.format(constraint["reactionID"])
 
@@ -569,7 +569,7 @@ class ConcentrationUpdates:
             if len(reaction["stoichiometry"]) != 3:
                 continue
 
-            moleculeName = [x["molecule"].encode("utf-8") for x in reaction["stoichiometry"] if x["type"] == "metabolite"][0]
+            moleculeName = [x["molecule"] for x in reaction["stoichiometry"] if x["type"] == "metabolite"][0]
             amountToSet = 1e-4
             moleculeSetAmounts[moleculeName + "[p]"] = amountToSet * self.units
             moleculeSetAmounts[moleculeName + "[c]"] = amountToSet * self.units

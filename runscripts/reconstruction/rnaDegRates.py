@@ -22,14 +22,14 @@ GENE_IDS = os.path.join("validation","ecoli","flat","geneIDs.tsv")
 DEG_RATES = os.path.join("validation","ecoli","flat","moffitt2016_mrna_deg_rates.tsv")
 
 geneDict = {}
-with open(GENE_IDS, "rU") as csvfile:
+with open(GENE_IDS, encoding="utf-8") as csvfile:
     reader = csv.DictReader(csvfile, dialect = CSV_DIALECT)
     for row in reader:
         genes = row["Names"].replace("\"","").replace("(","").replace(")","").split(" ")
         geneDict[row["FrameID"]] = genes
 
 rateDict = {}
-with open(DEG_RATES, "rU") as csvfile:
+with open(DEG_RATES, encoding="utf-8") as csvfile:
     reader = csv.DictReader(csvfile, dialect = CSV_DIALECT)
     for row in reader:
         if row["Sample"] == "WT -kas replicate 1" and row["Rate"] != "":

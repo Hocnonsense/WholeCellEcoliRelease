@@ -221,7 +221,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         args = zip(range(ap.n_variant), [ap] * ap.n_variant)
         divisionResult = pool.map(getDivisionTime, args)
         stop = time.time()
-        pickle.dump(divisionResult, open(os.path.join(plotOutDir, plotOutFileName + "_division.pickle"), "w"))
+        pickle.dump(divisionResult, open(os.path.join(plotOutDir, plotOutFileName + "_division.pickle"), "wb"))
         print("%d seconds:\tTo get simulation time data (to compute division time) -- completed" % (stop - start))
 
         # Get initial mass
@@ -229,7 +229,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         args = zip(range(ap.n_variant), [ap] * ap.n_variant)
         initialMassResult = pool.map(getInitialMass, args)
         stop = time.time()
-        pickle.dump(initialMassResult, open(os.path.join(plotOutDir, plotOutFileName + "_initialMass.pickle"), "w"))
+        pickle.dump(initialMassResult, open(os.path.join(plotOutDir, plotOutFileName + "_initialMass.pickle"), "wb"))
         print("%d seconds:\tTo get initial mass data -- completed" % (stop - start))
 
         # Get final mass
@@ -237,7 +237,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         args = zip(range(ap.n_variant), [ap] * ap.n_variant)
         finalMassResult = pool.map(getFinalMass, args)
         stop = time.time()
-        pickle.dump(finalMassResult, open(os.path.join(plotOutDir, plotOutFileName + "_finalMass.pickle"), "w"))
+        pickle.dump(finalMassResult, open(os.path.join(plotOutDir, plotOutFileName + "_finalMass.pickle"), "wb"))
         print("%d seconds:\tTo get final mass data -- completed" % (stop - start))
 
         # Get fluxome correlation
@@ -245,7 +245,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         args = zip(range(ap.n_variant), [ap] * ap.n_variant, [toyaReactions] * ap.n_variant, [toyaFluxesDict] * ap.n_variant, [toyaStdevDict] * ap.n_variant)
         fluxomeResult = pool.map(getPCCFluxome, args)
         stop = time.time()
-        pickle.dump(fluxomeResult, open(os.path.join(plotOutDir, plotOutFileName + "_fluxome.pickle"), "w"))
+        pickle.dump(fluxomeResult, open(os.path.join(plotOutDir, plotOutFileName + "_fluxome.pickle"), "wb"))
         print("%d seconds:\tTo get fluxome correlation -- completed" % (stop - start))
 
         # Get proteome correlation
@@ -253,7 +253,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         args = zip(range(ap.n_variant), [ap] * ap.n_variant, [validation_data.protein.schmidt2015Data["monomerId"].tolist()] * ap.n_variant, [schmidtCounts] * ap.n_variant)
         proteomeResult = pool.map(getPCCProteome, args)
         stop = time.time()
-        pickle.dump(proteomeResult, open(os.path.join(plotOutDir, plotOutFileName + "_proteome.pickle"), "w"))
+        pickle.dump(proteomeResult, open(os.path.join(plotOutDir, plotOutFileName + "_proteome.pickle"), "wb"))
         print("%d seconds:\tTo get proteome correlation -- completed" % (stop - start))
 
         pool.close()

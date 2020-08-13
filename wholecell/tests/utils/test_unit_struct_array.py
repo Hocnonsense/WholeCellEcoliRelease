@@ -31,7 +31,7 @@ class Test_unit_struct_array(unittest.TestCase):
                  >>> us_array
                 STRUCTURED ARRAY:
                 array([(b'', 0.), (b'', 0.), (b'', 0.)],
-                      dtype=[('id', 'S10'), ('mass', '<f8')])
+                      dtype=[('id', "U10"), ('mass', '<f8')])
                 UNITS:
                 {'id': None, 'mass': 1 [g]}
         """

@@ -41,7 +41,7 @@ class BulkMolecules(wholecell.states.internal_state.InternalState):
     def initialize(self, sim, sim_data):
         super(BulkMolecules, self).initialize(sim, sim_data)
 
-        self._processIDs = sim.processes.keys()
+        self._processIDs = list(sim.processes.keys())
 
         # Load constants
         self._moleculeIDs = sim_data.internal_state.bulkMolecules.bulkData['id']

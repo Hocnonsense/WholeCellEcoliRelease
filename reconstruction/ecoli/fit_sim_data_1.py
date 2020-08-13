@@ -136,7 +136,7 @@ def fitSimData_1(
     # Limit the number of conditions that are being fit so that execution time decreases
     if options['debug']:
         print("Warning: running fitter in debug mode - not all conditions will be fit")
-        key = sim_data.tfToActiveInactiveConds.keys()[0]
+        key = list(sim_data.tfToActiveInactiveConds.keys())[0]
         sim_data.tfToActiveInactiveConds = {key: sim_data.tfToActiveInactiveConds[key]}
 
     # Set fast monomer degradation rates for r-proteins
@@ -3448,7 +3448,7 @@ def setKmCooperativeEndoRNonLinearRNAdecay(sim_data, bulkContainer):
 
         if VERBOSE: print("Running non-linear optimization")
         KmCooperativeModel = scipy.optimize.fsolve(LossFunction, Kmcounts, fprime = LossFunctionP)
-        pickle.dump(KmCooperativeModel, open(os.path.join(fixturesDir, "km.pickle"), "w"))
+        pickle.dump(KmCooperativeModel, open(os.path.join(fixturesDir, "km.pickle"), "wb"))
     else:
         if VERBOSE: print("Not running non-linear optimization--using cached result")
         KmCooperativeModel = KmcountsCached

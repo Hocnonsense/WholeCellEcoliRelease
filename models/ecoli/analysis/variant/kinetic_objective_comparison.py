@@ -128,7 +128,7 @@ class Plot(variantAnalysisPlot.VariantAnalysisPlot):
         reactionCatalysts = sim_data.process.metabolism.reactionCatalysts
 
         reaction_to_enzyme = {r: reactionCatalysts[r][0] for r in REACTIONS}
-        enzyme_names = reaction_to_enzyme.values()
+        enzyme_names = list(reaction_to_enzyme.values())
         reactions_with_km = sorted(SIMULATION_KMS)
         km_metabolites = [SIMULATION_KMS[r]['metabolite'] for r in reactions_with_km]
         kms = np.array([SIMULATION_KMS[r]['KM'] for r in reactions_with_km])

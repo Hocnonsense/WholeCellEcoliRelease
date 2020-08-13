@@ -30,7 +30,7 @@ molecular_weight_order = collections.OrderedDict([
 def load_tsv(file_name):
     data = []
 
-    with open(file_name) as csvfile:
+    with open(file_name, encoding="utf-8") as csvfile:
         reader = JsonReader(csvfile, dialect = CSV_DIALECT)
         for row in reader:
             data.append(dict([(x, y) for x,y in row.items()]))

@@ -22,7 +22,7 @@ class Environment:
         environmentData = np.zeros(
             0,
             dtype = [
-                ("id", "a50"),
+                ("id", "U50"),
                 ]
             )
 

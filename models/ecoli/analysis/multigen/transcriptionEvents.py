@@ -129,7 +129,7 @@ class Plot(multigenAnalysisPlot.MultigenAnalysisPlot):
                 }, open(os.path.join(plotOutDir, "transcriptionEvents2.pickle"), "wb"))
 
         if USE_CACHE:
-            D = pickle.load(open(os.path.join(plotOutDir, "transcriptionEvents2.pickle"), "r"))
+            D = pickle.load(open(os.path.join(plotOutDir, "transcriptionEvents2.pickle"), "rb"))
             time = D["time"]
             transcribedBoolOrdered = D["transcriptionFrequency"]
             colors = D["colors"]

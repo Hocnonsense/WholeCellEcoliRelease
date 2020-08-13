@@ -25,12 +25,12 @@ class getterFunctions:
     def getMass(self, ids):
         assert isinstance(ids, list) or isinstance(ids, np.ndarray)
         try:
-            idx = [np.where(self._allMass['id'] == re.sub("\[[a-z]\]","", i))[0][0] for i in ids]
+            idx = [np.where(self._allMass['id'] == np.bytes_(re.sub("\[[a-z]\]","", i)))[0][0] for i in ids]
 
         except IndexError:
-            if i not in self._allMass["id"]:
-                raise IndexError("Unrecognized id: {}".format(i))
-
+            for i in ids:
+                if not np.any(self._allMass['id'] == np.bytes_(re.sub("\[[a-z]\]","", i))):
+                    raise IndexError("Unrecognized id: {}".format(i))
             else:
                 raise
 
@@ -44,26 +44,25 @@ class getterFunctions:
         size = len(raw_data.rnas) + len(raw_data.proteins) + len(raw_data.proteinComplexes) + len(raw_data.metabolites) + len(raw_data.modifiedForms) + len(raw_data.polymerized) + len(raw_data.water) + len(raw_data.chromosome)
         allMass = np.empty(size,
             dtype = [
-                    ('id',        'a50'),
-                    ('mass',    "f8")
-                    ]
-            )
+                ('id',   'a50'),
+                ('mass', "f8")
+                ])
 
         listMass = []
-        listMass.extend([(x['id'],np.sum(x['mw'])) for x in raw_data.rnas])
-        listMass.extend([(x['id'],np.sum(x['mw'])) for x in raw_data.proteins])
-        listMass.extend([(x['id'],np.sum(x['mw'])) for x in raw_data.proteinComplexes])
-        listMass.extend([(x['id'],np.sum(x['mw7.2'])) for x in raw_data.metabolites])
-        listMass.extend([(x['id'],np.sum(x['mw7.2'])) for x in raw_data.modifiedForms])
-        listMass.extend([(x['id'],np.sum(x['mw'])) for x in raw_data.polymerized])
-        listMass.extend([(x['id'],np.sum(x['mw7.2'])) for x in raw_data.water])
-        listMass.extend([(x['id'],np.sum(x['mw'])) for x in raw_data.chromosome])
+        listMass.extend([(x['id'], np.sum(x['mw'])) for x in raw_data.rnas])
+        listMass.extend([(x['id'], np.sum(x['mw'])) for x in raw_data.proteins])
+        listMass.extend([(x['id'], np.sum(x['mw'])) for x in raw_data.proteinComplexes])
+        listMass.extend([(x['id'], np.sum(x['mw7.2'])) for x in raw_data.metabolites])
+        listMass.extend([(x['id'], np.sum(x['mw7.2'])) for x in raw_data.modifiedForms])
+        listMass.extend([(x['id'], np.sum(x['mw'])) for x in raw_data.polymerized])
+        listMass.extend([(x['id'], np.sum(x['mw7.2'])) for x in raw_data.water])
+        listMass.extend([(x['id'], np.sum(x['mw'])) for x in raw_data.chromosome])
 
         allMass[:] = listMass
 
         field_units = {
-            'id'        :    None,
-            'mass'        :    units.g / units.mol,
+            'id'  : None,
+            'mass': units.g / units.mol,
             }
 
         self._allMass = UnitStructArray(allMass, field_units) # TODO: change to dict?
@@ -71,18 +70,18 @@ class getterFunctions:
     def _buildLocations(self, raw_data, sim_data):
         locationDict = {}
         for item in raw_data.rnas:
-            locationDict[item["id"]] = [x.encode("utf-8") for x in item["location"]]
+            locationDict[item["id"]] = [x for x in item["location"]]
         for item in raw_data.proteins:
-            locationDict[item["id"]] = [x.encode("utf-8") for x in item["location"]]
+            locationDict[item["id"]] = [x for x in item["location"]]
         for item in raw_data.proteinComplexes:
-            locationDict[item["id"]] = [x.encode("utf-8") for x in item["location"]]
+            locationDict[item["id"]] = [x for x in item["location"]]
         for item in raw_data.metabolites:
-            locationDict[item["id"]] = [x.encode("utf-8") for x in item["location"]]
+            locationDict[item["id"]] = [x for x in item["location"]]
         for item in raw_data.polymerized:
-            locationDict[item["id"]] = [x.encode("utf-8") for x in item["location"]]
+            locationDict[item["id"]] = [x for x in item["location"]]
         for item in raw_data.water:
-            locationDict[item["id"]] = [x.encode("utf-8") for x in item["location"]]
+            locationDict[item["id"]] = [x for x in item["location"]]
         for item in raw_data.modifiedForms:
-            locationDict[item["id"]] = [x.encode("utf-8") for x in item["location"]]
+            locationDict[item["id"]] = [x for x in item["location"]]
 
         self._locationDict = locationDict

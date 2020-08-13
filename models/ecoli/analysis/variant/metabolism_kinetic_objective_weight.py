@@ -38,7 +38,7 @@ OUTLIER_REACTIONS = [
     ]
 
 
-def analyze_variant((variant, ap, toya_reactions, toya_fluxes, outlier_filter)):
+def analyze_variant(variant, ap, toya_reactions, toya_fluxes, outlier_filter):
     '''
     Function to analyze the data for each variant in parallel
 

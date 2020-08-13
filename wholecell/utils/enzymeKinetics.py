@@ -66,7 +66,7 @@ class EnzymeKinetics:
                     reactionRateInfoNew[constraintID] = reactionInfo
             self.reactionRateInfo = reactionRateInfoNew
 
-        self.allConstraintIDs = self.reactionRateInfo.keys()
+        self.allConstraintIDs = list(self.reactionRateInfo.keys())
 
         self.allReactionIDs = [x["reactionID"] for x in self.reactionRateInfo.values()]
 

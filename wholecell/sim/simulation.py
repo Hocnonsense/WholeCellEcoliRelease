@@ -340,8 +340,8 @@ class Simulation:
     # Save to/load from disk
     def tableCreate(self, tableWriter):
         tableWriter.writeAttributes(
-            states = self.internal_states.keys(),
-            processes = self.processes.keys()
+            states = list(self.internal_states.keys()),
+            processes = list(self.processes.keys())
             )
 
 

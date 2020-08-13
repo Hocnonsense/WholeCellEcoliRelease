@@ -38,10 +38,10 @@ class Replication:
         genomeLength = len(raw_data.genome_sequence)
         self.geneData = np.zeros(
             len(raw_data.genes),
-            dtype=[('name', 'a50'),
-                ('symbol', 'a7'),
-                ('rnaId', 'a50'),
-                ('monomerId', 'a50'),
+            dtype=[('name', "U50"),
+                ('symbol', "U7"),
+                ('rnaId', "U50"),
+                ('monomerId', "U50"),
                 ('endCoordinate', 'int64')])
 
         self.geneData['name'] = [x['id'] for x in raw_data.genes]

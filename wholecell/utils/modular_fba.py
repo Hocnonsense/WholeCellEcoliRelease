@@ -1085,8 +1085,8 @@ class FluxBalanceAnalysis:
         change = np.zeros(len(self._outputMoleculeIDs))
 
         for i, stoich in enumerate(self._outputMoleculeCoeffs):
-            flowRates = self._solver.getFlowRates(stoich.keys())
-            coeffs = stoich.values()
+            flowRates = self._solver.getFlowRates(list(stoich.keys()))
+            coeffs = list(stoich.values())
             change[i] = np.dot(flowRates, coeffs)
 
         return -change

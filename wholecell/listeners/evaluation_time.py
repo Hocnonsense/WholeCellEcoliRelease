@@ -30,8 +30,8 @@ class EvaluationTime(wholecell.listeners.listener.Listener):
     def initialize(self, sim, sim_data):
         super(EvaluationTime, self).initialize(sim, sim_data)
 
-        self.stateNames = sim.internal_states.keys()
-        self.processNames = sim.processes.keys()
+        self.stateNames = list(sim.internal_states.keys())
+        self.processNames = list(sim.processes.keys())
 
         self.nStates = len(sim.internal_states)
         self.nProcesses = len(sim.processes)

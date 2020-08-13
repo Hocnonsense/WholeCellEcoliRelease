@@ -91,9 +91,9 @@ class InternalState:
         # Add active RNA polymerase
         rnaPolyComplexMass = self.bulkMolecules.bulkData["mass"][self.bulkMolecules.bulkData["id"] == "APORNAP-CPLX[c]"]
         rnaPolyAttributes = {
-                'rnaIndex' : 'i8',
-                'transcriptLength' : 'i8'
-                }
+            'rnaIndex' : 'i8',
+            'transcriptLength' : 'i8'
+            }
         self.uniqueMolecules.addToUniqueState('activeRnaPoly', rnaPolyAttributes, rnaPolyComplexMass)
 
         # Add active ribosome
@@ -137,7 +137,7 @@ class InternalState:
 
     def _buildCompartments(self, raw_data, sim_data):
         compartmentData = np.empty(len(raw_data.compartments),
-            dtype = [('id','a20'),('compartmentAbbreviation', 'a1')])
+            dtype = [('id','a20'),('compartmentAbbreviation', "U1")])
 
         compartmentData['id'] = [x['id'] for x in raw_data.compartments]
         compartmentData['compartmentAbbreviation'] = [x['abbrev'] for x in raw_data.compartments]

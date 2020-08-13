@@ -4,7 +4,7 @@ from reconstruction.spreadsheets import JsonReader, JsonWriter
 
 
 def load_tsv(file_name):
-    with open(file_name, 'rU') as csvfile:
+    with open(file_name, encoding="utf-8") as csvfile:
         reader = JsonReader(csvfile, dialect = csv.excel_tab)
         return [row for row in reader]
 

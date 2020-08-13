@@ -232,11 +232,10 @@ class TwoComponentSystem:
         Columns: complexes
         Values: monomer stoichiometry
         '''
-        ids_complexes = self.complexToMonomer.keys()
         stoichMatrixMonomersI = []
         stoichMatrixMonomersJ = []
         stoichMatrixMonomersV = []
-        for colIdx, id_complex in enumerate(ids_complexes):
+        for colIdx, id_complex in enumerate(self.complexToMonomer.keys()):
             D = self.getMonomers(id_complex)
 
             rowIdx = self.moleculeNames.tolist().index(id_complex)
@@ -480,7 +479,7 @@ class TwoComponentSystem:
 
         info = self.complexToMonomer
         if cplxId in info:
-            out = {'subunitIds' : info[cplxId].keys(), 'subunitStoich' : info[cplxId].values()}
+            out = {'subunitIds' : list(info[cplxId].keys()), 'subunitStoich' : list(info[cplxId].values())}
         else:
             out = {'subunitIds' : cplxId, 'subunitStoich' : 1}
         return out

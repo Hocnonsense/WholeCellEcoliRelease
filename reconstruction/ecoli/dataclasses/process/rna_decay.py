@@ -26,7 +26,7 @@ class RnaDecay:
         self.trna_index = 4
         self.rtrna_index = 5
 
-        self.endoRnaseIds = [x["endoRnase"].encode("utf-8") for x in raw_data.endoRnases]
+        self.endoRnaseIds = [x["endoRnase"] for x in raw_data.endoRnases]
         self.kcats = (1 / units.s) * np.array([x["kcat"].asNumber(1 / units.s) for x in raw_data.endoRnases])
         self.StatsFit = {
                 'LossKm': 0.,

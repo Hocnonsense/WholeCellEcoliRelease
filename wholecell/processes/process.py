@@ -4,7 +4,7 @@
     @organization: Covert Lab, Department of Bioengineering, Stanford University
     @date: Created 4/2/2013
     @LastEditors: Hwrn
-    @LastEditTime: 2020-08-11 15:54:35
+    @LastEditTime: 2020-08-13 09:03:41
     @FilePath: /WholeCellEcoliRelease/wholecell/processes/process.py
     Description:
         Process
@@ -48,7 +48,7 @@ class Process:
     def initialize(self, sim, sim_data):
         self._sim = sim
 
-        self._processIndex = sim.processes.keys().index(self._name)
+        self._processIndex = list(sim.processes.keys()).index(self._name)
 
         self._internal_states = sim.internal_states
         self._external_states = sim.external_states
