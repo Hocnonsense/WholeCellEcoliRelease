@@ -1,6 +1,6 @@
 import csv
 import os
-import pyyaml
+import yaml
 import json
 import numpy as np
 from reconstruction.spreadsheets import JsonReader
@@ -47,7 +47,7 @@ def getLocationDifferences(ourLocations, ecocycLocations):
 
 
 
-jsonData = pyyaml.safe_load(open(ECOCYC_DUMP, "r"))
+jsonData = yaml.safe_load(open(ECOCYC_DUMP, "r"))
 
 ourLocations = getMonomerLocationsFromOurData()
 ecocycLocations = getMonomerLocationsFromEcocyc(jsonData["complexations"])
