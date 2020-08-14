@@ -9,9 +9,6 @@ The UniqueMolecules State instantiates a UniqueObjectsContainer object, which
 creates and manages the structured arrays in memory.
 """
 
-
-
-
 import collections
 from copy import deepcopy
 
@@ -66,10 +63,10 @@ class UniqueMolecules(wholecell.states.internal_state.InternalState):
             defaultMassAttributes[massDiffPropertyName] = np.float64
             self._submassNameToProperty[submassName] = massDiffPropertyName
 
-        for molDef in self.uniqueMoleculeDefinitions.viewvalues():
+        for molDef in self.uniqueMoleculeDefinitions.values():
             molDef.update(defaultMassAttributes)
 
-        for molDef in molDefs.viewvalues():
+        for molDef in molDefs.values():
             molDef.update(defaultAttributes)
             molDef.update(defaultMassAttributes)
 
@@ -219,7 +216,7 @@ class UniqueMoleculesView(wholecell.views.view.View):
 
         self._queryResult = None # TODO: store query results with the state
 
-        if isinstance(self._query[0], basestring):
+        if isinstance(self._query[0], str):
             self._query = list(self._query)
             self._query[0] = [self._query[0]]
 

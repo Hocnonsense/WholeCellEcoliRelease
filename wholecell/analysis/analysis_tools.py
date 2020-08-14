@@ -106,7 +106,7 @@ def read_bulk_molecule_counts(sim_out_dir, mol_names):
 
     # Check for string instead of array since it will cause mol_indices lookup to fail
     for names in mol_names:
-        assert isinstance(names, basestring), 'mol_names must be a tuple of arrays not strings like {}'.format(names)
+        assert isinstance(names, str), 'mol_names must be a tuple of arrays not strings like {}'.format(names)
 
     bulk_reader = TableReader(os.path.join(sim_out_dir, 'BulkMolecules'))
 

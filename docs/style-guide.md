@@ -105,31 +105,31 @@ Style guides make recommendations among programming alternatives like [imports](
 
       # Put no spaces immediately within `()`, `[]`, or `{}`.
       spam(ham[1], {eggs: 2, salsa: 10})
-      
+
       # Put a space between `,` `;` or `:` and any following item.
       demo = (0,) + (2, 3)
       if x == 4:
           print x, y; x, y = y, x
-      
+
       # Put no space in a simple slice expression, but parentheses to clarify complicated slice precedence
       # or construct a slice object or put subexpressions into variables.
       ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
       ham[(lower+offset):(upper+offset)]
-      
+
       # Put no space in function application or object indexing.
       spam(1) < spam(2)
       dct['key'] += lst[index]
-      
+
       # Don't line up the `=` on multiple lines of assignment statements.
       x = 1
       long_variable = (3, 10)
-      
+
       # Prefer no spaces around keyword_parameter=default. PEP8 recommends such spaces only
       # when there's a Python 3 parameter annotation.
       c = magic(real=1.0, imag=10.5)
       c = magic(real = 1.0, imag = 10.5)
       def munge(input: AnyStr, sep: AnyStr = None, limit=1000): ...
-      
+
       # It's OK to use spaces or extra parentheses to help convey precedence.
       hypot2 = x*x + y*y
 
@@ -148,18 +148,18 @@ Style guides make recommendations among programming alternatives like [imports](
    ```python
    ClassName
    ExceptionName  # usually ends with "Error"
-   
+
    GLOBAL_CONSTANT_NAME
-   
+
    function_name, method_name
    decorator_name
-   
+
    local_var_name, global_var_name, instance_var_name, function_parameter_name
    camelCase  # OK to match the existing style
-   
+
    __mangled_class_attribute_name
    _internal_name
-   
+
    module_name
    package  # underscores are discouraged
    ```
@@ -196,7 +196,7 @@ Programming tips:
   * A failure case should raise an explicit exception.
 * Use string methods instead of the string module. They're faster and have the same API as Unicode strings.
 * String `.startswith()` and `.endswith()` are less error-prone than string slicing.
-* Use e.g. `isinstance(obj, int)` instead of `type(obj) is type(1)` to check an object's type. Use `isinstance(obj, basestring)` to accept both str and unicode.
+* Use e.g. `isinstance(obj, int)` instead of `type(obj) is type(1)` to check an object's type. Use `isinstance(obj, str)` to accept both str and unicode.
   * Better yet, avoid checking types except to catch common errors. It's cleaner to call different function for distinct input patterns or use O-O dispatch.
 * Use `' '.join()` rather than looping over `a_string += stuff` to combine strings since `join()` takes linear time rather than O(_n_^2) time.
 

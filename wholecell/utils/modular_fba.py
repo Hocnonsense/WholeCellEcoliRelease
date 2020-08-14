@@ -428,7 +428,7 @@ class FluxBalanceAnalysis:
         # Load parameters
         leadingMoleculeID = objectiveParameters["leading molecule ID"]
 
-        if not objective.has_key(leadingMoleculeID):
+        if leadingMoleculeID not in objective:
             raise FBAError("flexFBA leading molecule must be in the objective")
 
         fractionalDifferenceWeight = objectiveParameters["gamma"]
@@ -441,7 +441,7 @@ class FluxBalanceAnalysis:
         if biomassSatisfactionWeight < 0:
             raise FBAError("flexFBA beta parameter must be nonnegative")
 
-        if any(coeff < 0 for coeff in objective.viewvalues()):
+        if any(coeff < 0 for coeff in objective.values()):
             warnings.warn("flexFBA is not designed to use negative biomass coefficients")
 
         # Add biomass to objective
@@ -545,7 +545,7 @@ class FluxBalanceAnalysis:
         to minimize the distance between the current metabolite level and some
         target level, as defined in the objective."""
 
-        if any(coeff < 0 for coeff in objective.viewvalues()):
+        if any(coeff < 0 for coeff in objective.values()):
             raise FBAError("Homeostatic FBA is not designed to use negative biomass coefficients")
 
         self._homeostaticTargetMolecules.update(set(objective.keys()))
@@ -1011,7 +1011,7 @@ class FluxBalanceAnalysis:
                 reverse reaction since net flux bounds might not be set
         '''
 
-        if isinstance(reactionIDs, basestring):
+        if isinstance(reactionIDs, str):
             reactionIDs = [reactionIDs]
             lowerBounds = [lowerBounds]
             upperBounds = [upperBounds]
@@ -1215,7 +1215,7 @@ class FluxBalanceAnalysis:
 
     def setKineticTarget(self, reactionIDs, reactionTargets, raiseForReversible=True):
         # If a single value is passed in, make a list of length 1 from it
-        if isinstance(reactionIDs, basestring):
+        if isinstance(reactionIDs, str):
             reactionIDs = [reactionIDs]
         if not (isinstance(reactionTargets, list) or isinstance(reactionTargets, np.ndarray)):
             reactionTargets = [reactionTargets]
@@ -1256,7 +1256,7 @@ class FluxBalanceAnalysis:
 
     def enableKineticTargets(self, reactionIDs=None):
         # If a single value is passed in, make a list of length 1 from it
-        if isinstance(reactionIDs, basestring):
+        if isinstance(reactionIDs, str):
             reactionIDs = [reactionIDs]
 
         # If no reactions specified, enable all kinetic reactions
@@ -1289,7 +1289,7 @@ class FluxBalanceAnalysis:
 
     def disableKineticTargets(self, reactionIDs=None):
         # If a single value is passed in, make a list of length 1 from it
-        if isinstance(reactionIDs, basestring):
+        if isinstance(reactionIDs, str):
             reactionIDs = [reactionIDs]
 
         # If no reactions specified, disable all kinetic reactions

@@ -498,7 +498,7 @@ while comp_rxns:
     if len(to_remove) == 0:
         unrecognized_subunits = {
             s["molecule"]
-            for comp_rxn in comp_rxns.viewvalues()
+            for comp_rxn in comp_rxns.values()
             for s in comp_rxn["stoichiometry"]
             } - species_weights.keys() - comp_data.keys()
 

@@ -336,7 +336,7 @@ class NetworkFlowGLPK(NetworkFlowProblemBase):
         return self._objective[flow]
 
     def getFlowRates(self, flows):
-        if isinstance(flows, basestring):
+        if isinstance(flows, str):
             flows = (flows,)
 
         self._solve()

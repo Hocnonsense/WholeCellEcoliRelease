@@ -3,8 +3,6 @@ filepath.py
 File and filename path utilities.
 """
 
-
-
 import datetime
 import errno
 import json

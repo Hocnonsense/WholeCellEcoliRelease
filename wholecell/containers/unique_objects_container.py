@@ -9,10 +9,9 @@ The UniqueObjectsContainer uses _UniqueObject objects to present a clean
 interface to a specific molecule"s attributes.
 """
 
-
-
 from copy import deepcopy
 import warnings
+from functools import reduce
 
 from functools import partial
 
@@ -317,7 +316,7 @@ class UniqueObjectsContainer:
     def tableAppend(self, tableWriter):
         tableWriter.append(
             **dict(
-                zip(self._names, self._collections)
+                list(zip(self._names, self._collections))
                 + [("_globalReference", self._globalReference)]
                 ) # TODO: consider caching this dict
             )

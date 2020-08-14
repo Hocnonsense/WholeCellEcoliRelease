@@ -145,7 +145,7 @@ class polymerize: # Class name is lowercase because interface is function-like
 
         # activeSequencesIndexes: 1D ndarray of integer, the indexes of the
         #     currently active sequences.
-        self._activeSequencesIndexes = np.arange(self._nSequences)
+        self._activeSequencesIndexes = np.arange(self._nSequences, dtype=np.int64)
         self._currentStep = 0
         self._progress = np.zeros(self._nSequences, np.int64)
         self._activeSequencesIndexes = self._activeSequencesIndexes[

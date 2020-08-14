@@ -66,7 +66,7 @@ def is_leaf(value, leaves=leaf_types):
     through the object tree.
     """
     if isinstance(value, (collections.Mapping, collections.Sequence)):
-        return isinstance(value, basestring)
+        return isinstance(value, str)
     return (callable(value)                 # it's callable
             or isinstance(value, leaves)    # it's an instance of a declared leaf type
             or not has_python_vars(value))  # an object without Python instance variables

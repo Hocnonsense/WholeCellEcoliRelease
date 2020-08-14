@@ -86,7 +86,7 @@ class Disk(wholecell.loggers.logger.Logger):
         # Close files
         self.mainFile.close()
 
-        for saveFile in self.saveFiles.viewvalues():
+        for saveFile in self.saveFiles.values():
             saveFile.close()
 
 

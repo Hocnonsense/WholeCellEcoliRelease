@@ -217,7 +217,7 @@ metadata = {
     }
 
 for key, value in metadata.items():
-    if not isinstance(value, basestring):
+    if not isinstance(value, str):
         continue
     filepath.write_file(os.path.join(METADATA_DIRECTORY, key), value)
 

@@ -136,7 +136,7 @@ def chromosomeDivision(bulkMolecules, randomState):
         d2_chromosome_count = full_chromosome_count // 2
     else:
         d1_chromosome_count = full_chromosome_count // 2
-        d1_chromosome_count += randomState.binomial(1, p=BINOMIAL_COEFF)
+        d1_chromosome_count += approx_binomial(1, p=BINOMIAL_COEFF)
         d2_chromosome_count = full_chromosome_count - d1_chromosome_count
 
     assert d1_chromosome_count + d2_chromosome_count == full_chromosome_count
@@ -164,7 +164,7 @@ def divideBulkMolecules(bulkMolecules, randomState, chromosome_counts):
     # Binomially divide bulk molecules with division IDs set as 'binomial'
     molecule_counts = bulkMolecules.container.counts(
         bulkMolecules.divisionIds['binomial'])
-    d1_counts = randomState.binomial(molecule_counts, p=BINOMIAL_COEFF)
+    d1_counts = approx_binomial(molecule_counts, p=BINOMIAL_COEFF)
     d2_counts = molecule_counts - d1_counts
     assert np.all(d1_counts + d2_counts == molecule_counts)
 
@@ -240,7 +240,7 @@ def divideUniqueMolecules(uniqueMolecules, randomState, chromosome_counts, curre
         moleculeSet = uniqueMolecules.container.objectsInCollection(moleculeName)
 
         if len(moleculeSet) > 0:
-            n_d1 = randomState.binomial(len(moleculeSet), p=BINOMIAL_COEFF)
+            n_d1 = approx_binomial(len(moleculeSet), p=BINOMIAL_COEFF)
             n_d2 = len(moleculeSet) - n_d1
             assert n_d1 + n_d2 == len(moleculeSet)
 
@@ -255,7 +255,7 @@ def divideUniqueMolecules(uniqueMolecules, randomState, chromosome_counts, curre
             # Add the divided unique molecules to the daughter cell containers
             d1_dividedAttributesDict = {}
             d2_dividedAttributesDict = {}
-            for moleculeAttribute in moleculeAttributeDict.iterkeys():
+            for moleculeAttribute in moleculeAttributeDict.keys():
                 d1_dividedAttributesDict[moleculeAttribute] = (
                     moleculeSet.attr(moleculeAttribute)[d1_bool]
                 )
@@ -291,7 +291,7 @@ def divideUniqueMolecules(uniqueMolecules, randomState, chromosome_counts, curre
         translationCapacity = elngRate * n_ribosomes * noiseMultiplier
 
         # Binomially split the total count of active ribosomes
-        n_d1 = randomState.binomial(n_ribosomes, p=BINOMIAL_COEFF)
+        n_d1 = approx_binomial(n_ribosomes, p=BINOMIAL_COEFF)
         n_d2 = n_ribosomes - n_d1
         assert n_d1 + n_d2 == n_ribosomes
 
@@ -317,7 +317,7 @@ def divideUniqueMolecules(uniqueMolecules, randomState, chromosome_counts, curre
         # Add the divided ribosomes to the daughter cell containers
         d1_dividedAttributesDict = {}
         d2_dividedAttributesDict = {}
-        for moleculeAttribute in moleculeAttributeDict.iterkeys():
+        for moleculeAttribute in moleculeAttributeDict.keys():
             d1_dividedAttributesDict[moleculeAttribute] = (
                 moleculeSet.attr(moleculeAttribute)[d1_bool]
             )
@@ -349,7 +349,7 @@ def divideUniqueMolecules(uniqueMolecules, randomState, chromosome_counts, curre
         # Add the divided DNAPs to the daughter cell containers
         d1_dividedAttributesDict = {}
         d2_dividedAttributesDict = {}
-        for moleculeAttribute in moleculeAttributeDict.iterkeys():
+        for moleculeAttribute in moleculeAttributeDict.keys():
             d1_dividedAttributesDict[moleculeAttribute] = (
                 moleculeSet.attr(moleculeAttribute)[d1_bool]
             )
@@ -388,7 +388,7 @@ def divideUniqueMolecules(uniqueMolecules, randomState, chromosome_counts, curre
         # Add the divided OriCs to the daughter cell containers
         d1_dividedAttributesDict = {}
         d2_dividedAttributesDict = {}
-        for moleculeAttribute in moleculeAttributeDict.iterkeys():
+        for moleculeAttribute in moleculeAttributeDict.keys():
             d1_dividedAttributesDict[moleculeAttribute] = (
                 moleculeSet.attr(moleculeAttribute)[d1_bool]
             )
@@ -427,7 +427,7 @@ def divideUniqueMolecules(uniqueMolecules, randomState, chromosome_counts, curre
 
         d1_dividedAttributesDict = {}
         d2_dividedAttributesDict = {}
-        for moleculeAttribute in moleculeAttributeDict.iterkeys():
+        for moleculeAttribute in moleculeAttributeDict.keys():
             d1_dividedAttributesDict[moleculeAttribute] = (
                 moleculeSet.attr(moleculeAttribute)[d1_bool]
             )
@@ -469,3 +469,18 @@ def resetChromosomeIndex(oldChromosomeIndex, chromosomeCount):
         newChromosomeIndex[indexMatch] = newIndex
 
     return newChromosomeIndex
+
+def approx_binomial(n, p, size=None):
+    """
+        @description: sometimes np.random.binomial cannot run correctly
+            for exapmle: when n > 2**32
+    """
+    try:
+        binomial = np.random.binomial(n, p, size)
+    except TypeError:
+        n = np.array(n)
+        gaussian = np.random.normal(n*p, n*p*(1-p), size=size)
+        # Add the continuity correction to sample at the midpoint of each integral bin.
+        gaussian += 0.5
+        binomial = gaussian.astype(n.dtype)
+    return binomial

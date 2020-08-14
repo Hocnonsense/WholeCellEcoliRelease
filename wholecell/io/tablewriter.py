@@ -89,8 +89,8 @@ class _Column:
     def __init__(self, path):
         filepath.makedirs(path)
 
-        self._data = open(os.path.join(path, FILE_DATA), "w")
-        self._offsets = open(os.path.join(path, FILE_OFFSETS), "w")
+        self._data = open(os.path.join(path, FILE_DATA), "w", encoding='utf-8')
+        self._offsets = open(os.path.join(path, FILE_OFFSETS), "w", encoding='utf-8')
 
         self._dtype = None
 
@@ -122,7 +122,7 @@ class _Column:
             self._data.write(json.dumps(descr) + "\n")
             self._offsets.write(str(self._data.tell()) + "\n")
 
-        self._data.write(value.tobytes())
+        self._data.write(str(value))
         self._offsets.write(str(self._data.tell()) + "\n")
 
 
@@ -371,7 +371,7 @@ class TableWriter:
         """
 
         if self._columns is not None:
-            for column in self._columns.viewvalues():
+            for column in self._columns.values():
                 column.close()
 
 

@@ -353,7 +353,7 @@ class TableReader:
         with open(os.path.join(self._dirColumns, name, tw.FILE_DATA)) as dataFile:
             rawDtype = json.loads(dataFile.read(offsets[0]))
 
-            if isinstance(rawDtype, basestring):
+            if isinstance(rawDtype, str):
                 dtype = str(rawDtype)
 
             else:

@@ -4,8 +4,6 @@
 @date: Created 7/14/2016
 """
 
-
-
 import os
 import pickle
 
@@ -51,7 +49,7 @@ class Plot(singleAnalysisPlot.SingleAnalysisPlot):
 
         # Build a mapping from reaction to color
         idToColor = {}
-        for reactionID, color in itertools.zip(reactionIDs, itertools.cycle(COLORS_LARGE)):
+        for reactionID, color in zip(reactionIDs, itertools.cycle(COLORS_LARGE)):
             idToColor[reactionID] = color
 
         plt.figure(figsize = (17, 11))

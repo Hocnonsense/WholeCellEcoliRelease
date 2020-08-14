@@ -8,16 +8,13 @@ significant parameters for each output difference measure.
 @date: Created 5/17/19
 """
 
-
-
-from future_builtins import zip
-
 import pickle
 import csv
 from multiprocessing import Pool
 import operator
 import os
 import re
+from functools import reduce
 
 from matplotlib import pyplot as plt
 from matplotlib.ticker import FormatStrFormatter

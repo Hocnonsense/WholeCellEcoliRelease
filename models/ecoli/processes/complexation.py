@@ -14,8 +14,6 @@ TODO:
 @date: Created 4/4/2013
 """
 
-
-
 import numpy as np
 
 import wholecell.processes.process
@@ -54,7 +52,7 @@ class Complexation(wholecell.processes.process.Process):
         # Macromolecule complexes are requested
         updatedMoleculeCounts = mccFormComplexesWithPrebuiltMatrices(
             moleculeCounts,
-            self.randomState.randint(RAND_MAX),
+            self.randomState.randint(RAND_MAX, dtype = np.uint32),
             self.stoichMatrix,
             *self.prebuiltMatrices
             )
@@ -68,7 +66,7 @@ class Complexation(wholecell.processes.process.Process):
         # Macromolecule complexes are formed from their subunits
         updatedMoleculeCounts = mccFormComplexesWithPrebuiltMatrices(
             moleculeCounts,
-            self.randomState.randint(RAND_MAX),
+            self.randomState.randint(RAND_MAX, dtype = np.uint32),
             self.stoichMatrix,
             *self.prebuiltMatrices
             )

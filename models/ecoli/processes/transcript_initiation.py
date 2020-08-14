@@ -3,8 +3,8 @@
     @author: John Mason
     @organization: Covert Lab, Department of Bioengineering, Stanford University
     @date: Created 4/26/14
-    LastEditors: Hwrn
-    LastEditTime: 2020-08-09 11:44:11
+    @LastEditors: Hwrn
+    @LastEditTime: 2020-08-13 23:14:12
     ImportPath: models.ecoli.processes.transcript_initiation
     Description:
         TranscriptInitiation
@@ -166,7 +166,7 @@ class TranscriptInitiation(wholecell.processes.process.Process):
         # 仅对非零值进行操作
         nonzeroCount = (nNewRnas > 0)
         # np.arange(nNewRnas.size)[nonzeroCount] 提取非零值的指针
-        for rnaIndex, counts in itertools.zip(np.arange(nNewRnas.size)[nonzeroCount], nNewRnas[nonzeroCount]):
+        for rnaIndex, counts in zip(np.arange(nNewRnas.size)[nonzeroCount], nNewRnas[nonzeroCount]):
             rnaIndexes[startIndex:startIndex+counts] = rnaIndex
             startIndex += counts
 

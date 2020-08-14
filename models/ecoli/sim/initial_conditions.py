@@ -333,7 +333,7 @@ def initializeRNApolymerase(bulkMolCntr, uniqueMolCntr, sim_data, randomState):
         startIndex += counts
 
     # TODO (Eran) -- make sure there aren't any rnapolys at same location on same gene
-    updatedLengths = np.array(randomState.rand(rnaPolyToActivate) * rnaLengths[rnaIndices], dtype=np.int)
+    updatedLengths = np.array(randomState.rand(rnaPolyToActivate) * rnaLengths[rnaIndices], dtype=np.int64)
 
     # update mass
     sequences = rnaSequences[rnaIndices]
@@ -395,7 +395,7 @@ def initializeRibosomes(bulkMolCntr, uniqueMolCntr, sim_data, randomState):
         startIndex += counts
 
     # TODO (Eran) -- make sure there aren't any peptides at same location on same rna
-    updatedLengths = np.array(randomState.rand(ribosomeToActivate) * proteinLengths[proteinIndices], dtype=np.int)
+    updatedLengths = np.array(randomState.rand(ribosomeToActivate) * proteinLengths[proteinIndices], dtype=np.int64)
 
     # update mass
     sequences = proteinSequences[proteinIndices]
