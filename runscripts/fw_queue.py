@@ -95,7 +95,7 @@ from wholecell.sim.simulation import DEFAULT_SIMULATION_KWARGS
 
 from wholecell.utils import constants
 from wholecell.utils import filepath
-import pyyaml
+import yaml
 import os
 import collections
 import pickle
@@ -228,7 +228,7 @@ with open(os.path.join(METADATA_DIRECTORY, constants.SERIALIZED_METADATA_FILE), 
 
 # Create launchpad
 with open(LAUNCHPAD_FILE) as f:
-    lpad = LaunchPad(**pyyaml.safe_load(f))
+    lpad = LaunchPad(**yaml.safe_load(f))
 
 # Store list of FireWorks
 wf_fws = []

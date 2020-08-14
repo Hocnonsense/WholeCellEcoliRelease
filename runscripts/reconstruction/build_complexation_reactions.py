@@ -1,7 +1,7 @@
 import os
 from reconstruction.spreadsheets import JsonReader
 import csv
-import pyyaml
+import yaml
 import json
 import numpy as np
 
@@ -177,7 +177,7 @@ rnaMass = getRnaMasses()
 idMass.update(rnaMass)
 ourLocations = getMonomerLocationsFromOurData()
 
-jsonData = pyyaml.safe_load(open(ECOCYC_DUMP, "r"))
+jsonData = yaml.safe_load(open(ECOCYC_DUMP, "r"))
 reactionDataFiltered = removeBlaclistedReactions(jsonData["complexations"])
 idLocation = getLocations(reactionDataFiltered)
 getMasses(idMass, reactionDataFiltered)
